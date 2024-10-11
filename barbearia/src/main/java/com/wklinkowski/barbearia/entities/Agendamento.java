@@ -28,14 +28,14 @@ public class Agendamento {
     private Long idAgendamento;
 
     @NotNull
-    @ManyToOne
-    @Column(name = "barbeiro", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idBarbeiro")
     private Barbeiro barbeiroAgendamento;
 
     @NotNull
-    @OneToOne
-    @Column(name = "cliente", nullable = false)
-    private Cliente idClienteAgendamento;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idCliente")
+    private Cliente clienteAgendamento;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -64,4 +64,17 @@ public class Agendamento {
     @NotNull
     @Column(name = "cancelado", nullable = false)
     private boolean canceladoAgendamento = true;
+
+    public Agendamento(Barbeiro barbeiroAgendamento, Cliente clienteAgendamento, Servicos servicoAgendamento, LocalDate dataAgendamento,
+               Horarios horarioAgendamento, FormaPagamento formaPagamentoAgendamento, boolean adiantarHorarioAgendamento, boolean canceladoAgendamento) {
+
+        this.barbeiroAgendamento = barbeiroAgendamento;
+        this.clienteAgendamento = clienteAgendamento;
+        this.servicoAgendamento = servicoAgendamento;
+        this.dataAgendamento = dataAgendamento;
+        this.horarioAgendamento = horarioAgendamento;
+        this.formaPagamentoAgendamento = formaPagamentoAgendamento;
+        this.adiantarHorarioAgendamento = adiantarHorarioAgendamento;
+        this.canceladoAgendamento = canceladoAgendamento;
+    }
 }

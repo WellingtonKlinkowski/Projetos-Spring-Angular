@@ -34,15 +34,22 @@ public class Cliente {
 
     @NotNull
     @Pattern(regexp = "^\\+55 \\(\\d{2}\\) \\d{5}-\\d{4}$", message = "Número de telefone inválido.")
-    @Column(name = "telefone", nullable = false)
+    @Column(name = "telefone", nullable = false, unique = true)
     private String telefoneCliente;
 
     @Size(max = 80, message = "O email deve ter no máximo 100 caracteres")
     @Email(message = "E-mail inválido")
-    @Column(name = "email", nullable = true)
+    @Column(name = "email", nullable = true, unique = true)
     private String emailCliente;
 
-    @OneToOne
+    @OneToOne(mappedBy = "clienteAgendamento")
     private Agendamento agendamentoCliente;
 
+    public Cliente(String nomeCliente, String sobrenomeCliente, String telefoneCliente, String emailCliente, Agendamento agendamentoCliente) {
+        this.nomeCliente = nomeCliente;
+        this.sobrenomeCliente = sobrenomeCliente;
+        this.telefoneCliente = telefoneCliente;
+        this.emailCliente = emailCliente;
+        this.agendamentoCliente = agendamentoCliente;
+    }
 }

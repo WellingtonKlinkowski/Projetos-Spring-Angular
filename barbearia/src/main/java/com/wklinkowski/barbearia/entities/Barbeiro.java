@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "BARBEIROS")
 @Getter
@@ -34,15 +36,23 @@ public class Barbeiro {
 
     @NotNull
     @Pattern(regexp = "^\\+55 \\(\\d{2}\\) \\d{5}-\\d{4}$", message = "Número de telefone inválido.")
-    @Column(name = "telefone", nullable = false)
+    @Column(name = "telefone", nullable = false, unique = true)
     private String telefoneBarbeiro;
 
     @Size(max = 80, message = "O email deve ter no máximo 100 caracteres")
     @Email(message = "E-mail inválido")
-    @Column(name = "email", nullable = true)
+    @Column(name = "email", nullable = true, unique = true)
     private String emailBarbeiro;
 
-    @OneToMany
-    private Agendamento agendamentoBarbeiro;
+    @OneToMany(mappedBy = "barbeiroAgendamento")
+    private List<Agendamento> agendamentosBarbeiro;
+
+    public Barbeiro(String nomeBarbeiro, String sobrenomeBarbeiro, String telefoneBarbeiro, String emailBarbeiro, List<Agendamento> agendamentosBarbeiro) {
+        this.nomeBarbeiro = nomeBarbeiro;
+        this.sobrenomeBarbeiro = sobrenomeBarbeiro;
+        this.telefoneBarbeiro = telefoneBarbeiro;
+        this.emailBarbeiro = emailBarbeiro;
+        this.agendamentosBarbeiro = agendamentosBarbeiro;
+    }
 }
 
