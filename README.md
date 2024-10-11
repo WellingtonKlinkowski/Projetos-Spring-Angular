@@ -31,7 +31,4 @@ Caso ainda não tenha projetos com Angular é porque estou dando prioridade para
 ![VSCode](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC.svg?style=for-the-badge&logo=Visual-Studio-Code&logoColor=white)
 ![JUnit](https://img.shields.io/badge/JUnit5-25A162.svg?style=for-the-badge&logo=JUnit5&logoColor=white)
 
-
-
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=WellingtonKlinkowski&layout=compact)
 </div>
