@@ -1,10 +1,10 @@
-package wellington.klinkowski.picpay_simplificado;
+package com.wklinkowski.barbearia;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PicpaySimplificadoApplicationTests {
+class BarbeariaApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,12 +1,13 @@
-package wellington.klinkowski.picpay_simplificado;
+package com.wklinkowski.barbearia;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PicpaySimplificadoApplication {
+public class BarbeariaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PicpaySimplificadoApplication.class, args);
+		SpringApplication.run(BarbeariaApplication.class, args);
 	}
+
 }
