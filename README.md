@@ -4,7 +4,7 @@
 Me chamo Wellington Klinkowski, sou de Blumenau-SC.   
 Um apaixonado por hardware que monta e desmonta desktop desde de pequeno e que está se aventurando no mundo do software.
 Conclui o curso de desenvolvimento em Java, Spring, Angular e PostgreSQL do ENTRA21 da Blusoft.
-Estágiei na Senior Sistemas por alguns meses e após isso consegui uma vaga na Edusoft como desenvolvedor de sistemas.
+Estágiei na Senior Sistemas por alguns meses e após isso consegui uma vaga na Edusoft como desenvolvedor de sistemas e no momento estou a procura de um novo desafio.
 
 Neste repositório irei criar alguns projetos para treinar meus conhecimentos.
 Caso ainda não tenha projetos com Angular é porque estou dando prioridade para o Spring.

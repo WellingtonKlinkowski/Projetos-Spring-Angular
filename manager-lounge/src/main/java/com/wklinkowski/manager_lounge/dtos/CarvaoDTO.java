@@ -1,0 +1,30 @@
+package com.wklinkowski.manager_lounge.dtos;
+
+import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
+import com.wklinkowski.manager_lounge.enums.MarcaCarvao;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+import org.springframework.beans.BeanUtils;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
+@Getter
+@Setter
+public class CarvaoDTO {
+
+    @NotNull(message = "A marca do carvão não pode estar vazia.")
+    private MarcaCarvao marcaCarvao;
+
+    @Min(value = 1, message = "O peso mínimo para o carvão é 1g.")
+    private Integer pesoCarvao = 1;
+
+    @Min(value = 1, message = "A quantidade mínima de carvã permitida é 1.")
+    private Integer quantidadeCarvao = 1;
+
+    public CarvaoDTO (CarvaoEntity carvaoEntity){
+        BeanUtils.copyProperties(carvaoEntity, this);
+    }
+}
