@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class FumoService {
 
-    private FumoRepository fumoRepository;
+    private final FumoRepository fumoRepository;
 
     @Autowired
     public FumoService (FumoRepository fumoRepository){

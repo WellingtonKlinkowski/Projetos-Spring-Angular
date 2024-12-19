@@ -2,6 +2,8 @@ package com.wklinkowski.manager_lounge.services;
 
 import com.wklinkowski.manager_lounge.dtos.CarvaoDTO;
 import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
+import com.wklinkowski.manager_lounge.enums.MarcaCarvao;
+import com.wklinkowski.manager_lounge.enums.MarcasRosh;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
 import com.wklinkowski.manager_lounge.repositories.CarvaoRepository;
 import jakarta.transaction.Transactional;
@@ -15,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class CarvaoService {
 
-    private CarvaoRepository carvaoRepository;
+    private final CarvaoRepository carvaoRepository;
 
     @Autowired
     public CarvaoService(CarvaoRepository carvaoRepository){
@@ -33,7 +35,8 @@ public class CarvaoService {
     public List<CarvaoDTO> listarCarvoes (){
         List<CarvaoEntity> listaCarvaoEntity = carvaoRepository.findAll();
 
-        return listaCarvaoEntity.stream().map(carvao -> new CarvaoDTO(carvao)).collect(Collectors.toList());
+        return listaCarvaoEntity.stream().map(carvao ->
+                new CarvaoDTO(carvao)).collect(Collectors.toList());
     }
 
     @Transactional
@@ -64,4 +67,58 @@ public class CarvaoService {
         carvaoRepository.delete(carvaoEntity);
     }
 
+    @Transactional
+    public List<CarvaoDTO> procuraCarvaoPorMarcaCarvao (MarcaCarvao marcaCarvao){
+
+        List<CarvaoEntity> listaCarvaoPorMarcaCarvao = carvaoRepository.findByMarcaCarvaoOrderByMarcaCarvaoDesc(marcaCarvao);
+
+        return listaCarvaoPorMarcaCarvao.stream().map(carvao ->
+                new CarvaoDTO(carvao)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<CarvaoDTO> procuraCarvaoPorPesoCarvao (Integer pesoCarvao){
+        List<CarvaoEntity> listaCarvaoPorPeso = carvaoRepository.findByPesoCarvaoOrderByPesoCarvaoDesc(pesoCarvao);
+
+        return listaCarvaoPorPeso.stream().map(carvao ->
+                new CarvaoDTO(carvao)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<CarvaoDTO> procuraCarvaoPorQuantidadeCarvao (Integer quantidadeCarvao){
+        List<CarvaoEntity> listaCarvaoPorQuantidadeCarvao =
+                carvaoRepository.findByQuantidadeCarvaoOrderByQuantidadeCarvaoDesc(quantidadeCarvao);
+
+        return listaCarvaoPorQuantidadeCarvao.stream().map(carvao ->
+                new CarvaoDTO(carvao)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<CarvaoDTO> procuraCarvaoPorMarcaEPeso (MarcaCarvao marcaCarvao, Integer pesoCarvao){
+        List<CarvaoEntity> listaCarvaoPorMarcaEPesoCarvao = carvaoRepository.procuraCarvaoPorMarcaEPeso(marcaCarvao, pesoCarvao);
+
+        return listaCarvaoPorMarcaEPesoCarvao.stream().map(carvao ->
+                new CarvaoDTO(carvao)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<CarvaoDTO> procuraMarcaCarvaoUsandoLike (String marcaCarvao){
+        List<CarvaoEntity> listaCarvaoPorMarca = carvaoRepository.procuraMarcaCarvaoComMetodoLike(marcaCarvao);
+
+        return listaCarvaoPorMarca.stream().map(carvao ->
+                new CarvaoDTO(carvao)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<CarvaoDTO> procuraCarvaoComPesoEntreDoisValores (Integer pesoMinimo, Integer pesoMaximo){
+        List<CarvaoEntity> listaCarvaoComPesoEntreDoisValores = carvaoRepository.findByPesoCarvaoBetween(pesoMinimo, pesoMaximo);
+
+        return listaCarvaoComPesoEntreDoisValores.stream().map(carvao ->
+                new CarvaoDTO(carvao)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void deletarCarvaoPorMarcaCarvao (MarcaCarvao marcaCarvao){
+        carvaoRepository.deleteByMarcaCarvao(marcaCarvao);
+    }
 }

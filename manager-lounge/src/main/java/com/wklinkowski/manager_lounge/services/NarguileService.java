@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class NarguileService {
 
-    private NarguileRepository narguileRepository;
+    private final NarguileRepository narguileRepository;
 
     @Autowired
     public NarguileService (NarguileRepository narguileRepository){

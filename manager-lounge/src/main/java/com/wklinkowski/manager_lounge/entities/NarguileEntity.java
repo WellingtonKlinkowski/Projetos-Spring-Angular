@@ -25,12 +25,14 @@ public class NarguileEntity {
     private String nomeNarguile;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private MarcasNarguile marcasNarguile;
 
     @Column(nullable = false)
     private Integer quantidadeMangueirasNarguile = 1;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private MaterialNarguile materialNarguile;
 
     public NarguileEntity (NarguileDTO narguileDTO){

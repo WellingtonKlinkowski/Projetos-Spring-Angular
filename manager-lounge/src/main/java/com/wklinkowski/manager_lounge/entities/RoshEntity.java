@@ -22,9 +22,11 @@ public class RoshEntity {
     private Long id;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private MarcasRosh marcasRosh;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private MaterialRosh materialRosh;
 
     public RoshEntity (RoshDTO roshDTO){

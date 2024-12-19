@@ -2,6 +2,8 @@ package com.wklinkowski.manager_lounge.dtos;
 
 import com.wklinkowski.manager_lounge.entities.FumoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasFumo;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,6 +20,7 @@ import org.springframework.beans.BeanUtils;
 public class FumoDTO {
 
     @NotNull(message = "A marca do fumo não pode estar vazio.")
+    @Enumerated(EnumType.STRING)
     private MarcasFumo marcasFumo;
 
     @NotBlank(message = "O sabor não pode estar vazio.")

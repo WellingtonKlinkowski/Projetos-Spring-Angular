@@ -1,0 +1,853 @@
+{
+	"info": {
+		"_postman_id": "8cc5a337-aeaa-4b56-a514-3889ca499d4e",
+		"name": "Projeto Lounge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24892554"
+	},
+	"item": [
+		{
+			"name": "Fumo",
+			"item": [
+				{
+					"name": "Criar fumo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"marcasFumo\": \"ZOMO\",\r\n  \"saborFumo\": \"swiss alps\",\r\n  \"pesoFumo\": 50\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}fumos/criar",
+							"host": [
+								"{{base}}fumos"
+							],
+							"path": [
+								"criar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar fumos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}fumos/listar",
+							"host": [
+								"{{base}}fumos"
+							],
+							"path": [
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura fumo por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}fumos/4",
+							"host": [
+								"{{base}}fumos"
+							],
+							"path": [
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza fumo por id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"marcasFumo\": \"ADALYA\",\r\n  \"saborFumo\": \"love 66\",\r\n  \"pesoFumo\": 250\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}fumos/3",
+							"host": [
+								"{{base}}fumos"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar fumo por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}fumos/3",
+							"host": [
+								"{{base}}fumos"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Carvao",
+			"item": [
+				{
+					"name": "Criar carvao",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"marcaCarvao\" : \"ZOMO\",\r\n    \"pesoCarvao\" : 500,\r\n    \"quantidadeCarvao\" : 30\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}carvoes/criar",
+							"host": [
+								"{{base}}carvoes"
+							],
+							"path": [
+								"criar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar carvao",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}carvoes/listar",
+							"host": [
+								"{{base}}carvoes"
+							],
+							"path": [
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura carvão pro id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}carvoes/2",
+							"host": [
+								"{{base}}carvoes"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura carvão por marca",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}carvoes/marca-carvao?marcaCarvao=COCO_BASS",
+							"host": [
+								"{{base}}carvoes"
+							],
+							"path": [
+								"marca-carvao"
+							],
+							"query": [
+								{
+									"key": "marcaCarvao",
+									"value": "COCO_BASS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura carvão por peso",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}carvoes/peso-carvao?pesoCarvao=1000",
+							"host": [
+								"{{base}}carvoes"
+							],
+							"path": [
+								"peso-carvao"
+							],
+							"query": [
+								{
+									"key": "pesoCarvao",
+									"value": "1000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura carvão por peso",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}carvoes/quantidade-carvao?quantidadeCarvao=60",
+							"host": [
+								"{{base}}carvoes"
+							],
+							"path": [
+								"quantidade-carvao"
+							],
+							"query": [
+								{
+									"key": "quantidadeCarvao",
+									"value": "60"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura carvão por marca e peso",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}carvoes/marca-peso-carvao?marcaCarvao=COCO_BASS&pesoCarvao=500",
+							"host": [
+								"{{base}}carvoes"
+							],
+							"path": [
+								"marca-peso-carvao"
+							],
+							"query": [
+								{
+									"key": "marcaCarvao",
+									"value": "COCO_BASS"
+								},
+								{
+									"key": "pesoCarvao",
+									"value": "500"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura carvão por marca com sugestão",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}carvoes/sugestao-marca-carvao?marcaCarvao=BASS",
+							"host": [
+								"{{base}}carvoes"
+							],
+							"path": [
+								"sugestao-marca-carvao"
+							],
+							"query": [
+								{
+									"key": "marcaCarvao",
+									"value": "BASS"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura carvão entra peso",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}carvoes/entre-peso-carvao?pesoMinimo=250&pesoMaximo=1000",
+							"host": [
+								"{{base}}carvoes"
+							],
+							"path": [
+								"entre-peso-carvao"
+							],
+							"query": [
+								{
+									"key": "pesoMinimo",
+									"value": "250"
+								},
+								{
+									"key": "pesoMaximo",
+									"value": "1000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar carvao por id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"marcaCarvao\" : \"CHACAL\",\r\n    \"pesoCarvao\" : 1000,\r\n    \"quantidadeCarvao\" : 60\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}carvoes/1",
+							"host": [
+								"{{base}}carvoes"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar carvao por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}carvoes/1",
+							"host": [
+								"{{base}}carvoes"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar carvao por marca",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}carvoes/apagar-marca-carvao?marcaCarvao=ZOMO",
+							"host": [
+								"{{base}}carvoes"
+							],
+							"path": [
+								"apagar-marca-carvao"
+							],
+							"query": [
+								{
+									"key": "marcaCarvao",
+									"value": "ZOMO"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Narguile",
+			"item": [
+				{
+					"name": "Criar narguile",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nomeNarguile\" : \"Future\",\r\n    \"marcasNarguile\" : \"AMAZON\",\r\n    \"quantidadeMangueirasNarguile\" : 1,\r\n    \"materialNarguile\" : \"ACO_INOXIDAVEL\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/criar",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"criar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar narguile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/listar",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura narguile por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/2",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza narguile por id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nomeNarguile\" : \"Future\",\r\n    \"marcasNarguile\" : \"AMAZON\",\r\n    \"quantidadeMangueirasNarguile\" : 1,\r\n    \"materialNarguile\" : \"ALUMINIO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/1",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar narguile por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/1",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rosh",
+			"item": [
+				{
+					"name": "Criar rosh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"marcasRosh\" : \"SEVEN\",\r\n    \"materialRosh\" : \"VIDRO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}roshs/criar",
+							"host": [
+								"{{base}}roshs"
+							],
+							"path": [
+								"criar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar rosh",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}roshs/listar",
+							"host": [
+								"{{base}}roshs"
+							],
+							"path": [
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura rosh por id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}roshs/2",
+							"host": [
+								"{{base}}roshs"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualiza rosh por id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"marcasRosh\" : \"OHT\",\r\n    \"materialRosh\" : \"CERAMICA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}roshs/2",
+							"host": [
+								"{{base}}roshs"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar rosh por id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}roshs/4",
+							"host": [
+								"{{base}}roshs"
+							],
+							"path": [
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base",
+			"value": "http://localhost:8080/",
+			"type": "string"
+		}
+	]
+}

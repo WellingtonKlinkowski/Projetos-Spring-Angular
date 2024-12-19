@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/fumos")
 public class FumoController {
 
-    private FumoService fumoService;
+    private final FumoService fumoService;
 
     @Autowired
     public FumoController (FumoService fumoService){

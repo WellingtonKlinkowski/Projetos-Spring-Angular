@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/roshs")
 public class RoshController {
 
-    private RoshService roshService;
+    private final RoshService roshService;
 
     @Autowired
     public RoshController (RoshService roshService){

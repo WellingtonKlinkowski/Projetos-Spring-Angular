@@ -21,6 +21,7 @@ public class FumoEntity {
     private Long id;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private MarcasFumo marcasFumo;
 
     @Column(nullable = false)

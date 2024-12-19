@@ -3,6 +3,8 @@ package com.wklinkowski.manager_lounge.dtos;
 import com.wklinkowski.manager_lounge.entities.NarguileEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasNarguile;
 import com.wklinkowski.manager_lounge.enums.MaterialNarguile;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,12 +25,14 @@ public class NarguileDTO {
     private String nomeNarguile;
 
     @NotNull(message = "A marca não pode estar vazia.")
+    @Enumerated(EnumType.STRING)
     private MarcasNarguile marcasNarguile;
 
     @Min(value = 1, message = "A narguile deve ter mangueiras.")
     private Integer quantidadeMangueirasNarguile = 1;
 
     @NotNull(message = "O material não pode estar vazio.")
+    @Enumerated(EnumType.STRING)
     private MaterialNarguile materialNarguile;
 
     public NarguileDTO (NarguileEntity narguileEntity){

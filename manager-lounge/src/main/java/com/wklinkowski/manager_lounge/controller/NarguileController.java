@@ -14,7 +14,7 @@ import java.util.List;
 @RequestMapping("/narguiles")
 public class NarguileController {
 
-    private NarguileService narguileService;
+    private final NarguileService narguileService;
 
     @Autowired
     public NarguileController (NarguileService narguileService){

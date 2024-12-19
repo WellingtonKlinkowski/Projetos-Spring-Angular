@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Service
 public class RoshService {
 
-    private RoshRepository roshRepository;
+    private final RoshRepository roshRepository;
 
     @Autowired
     public RoshService (RoshRepository roshRepository){

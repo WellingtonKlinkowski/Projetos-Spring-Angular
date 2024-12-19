@@ -21,6 +21,7 @@ public class CarvaoEntity {
     private Long id;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private MarcaCarvao marcaCarvao;
 
     @Column(nullable = false)
