@@ -1,7 +1,10 @@
 package com.wklinkowski.manager_lounge.services;
 
+import com.wklinkowski.manager_lounge.dtos.CarvaoDTO;
 import com.wklinkowski.manager_lounge.dtos.FumoDTO;
 import com.wklinkowski.manager_lounge.entities.FumoEntity;
+import com.wklinkowski.manager_lounge.enums.MarcasFumo;
+import com.wklinkowski.manager_lounge.enums.MarcasRosh;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
 import com.wklinkowski.manager_lounge.repositories.FumoRepository;
 import jakarta.transaction.Transactional;
@@ -61,5 +64,65 @@ public class FumoService {
                 new EntidadeNaoEncontrada());
 
         fumoRepository.delete(fumoEntity);
+    }
+
+    @Transactional
+    public List<FumoDTO> procuraFumoPorMarcasFumo (MarcasFumo marcasFumo){
+        List<FumoEntity> listaFumoPorMarcasFumo =
+                fumoRepository.findByMarcasFumoOrderByMarcasFumoDesc(marcasFumo);
+
+        return listaFumoPorMarcasFumo.stream().map( fumo ->
+                new FumoDTO(fumo)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<FumoDTO> procuraFumoPorSaborFumo (String saborFumo){
+        List<FumoEntity> listaFumoPorSaborFumo =
+                fumoRepository.findBySaborFumoOrderBySaborFumoDesc(saborFumo);
+
+        return listaFumoPorSaborFumo.stream().map( fumo ->
+                new FumoDTO(fumo)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<FumoDTO> procuraFumoPorPesoFumo (Integer pesoFumo){
+        List<FumoEntity> listaFumoPorPesoFumo =
+                fumoRepository.findByPesoFumoOrderByPesoFumoDesc(pesoFumo);
+
+        return listaFumoPorPesoFumo.stream().map( fumo ->
+                new FumoDTO(fumo)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<FumoDTO> procuraFumoPorMarcasFumoUsandoLike (String marcasFumo){
+        List<FumoEntity> listaFumoPorMarcasFumo =
+                fumoRepository.procuraMarcasFumoComMetodoLike(marcasFumo);
+
+        return listaFumoPorMarcasFumo.stream().map( fumo ->
+                new FumoDTO(fumo)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<FumoDTO> procuraFumoPorSaborFumoUsandoLike (String saborFumo){
+        List<FumoEntity> listaFumoPorSaborFumo =
+                fumoRepository.procuraSaborFumoComMetodoLike(saborFumo);
+
+        return listaFumoPorSaborFumo.stream().map( fumo ->
+                new FumoDTO(fumo)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<FumoDTO> procuraFumoEntrePesos (Integer pesoMinimoFumo, Integer pesoMaximoFumo){
+        List<FumoEntity> listaFumoPorPesoFumo =
+                fumoRepository.findByPesoFumoBetween(pesoMinimoFumo, pesoMaximoFumo);
+
+        return listaFumoPorPesoFumo.stream().map( fumo ->
+                new FumoDTO(fumo)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void apagaFumoPorMarcasFumo (MarcasFumo marcasFumo){
+
+        fumoRepository.deleteByMarcasFumo(marcasFumo);
     }
 }
