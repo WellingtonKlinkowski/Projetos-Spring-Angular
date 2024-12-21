@@ -20,7 +20,7 @@ public interface FumoRepository extends JpaRepository<FumoEntity, Long> {
     @Query(value = "SELECT * FROM FUMOS f WHERE f.marcas_fumo LIKE %?1%", nativeQuery = true)
     List<FumoEntity> procuraMarcasFumoComMetodoLike (String marcasFumo);
 
-    @Query(value = "SELECT * FROM FUMOS f WHERE f.sabor_fumo LIKE %?1%")
+    @Query(value = "SELECT * FROM FUMOS f WHERE f.sabor_fumo LIKE %?1%", nativeQuery = true)
     List<FumoEntity> procuraSaborFumoComMetodoLike (String saborFumo);
 
     List<FumoEntity> findByPesoFumoBetween (Integer pesoMinimo, Integer pesoMaximo);
