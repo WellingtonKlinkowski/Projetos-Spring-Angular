@@ -132,7 +132,7 @@ public class NarguileService {
     @Transactional
     public List<NarguileDTO> procuraNarguileEntreQuantidadeMangueirasNarguile (Integer quantidadeMangueirasMinimo, Integer quantidadeMangueirasMaximo) {
         List<NarguileEntity> listaNarguilePorQuantidadeMangueiras =
-                narguileRepository.findByQuantidadeMangueirasNarguileBetwenn(quantidadeMangueirasMinimo, quantidadeMangueirasMaximo);
+                narguileRepository.findByQuantidadeMangueirasNarguileBetween(quantidadeMangueirasMinimo, quantidadeMangueirasMaximo);
 
         return listaNarguilePorQuantidadeMangueiras.stream().map(narguile ->
                 new NarguileDTO(narguile)).collect(Collectors.toList());

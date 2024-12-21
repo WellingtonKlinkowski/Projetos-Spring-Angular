@@ -1,6 +1,9 @@
 package com.wklinkowski.manager_lounge.controller;
 
 import com.wklinkowski.manager_lounge.dtos.RoshDTO;
+import com.wklinkowski.manager_lounge.enums.MarcaCarvao;
+import com.wklinkowski.manager_lounge.enums.MarcasRosh;
+import com.wklinkowski.manager_lounge.enums.MaterialRosh;
 import com.wklinkowski.manager_lounge.services.RoshService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +63,64 @@ public class RoshController {
     @DeleteMapping("/{idRosh}")
     public ResponseEntity<Void> deletaRoshPorId (@PathVariable Long idRosh){
         roshService.deletaRoshPorId(idRosh);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/marcas-rosh")
+    public ResponseEntity<List<RoshDTO>> procuraRoshPorMarcasRosh (@RequestParam MarcasRosh marcasRosh){
+        List<RoshDTO> listaRoshResult = roshService.procuraRoshPorMarcasRosh(marcasRosh);
+
+        if(listaRoshResult.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(listaRoshResult, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/material-rosh")
+    public ResponseEntity<List<RoshDTO>> procuraRoshPorMaterialRosh (@RequestParam MaterialRosh materialRosh){
+        List<RoshDTO> listaRoshResult = roshService.procuraRoshPorMaterialRosh(materialRosh);
+
+        if(listaRoshResult.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(listaRoshResult, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/sugestao-marcas-rosh")
+    public ResponseEntity<List<RoshDTO>> procuraMarcasRoshComMetodoLike (@RequestParam String marcaRosh){
+        List<RoshDTO> listaRoshResult = roshService.procuraMarcasRoshComMetodoLike(marcaRosh);
+
+        if(listaRoshResult.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(listaRoshResult, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/sugestao-material-rosh")
+    public ResponseEntity<List<RoshDTO>> procuraMaterialRoshComMetodoLike (@RequestParam String materialRosh){
+        List<RoshDTO> listaRoshResult = roshService.procuraMaterialRoshComMetodoLike(materialRosh);
+
+        if(listaRoshResult.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(listaRoshResult, HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/apagar-marca-rosh")
+    public ResponseEntity<Void> apagaRoshPorMarcasRosh (@RequestParam MarcasRosh marcaRosh){
+        roshService.apagaRoshPorMarcasRosh(marcaRosh);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @DeleteMapping("/apagar-material-rosh")
+    public ResponseEntity<Void> apagaRoshPorMaterialRosh (@RequestParam MaterialRosh materialRosh){
+        roshService.apagaRoshPorMaterialRosh(materialRosh);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

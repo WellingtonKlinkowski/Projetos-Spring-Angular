@@ -29,7 +29,7 @@ public interface NarguileRepository extends JpaRepository<NarguileEntity, Long> 
     @Query(value = "SELECT * FROM NARGUILES n WHERE n.material_narguile LIKE %?1%", nativeQuery = true)
     List<NarguileEntity> procuraMaterialNarguileComMetodoLike (String materialNarguile);
 
-    List<NarguileEntity> findByQuantidadeMangueirasNarguileBetwenn (Integer quantidadeMinima, Integer quantidadeMaxima);
+    List<NarguileEntity> findByQuantidadeMangueirasNarguileBetween (Integer quantidadeMinima, Integer quantidadeMaxima);
 
     void deleteByMarcasNarguile (MarcasNarguile marcasNarguile);
 
