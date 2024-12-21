@@ -2,6 +2,8 @@ package com.wklinkowski.manager_lounge.services;
 
 import com.wklinkowski.manager_lounge.dtos.RoshDTO;
 import com.wklinkowski.manager_lounge.entities.RoshEntity;
+import com.wklinkowski.manager_lounge.enums.MarcasRosh;
+import com.wklinkowski.manager_lounge.enums.MaterialRosh;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
 import com.wklinkowski.manager_lounge.repositories.RoshRepository;
 import jakarta.transaction.Transactional;
@@ -60,5 +62,47 @@ public class RoshService {
                 new EntidadeNaoEncontrada());
 
         roshRepository.delete(roshEntity);
+    }
+
+    @Transactional
+    public List<RoshDTO> procuraRoshPorMarcasRosh (MarcasRosh marcasRosh) {
+        List<RoshEntity> listaRoshPorMarca = roshRepository.findByMarcasRoshOrderByMarcasRoshDesc(marcasRosh);
+
+        return listaRoshPorMarca.stream().map(rosh ->
+                new RoshDTO(rosh)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<RoshDTO> procuraRoshPorMaterialRosh (MaterialRosh materialRosh) {
+        List<RoshEntity> listaRoshPorMaterial = roshRepository.findByMaterialRoshOrderByMaterialRoshDesc(materialRosh);
+
+        return listaRoshPorMaterial.stream().map(rosh ->
+                new RoshDTO(rosh)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<RoshDTO> procuraMarcasRoshComMetodoLike (String marcaRosh) {
+        List<RoshEntity> listaRoshPorMarca = roshRepository.procuraMarcasRoshComMetodoLike(marcaRosh);
+
+        return listaRoshPorMarca.stream().map(rosh ->
+                new RoshDTO(rosh)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<RoshDTO> procuraMaterialRoshComMetodoLike (String materialRosh) {
+        List<RoshEntity> listaRoshPorMaterial = roshRepository.procuraMaterialRoshComMetodoLike(materialRosh);
+
+        return listaRoshPorMaterial.stream().map(rosh ->
+                new RoshDTO(rosh)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void apagaRoshPorMarcasRosh (MarcasRosh marcasRosh) {
+        roshRepository.deleteByMarcasRosh(marcasRosh);
+    }
+
+    @Transactional
+    public void apagaRoshPorMaterialRosh (MaterialRosh materialRosh) {
+        roshRepository.deleteByMaterialRosh(materialRosh);
     }
 }

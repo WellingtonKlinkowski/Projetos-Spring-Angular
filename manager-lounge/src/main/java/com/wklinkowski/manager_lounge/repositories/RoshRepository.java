@@ -13,12 +13,12 @@ import java.util.List;
 @Repository
 public interface RoshRepository extends JpaRepository<RoshEntity, Long> {
 
-    List<RoshEntity> findByMarcasRoshOrderByMarcasRoshDesc (MarcasNarguile marcasNarguile);
+    List<RoshEntity> findByMarcasRoshOrderByMarcasRoshDesc (MarcasRosh marcasRosh);
 
     List<RoshEntity> findByMaterialRoshOrderByMaterialRoshDesc (MaterialRosh materialRosh);
 
     @Query(value = "SELECT * FROM ROSHS r WHERE r.marcas_rosh LIKE %?1%", nativeQuery = true)
-    List<RoshEntity> procuraMarcasRoshComMetodoLike (String marcasNarguile);
+    List<RoshEntity> procuraMarcasRoshComMetodoLike (String marcasRosh);
 
     @Query(value = "SELECT * FROM ROSHS r WHERE r.material_rosh LIKE %?1%", nativeQuery = true)
     List<RoshEntity> procuraMaterialRoshComMetodoLike (String materialRosh);
