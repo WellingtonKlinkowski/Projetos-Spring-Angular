@@ -159,21 +159,21 @@ public class NarguileController {
     }
 
     @DeleteMapping("/apagar-marca-narguile")
-    public ResponseEntity<Void> apagaNarguilePorMarcasNarguile (@PathVariable MarcasNarguile marcaNarguile) {
+    public ResponseEntity<Void> apagaNarguilePorMarcasNarguile (@RequestParam MarcasNarguile marcaNarguile) {
         narguileService.apagaNarguilePorMarcasNarguile(marcaNarguile);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/apagar-material-narguile")
-    public ResponseEntity<Void> apagaNarguilePorMaterialNarguile (@PathVariable MaterialNarguile materialNarguile) {
+    public ResponseEntity<Void> apagaNarguilePorMaterialNarguile (@RequestParam MaterialNarguile materialNarguile) {
         narguileService.apagaNarguilePorMaterialNarguile(materialNarguile);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/apagar-quantidade-mangueiras-narguile")
-    public ResponseEntity<Void> apagaNarguilePorQuantidadeMangueirasNarguile (@PathVariable Integer quantidadeMangueirasNarguile) {
+    public ResponseEntity<Void> apagaNarguilePorQuantidadeMangueirasNarguile (@RequestParam Integer quantidadeMangueirasNarguile) {
         narguileService.apagaNarguilePorQuantidadeMangueirasNarguile(quantidadeMangueirasNarguile);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
