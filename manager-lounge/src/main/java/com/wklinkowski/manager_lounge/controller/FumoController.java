@@ -131,7 +131,7 @@ public class FumoController {
         return new ResponseEntity<>(listaFumoResult, HttpStatus.OK);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("/apaga-marca-fumo")
     public ResponseEntity<Void> deletaFumoPorMarcaFumo (@RequestParam MarcasFumo marcaFumo){
         fumoService.apagaFumoPorMarcasFumo(marcaFumo);
 
