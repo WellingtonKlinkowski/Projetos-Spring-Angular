@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"marcasFumo\": \"ZOMO\",\r\n  \"saborFumo\": \"swiss alps\",\r\n  \"pesoFumo\": 50\r\n}",
+							"raw": "{\r\n  \"marcasFumo\": \"NAY\",\r\n  \"saborFumo\": \"coffee\",\r\n  \"pesoFumo\": 50\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -94,6 +94,220 @@
 					"response": []
 				},
 				{
+					"name": "Procura fumo por marca",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}fumos/marcas-fumo?marcasFumo=ZIGGY",
+							"host": [
+								"{{base}}fumos"
+							],
+							"path": [
+								"marcas-fumo"
+							],
+							"query": [
+								{
+									"key": "marcasFumo",
+									"value": "ZIGGY"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura fumo por sabor",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}fumos/sabor-fumo?saborFumo=mint",
+							"host": [
+								"{{base}}fumos"
+							],
+							"path": [
+								"sabor-fumo"
+							],
+							"query": [
+								{
+									"key": "saborFumo",
+									"value": "mint"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura fumo por peso",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}fumos/peso-fumo?pesoFumo=500",
+							"host": [
+								"{{base}}fumos"
+							],
+							"path": [
+								"peso-fumo"
+							],
+							"query": [
+								{
+									"key": "pesoFumo",
+									"value": "500"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura fumo por por marca com sugestão",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}fumos/sugestao-marca-fumo?marcaFumo=Z",
+							"host": [
+								"{{base}}fumos"
+							],
+							"path": [
+								"sugestao-marca-fumo"
+							],
+							"query": [
+								{
+									"key": "marcaFumo",
+									"value": "Z"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura fumo por sabor com sugestão",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}fumos/sugestao-sabor-fumo?saborFumo=mint",
+							"host": [
+								"{{base}}fumos"
+							],
+							"path": [
+								"sugestao-sabor-fumo"
+							],
+							"query": [
+								{
+									"key": "saborFumo",
+									"value": "mint"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura fumo entre dois pesos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}fumos/entre-peso-fumo?pesoMinimoFumo=50&pesoMaximoFumo=300",
+							"host": [
+								"{{base}}fumos"
+							],
+							"path": [
+								"entre-peso-fumo"
+							],
+							"query": [
+								{
+									"key": "pesoMinimoFumo",
+									"value": "50"
+								},
+								{
+									"key": "pesoMaximoFumo",
+									"value": "300"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Atualiza fumo por id",
 					"request": {
 						"method": "PUT",
@@ -144,6 +358,38 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Deletar fumo por marca",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}fumos/apaga-marca-fumo?marcaFumo=ZOMO",
+							"host": [
+								"{{base}}fumos"
+							],
+							"path": [
+								"apaga-marca-fumo"
+							],
+							"query": [
+								{
+									"key": "marcaFumo",
+									"value": "ZOMO"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -157,7 +403,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"marcaCarvao\" : \"ZOMO\",\r\n    \"pesoCarvao\" : 500,\r\n    \"quantidadeCarvao\" : 30\r\n}",
+							"raw": "{\r\n    \"marcaCarvao\" : \"ZOMO\",\r\n    \"pesoCarvao\" : 1000,\r\n    \"quantidadeCarvao\" : 60\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -548,7 +794,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nomeNarguile\" : \"Future\",\r\n    \"marcasNarguile\" : \"AMAZON\",\r\n    \"quantidadeMangueirasNarguile\" : 1,\r\n    \"materialNarguile\" : \"ACO_INOXIDAVEL\"\r\n}",
+							"raw": "{\r\n    \"nomeNarguile\" : \"Mini 4\",\r\n    \"marcasNarguile\" : \"ZOMO\",\r\n    \"quantidadeMangueirasNarguile\" : 2,\r\n    \"materialNarguile\" : \"PLASTICO\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -626,6 +872,290 @@
 					"response": []
 				},
 				{
+					"name": "Procura narguile por nome",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/nome-narguile?nomeNarguile=Mini",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"nome-narguile"
+							],
+							"query": [
+								{
+									"key": "nomeNarguile",
+									"value": "Mini"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura narguile por marca",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/marca-narguile?marcaNarguile=ZOMO",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"marca-narguile"
+							],
+							"query": [
+								{
+									"key": "marcaNarguile",
+									"value": "ZOMO"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura narguile por quantidade mangueiras",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/quantidade-mangueiras-narguile?quantidadeMangueirasNarguile=2",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"quantidade-mangueiras-narguile"
+							],
+							"query": [
+								{
+									"key": "quantidadeMangueirasNarguile",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura narguile por material",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/material-narguile?materialNarguile=ACO",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"material-narguile"
+							],
+							"query": [
+								{
+									"key": "materialNarguile",
+									"value": "ACO"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura narguile por nome com sugestão",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/sugestao-nome-narguile?nomeNarguile=al",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"sugestao-nome-narguile"
+							],
+							"query": [
+								{
+									"key": "nomeNarguile",
+									"value": "al"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura narguile por marcas com sugestão",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/sugestao-marcas-narguile?marcaNarguile=Z",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"sugestao-marcas-narguile"
+							],
+							"query": [
+								{
+									"key": "marcaNarguile",
+									"value": "Z"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura narguile por material com sugestão",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/sugestao-material-narguile?materialNarguile=A",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"sugestao-material-narguile"
+							],
+							"query": [
+								{
+									"key": "materialNarguile",
+									"value": "A"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura narguile entre quantidade de mangueiras",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/entre-quantidade-mangueiras-narguile?quantidadeMangueirasNarguileMinimo=2&quantidadeMangueirasNarguileMaximo=3",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"entre-quantidade-mangueiras-narguile"
+							],
+							"query": [
+								{
+									"key": "quantidadeMangueirasNarguileMinimo",
+									"value": "2"
+								},
+								{
+									"key": "quantidadeMangueirasNarguileMaximo",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Atualiza narguile por id",
 					"request": {
 						"method": "PUT",
@@ -676,6 +1206,102 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Deletar narguile por marca",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/apagar-marca-narguile?marcaNarguile=ALFARID",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"apagar-marca-narguile"
+							],
+							"query": [
+								{
+									"key": "marcaNarguile",
+									"value": "ALFARID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar narguile por material",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/apagar-material-narguile?materialNarguile=FERRO",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"apagar-material-narguile"
+							],
+							"query": [
+								{
+									"key": "materialNarguile",
+									"value": "FERRO"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar narguile por quantidade de mangueiras",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}narguiles/apagar-quantidade-mangueiras-narguile?quantidadeMangueirasNarguile=3",
+							"host": [
+								"{{base}}narguiles"
+							],
+							"path": [
+								"apagar-quantidade-mangueiras-narguile"
+							],
+							"query": [
+								{
+									"key": "quantidadeMangueirasNarguile",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -689,7 +1315,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"marcasRosh\" : \"SEVEN\",\r\n    \"materialRosh\" : \"VIDRO\"\r\n}",
+							"raw": "{\r\n    \"marcasRosh\" : \"MAHALA\",\r\n    \"materialRosh\" : \"VIDRO\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -767,6 +1393,146 @@
 					"response": []
 				},
 				{
+					"name": "Procura rosh por marca",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}roshs/marcas-rosh?marcasRosh=MAHALA",
+							"host": [
+								"{{base}}roshs"
+							],
+							"path": [
+								"marcas-rosh"
+							],
+							"query": [
+								{
+									"key": "marcasRosh",
+									"value": "MAHALA"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura rosh por material",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}roshs/material-rosh?materialRosh=VIDRO",
+							"host": [
+								"{{base}}roshs"
+							],
+							"path": [
+								"material-rosh"
+							],
+							"query": [
+								{
+									"key": "materialRosh",
+									"value": "VIDRO"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura rosh por marca com sugestão",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}roshs/sugestao-marcas-rosh?marcaRosh=MO",
+							"host": [
+								"{{base}}roshs"
+							],
+							"path": [
+								"sugestao-marcas-rosh"
+							],
+							"query": [
+								{
+									"key": "marcaRosh",
+									"value": "MO"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Procura rosh por material com sugestão",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}roshs/sugestao-material-rosh?materialRosh=CERA",
+							"host": [
+								"{{base}}roshs"
+							],
+							"path": [
+								"sugestao-material-rosh"
+							],
+							"query": [
+								{
+									"key": "materialRosh",
+									"value": "CERA"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Atualiza rosh por id",
 					"request": {
 						"method": "PUT",
@@ -813,6 +1579,70 @@
 							],
 							"path": [
 								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar rosh por marca",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}roshs/apagar-marca-rosh?marcaRosh=PREDATOR",
+							"host": [
+								"{{base}}roshs"
+							],
+							"path": [
+								"apagar-marca-rosh"
+							],
+							"query": [
+								{
+									"key": "marcaRosh",
+									"value": "PREDATOR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar rosh por material",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base}}roshs/apagar-material-rosh?materialRosh=FERRO",
+							"host": [
+								"{{base}}roshs"
+							],
+							"path": [
+								"apagar-material-rosh"
+							],
+							"query": [
+								{
+									"key": "materialRosh",
+									"value": "FERRO"
+								}
 							]
 						}
 					},
