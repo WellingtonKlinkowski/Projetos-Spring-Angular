@@ -1,10 +1,8 @@
 package com.wklinkowski.manager_lounge.services;
 
-import com.wklinkowski.manager_lounge.dtos.CarvaoDTO;
 import com.wklinkowski.manager_lounge.dtos.FumoDTO;
 import com.wklinkowski.manager_lounge.entities.FumoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasFumo;
-import com.wklinkowski.manager_lounge.enums.MarcasRosh;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
 import com.wklinkowski.manager_lounge.repositories.FumoRepository;
 import jakarta.transaction.Transactional;
