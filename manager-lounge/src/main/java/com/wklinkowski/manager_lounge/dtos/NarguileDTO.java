@@ -35,6 +35,9 @@ public class NarguileDTO {
     @Enumerated(EnumType.STRING)
     private MaterialNarguile materialNarguile;
 
+    @Min(value = 1, message = "A quantidade de narguile deve ser igual a 1.")
+    private Integer quantidadeEstoqueNarguile = 1;
+    
     public NarguileDTO (NarguileEntity narguileEntity){
         BeanUtils.copyProperties(narguileEntity, this);
     }
