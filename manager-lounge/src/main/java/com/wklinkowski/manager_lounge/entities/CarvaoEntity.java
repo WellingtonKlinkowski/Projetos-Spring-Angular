@@ -30,6 +30,9 @@ public class CarvaoEntity {
     @Column(nullable = false)
     private Integer quantidadeCarvao = 1;
 
+    @Column(nullable = false)
+    private Integer quantidadeEstoqueCarvao = 1;
+
     public CarvaoEntity (CarvaoDTO carvaoDTO){
         BeanUtils.copyProperties(carvaoDTO, this);
     }
