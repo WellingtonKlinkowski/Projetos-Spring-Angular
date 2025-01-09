@@ -30,6 +30,9 @@ public class FumoEntity {
     @Column(nullable = false)
     private Integer pesoFumo = 1;
 
+    @Column(nullable = false)
+    private Integer quantidadeEstoqueFumo = 1;
+
     public FumoEntity (FumoDTO fumoDTO){
         BeanUtils.copyProperties(fumoDTO, this);
     }
