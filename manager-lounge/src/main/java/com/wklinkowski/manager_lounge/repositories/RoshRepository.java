@@ -1,7 +1,6 @@
 package com.wklinkowski.manager_lounge.repositories;
 
 import com.wklinkowski.manager_lounge.entities.RoshEntity;
-import com.wklinkowski.manager_lounge.enums.MarcasNarguile;
 import com.wklinkowski.manager_lounge.enums.MarcasRosh;
 import com.wklinkowski.manager_lounge.enums.MaterialRosh;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,6 +23,8 @@ public interface RoshRepository extends JpaRepository<RoshEntity, Long> {
     List<RoshEntity> procuraMaterialRoshComMetodoLike (String materialRosh);
 
     void deleteByMarcasRosh (MarcasRosh marcasRosh);
+
+    List<RoshEntity> findByQuantidadeEstoqueRoshOrderByQuantidadeEstoqueRoshDesc (Integer quantidadeEstoqueRosh);
 
     void deleteByMaterialRosh (MaterialRosh materialRosh);
 }
