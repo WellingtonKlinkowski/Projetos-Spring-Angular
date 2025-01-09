@@ -35,6 +35,9 @@ public class NarguileEntity {
     @Enumerated(EnumType.STRING)
     private MaterialNarguile materialNarguile;
 
+    @Column(nullable = false)
+    private Integer quantidadeEstoqueNarguile = 1;
+
     public NarguileEntity (NarguileDTO narguileDTO){
         BeanUtils.copyProperties(narguileDTO, this);
     }
