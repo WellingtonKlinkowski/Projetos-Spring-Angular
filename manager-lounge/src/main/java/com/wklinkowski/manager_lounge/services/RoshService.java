@@ -52,6 +52,7 @@ public class RoshService {
 
         roshEntity.setMaterialRosh(roshDTO.getMaterialRosh());
         roshEntity.setMarcasRosh(roshDTO.getMarcasRosh());
+        roshEntity.setQuantidadeEstoqueRosh(roshDTO.getQuantidadeEstoqueRosh());
 
         return new RoshDTO(roshRepository.save(roshEntity));
     }
@@ -93,6 +94,14 @@ public class RoshService {
         List<RoshEntity> listaRoshPorMaterial = roshRepository.procuraMaterialRoshComMetodoLike(materialRosh);
 
         return listaRoshPorMaterial.stream().map(rosh ->
+                new RoshDTO(rosh)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<RoshDTO> procuraRoshPorQuantidadeEstoqueRosh (int quantidadeEstoqueRosh) {
+        List<RoshEntity> listaRoshPorQuantidadeEstoque = roshRepository.findByQuantidadeEstoqueRoshOrderByQuantidadeEstoqueRoshDesc(quantidadeEstoqueRosh);
+
+        return listaRoshPorQuantidadeEstoque.stream().map(rosh ->
                 new RoshDTO(rosh)).collect(Collectors.toList());
     }
 
