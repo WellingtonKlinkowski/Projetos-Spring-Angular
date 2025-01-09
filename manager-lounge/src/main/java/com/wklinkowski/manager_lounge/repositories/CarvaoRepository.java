@@ -25,5 +25,7 @@ public interface CarvaoRepository extends JpaRepository<CarvaoEntity, Long> {
 
     List<CarvaoEntity> findByPesoCarvaoBetween (Integer pesoMinimoCarvao, Integer pesoMaximoCarvao);
 
+    List<CarvaoEntity> findByQuantidadeEstoqueCarvaoOrderByQuantidadeEstoqueCarvaoDesc (Integer quantidadeEstoqueCarvao);
+
     void deleteByMarcaCarvao (MarcaCarvao marcaCarvao);
 }
