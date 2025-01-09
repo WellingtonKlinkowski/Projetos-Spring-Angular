@@ -29,6 +29,9 @@ public class RoshEntity {
     @Enumerated(EnumType.STRING)
     private MaterialRosh materialRosh;
 
+    @Column(nullable = false)
+    private Integer quantidadeEstoqueRosh = 1;
+
     public RoshEntity (RoshDTO roshDTO){
         BeanUtils.copyProperties(roshDTO, this);
     }
