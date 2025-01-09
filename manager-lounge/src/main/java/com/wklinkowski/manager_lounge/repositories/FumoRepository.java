@@ -25,5 +25,7 @@ public interface FumoRepository extends JpaRepository<FumoEntity, Long> {
 
     List<FumoEntity> findByPesoFumoBetween (Integer pesoMinimo, Integer pesoMaximo);
 
+    List<FumoEntity> findByQuantidadeEstoqueFumoOrderByQuantidadeEstoqueFumoDesc (Integer quantidadeEstoqueFumo);
+
     void deleteByMarcasFumo(MarcasFumo marcasFumo);
 }
