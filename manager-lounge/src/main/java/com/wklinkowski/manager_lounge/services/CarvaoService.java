@@ -55,6 +55,7 @@ public class CarvaoService {
         carvaoEntity.setMarcaCarvao(carvao.getMarcaCarvao());
         carvaoEntity.setPesoCarvao(carvao.getPesoCarvao());
         carvaoEntity.setQuantidadeCarvao(carvao.getQuantidadeCarvao());
+        carvaoEntity.setQuantidadeEstoqueCarvao(carvao.getQuantidadeEstoqueCarvao());
 
         return new CarvaoDTO(carvaoRepository.save(carvaoEntity));
     }
@@ -114,6 +115,15 @@ public class CarvaoService {
         List<CarvaoEntity> listaCarvaoComPesoEntreDoisValores = carvaoRepository.findByPesoCarvaoBetween(pesoMinimo, pesoMaximo);
 
         return listaCarvaoComPesoEntreDoisValores.stream().map(carvao ->
+                new CarvaoDTO(carvao)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<CarvaoDTO> procuraCarvaoPorQuantidadeEmEstoque (Integer quantidadeEstoqueCarvao){
+        List<CarvaoEntity> listaCarvaoPorQuantidadeEstoque =
+                carvaoRepository.findByQuantidadeEstoqueCarvaoOrderByQuantidadeEstoqueCarvaoDesc(quantidadeEstoqueCarvao);
+
+        return listaCarvaoPorQuantidadeEstoque.stream().map(carvao ->
                 new CarvaoDTO(carvao)).collect(Collectors.toList());
     }
 
