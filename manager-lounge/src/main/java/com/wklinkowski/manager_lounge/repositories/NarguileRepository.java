@@ -31,6 +31,8 @@ public interface NarguileRepository extends JpaRepository<NarguileEntity, Long> 
 
     List<NarguileEntity> findByQuantidadeMangueirasNarguileBetween (Integer quantidadeMinima, Integer quantidadeMaxima);
 
+    List<NarguileEntity> findByQuantidadeEstoqueNarguileOrderByQuantidadeEstoqueNarguileoDesc (Integer quantidadeEstoqueNarguile);
+
     void deleteByMarcasNarguile (MarcasNarguile marcasNarguile);
 
     void deleteByMaterialNarguile (MaterialNarguile materialNarguile);
