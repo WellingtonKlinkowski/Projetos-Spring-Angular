@@ -24,8 +24,11 @@ public class CarvaoDTO {
     @Min(value = 1, message = "O peso mínimo para o carvão é 1g.")
     private Integer pesoCarvao = 1;
 
-    @Min(value = 1, message = "A quantidade mínima de carvã permitida é 1.")
+    @Min(value = 1, message = "A quantidade mínima de carvão permitida é 1.")
     private Integer quantidadeCarvao = 1;
+
+    @Min(value = 1, message = "A quantidade mínima de caixa de carvão permitida é 1.")
+    private Integer quantidadeEstoqueCarvao = 1;
 
     public CarvaoDTO (CarvaoEntity carvaoEntity){
         BeanUtils.copyProperties(carvaoEntity, this);
