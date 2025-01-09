@@ -54,6 +54,7 @@ public class NarguileService {
         narguileEntity.setMaterialNarguile(narguileDTO.getMaterialNarguile());
         narguileEntity.setNomeNarguile(narguileDTO.getNomeNarguile());
         narguileEntity.setQuantidadeMangueirasNarguile(narguileDTO.getQuantidadeMangueirasNarguile());
+        narguileEntity.setQuantidadeEstoqueNarguile(narguileDTO.getQuantidadeEstoqueNarguile());
 
         return new NarguileDTO(narguileRepository.save(narguileEntity));
     }

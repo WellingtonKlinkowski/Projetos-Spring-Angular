@@ -54,6 +54,7 @@ public class FumoService {
         fumoEntity.setMarcasFumo(fumoDTO.getMarcasFumo());
         fumoEntity.setPesoFumo(fumoDTO.getPesoFumo());
         fumoEntity.setSaborFumo(fumoDTO.getSaborFumo());
+        fumoEntity.setQuantidadeEstoqueFumo(fumoDTO.getQuantidadeEstoqueFumo());
 
         return new FumoDTO(fumoRepository.save(fumoEntity));
     }
@@ -117,6 +118,15 @@ public class FumoService {
                 fumoRepository.findByPesoFumoBetween(pesoMinimoFumo, pesoMaximoFumo);
 
         return listaFumoPorPesoFumo.stream().map( fumo ->
+                new FumoDTO(fumo)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<FumoDTO> procuraFumoPorQuantidadeEmEstoque (Integer quantidadeEstoqueFumo){
+        List<FumoEntity> listaFumoPorQuantidadeEstoque =
+                fumoRepository.findByQuantidadeEstoqueFumoOrderByQuantidadeEstoqueFumoDesc(quantidadeEstoqueFumo);
+
+        return listaFumoPorQuantidadeEstoque.stream().map( fumo ->
                 new FumoDTO(fumo)).collect(Collectors.toList());
     }
 
