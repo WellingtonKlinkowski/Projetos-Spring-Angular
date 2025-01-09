@@ -140,6 +140,15 @@ public class NarguileService {
     }
 
     @Transactional
+    public List<NarguileDTO> procuraNarguilePorQuantidadeEstoqueNarguile (Integer quantidadeEstoqueNarguile) {
+        List<NarguileEntity> listaNarguilePorQuantidadeEstoque =
+                narguileRepository.findByQuantidadeEstoqueNarguileOrderByQuantidadeEstoqueNarguileDesc(quantidadeEstoqueNarguile);
+
+        return listaNarguilePorQuantidadeEstoque.stream().map(narguile ->
+                new NarguileDTO(narguile)).collect(Collectors.toList());
+    }
+
+    @Transactional
     public void apagaNarguilePorMarcasNarguile (MarcasNarguile marcasNarguile) {
         narguileRepository.deleteByMarcasNarguile(marcasNarguile);
     }
