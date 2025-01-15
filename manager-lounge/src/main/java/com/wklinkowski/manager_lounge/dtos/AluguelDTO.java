@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.dtos;
 
 import com.wklinkowski.manager_lounge.entities.*;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -33,6 +34,9 @@ public class AluguelDTO {
 
     @NotNull(message = "A duração do aluguel não pode estar vazio.")
     private Duration duracaoAluguel;
+
+    @NotNull(message = "É preciso informar a situação em que o aluguel está.")
+    private boolean ativoAluguel;
 
     public AluguelDTO(AluguelEntity aluguelEntity){
         BeanUtils.copyProperties(aluguelEntity, this);

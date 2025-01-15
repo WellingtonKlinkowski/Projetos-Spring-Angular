@@ -49,6 +49,9 @@ public class AluguelEntity {
     @Convert(converter = DurationConverter.class)
     private Duration duracaoAluguel;
 
+    @Column(nullable = false)
+    private boolean ativoAluguel;
+
     public AluguelEntity(AluguelDTO aluguelDTO){
         BeanUtils.copyProperties(aluguelDTO, this);
     }
