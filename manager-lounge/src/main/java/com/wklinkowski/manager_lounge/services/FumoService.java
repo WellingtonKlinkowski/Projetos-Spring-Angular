@@ -31,13 +31,6 @@ public class FumoService {
     }
 
     @Transactional
-    public List<FumoDTO> listarFumos (){
-        List<FumoEntity> listaFumoEntity = fumoRepository.findAll();
-
-        return listaFumoEntity.stream().map(fumo -> new FumoDTO(fumo)).collect(Collectors.toList());
-    }
-
-    @Transactional
     public FumoDTO procurarFumoPorId (Long idFumo){
         Optional<FumoEntity> optionalFumo = fumoRepository.findById(idFumo);
 
@@ -45,24 +38,10 @@ public class FumoService {
     }
 
     @Transactional
-    public FumoDTO atualizaFumoPorId (Long idFumo, FumoDTO fumoDTO){
-        FumoEntity fumoEntity = fumoRepository.findById(idFumo).orElseThrow(() ->
-                new EntidadeNaoEncontrada());
+    public List<FumoDTO> listarFumos (){
+        List<FumoEntity> listaFumoEntity = fumoRepository.findAll();
 
-        fumoEntity.setMarcasFumo(fumoDTO.getMarcasFumo());
-        fumoEntity.setPesoFumo(fumoDTO.getPesoFumo());
-        fumoEntity.setSaborFumo(fumoDTO.getSaborFumo());
-        fumoEntity.setQuantidadeEstoqueFumo(fumoDTO.getQuantidadeEstoqueFumo());
-
-        return new FumoDTO(fumoRepository.save(fumoEntity));
-    }
-
-    @Transactional
-    public void deletaFumoPorId (Long idFumo) {
-        FumoEntity fumoEntity = fumoRepository.findById(idFumo).orElseThrow(() ->
-                new EntidadeNaoEncontrada());
-
-        fumoRepository.delete(fumoEntity);
+        return listaFumoEntity.stream().map(fumo -> new FumoDTO(fumo)).collect(Collectors.toList());
     }
 
     @Transactional
@@ -126,6 +105,27 @@ public class FumoService {
 
         return listaFumoPorQuantidadeEstoque.stream().map( fumo ->
                 new FumoDTO(fumo)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public FumoDTO atualizaFumoPorId (Long idFumo, FumoDTO fumoDTO){
+        FumoEntity fumoEntity = fumoRepository.findById(idFumo).orElseThrow(() ->
+                new EntidadeNaoEncontrada());
+
+        fumoEntity.setMarcasFumo(fumoDTO.getMarcasFumo());
+        fumoEntity.setPesoFumo(fumoDTO.getPesoFumo());
+        fumoEntity.setSaborFumo(fumoDTO.getSaborFumo());
+        fumoEntity.setQuantidadeEstoqueFumo(fumoDTO.getQuantidadeEstoqueFumo());
+
+        return new FumoDTO(fumoRepository.save(fumoEntity));
+    }
+
+    @Transactional
+    public void deletaFumoPorId (Long idFumo) {
+        FumoEntity fumoEntity = fumoRepository.findById(idFumo).orElseThrow(() ->
+                new EntidadeNaoEncontrada());
+
+        fumoRepository.delete(fumoEntity);
     }
 
     @Transactional
