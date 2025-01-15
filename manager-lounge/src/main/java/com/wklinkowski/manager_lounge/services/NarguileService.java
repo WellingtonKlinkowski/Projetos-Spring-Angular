@@ -141,16 +141,16 @@ public class NarguileService {
     }
 
     @Transactional
+    public void apagaNarguilePorMarcasNarguile (MarcasNarguile marcasNarguile) {
+        narguileRepository.deleteByMarcasNarguile(marcasNarguile);
+    }
+
+    @Transactional
     public void apagaNarguilePorId (Long idNarguile) {
         NarguileEntity narguileEntity = narguileRepository.findById(idNarguile).orElseThrow( () ->
                 new EntidadeNaoEncontrada());
 
         narguileRepository.delete(narguileEntity);
-    }
-
-    @Transactional
-    public void apagaNarguilePorMarcasNarguile (MarcasNarguile marcasNarguile) {
-        narguileRepository.deleteByMarcasNarguile(marcasNarguile);
     }
 
     @Transactional
