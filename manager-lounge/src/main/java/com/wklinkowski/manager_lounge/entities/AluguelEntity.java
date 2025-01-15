@@ -1,5 +1,6 @@
 package com.wklinkowski.manager_lounge.entities;
 
+import com.wklinkowski.manager_lounge.converters.DurationConverter;
 import com.wklinkowski.manager_lounge.dtos.AluguelDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -45,6 +46,7 @@ public class AluguelEntity {
     private LocalDateTime horaAluguel = LocalDateTime.now();
 
     @Column(nullable = false)
+    @Convert(converter = DurationConverter.class)
     private Duration duracaoAluguel;
 
     public AluguelEntity(AluguelDTO aluguelDTO){
