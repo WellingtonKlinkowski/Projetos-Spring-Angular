@@ -1,7 +1,9 @@
 package com.wklinkowski.manager_lounge.entities;
 
+import com.wklinkowski.manager_lounge.dtos.AluguelDTO;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.BeanUtils;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -44,5 +46,9 @@ public class AluguelEntity {
 
     @Column(nullable = false)
     private Duration duracaoAluguel;
+
+    public AluguelEntity(AluguelDTO aluguelDTO){
+        BeanUtils.copyProperties(aluguelDTO, this);
+    }
 
 }
