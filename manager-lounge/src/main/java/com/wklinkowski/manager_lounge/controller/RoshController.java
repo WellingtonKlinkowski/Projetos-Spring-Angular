@@ -32,17 +32,6 @@ public class RoshController {
         return new ResponseEntity<>(roshResultado, HttpStatus.CREATED);
     }
 
-    @GetMapping("/listar")
-    public ResponseEntity<List<RoshDTO>> listarRoshs(){
-        List<RoshDTO> listaRoshResultado = roshService.listarRosh();
-
-        if(listaRoshResultado.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-
-        return new ResponseEntity<>(listaRoshResultado, HttpStatus.OK);
-    }
-
     @GetMapping("/{idRosh}")
     public ResponseEntity<RoshDTO> procuraRoshPorId (@PathVariable Long idRosh){
         RoshDTO roshResultado = roshService.procuraRoshPorId(idRosh);
@@ -54,18 +43,15 @@ public class RoshController {
         return new ResponseEntity<>(roshResultado, HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/{idRosh}")
-    public ResponseEntity<RoshDTO> atualizaRoshPorId (@PathVariable Long idRosh, @Valid @RequestBody RoshDTO roshDTO){
-        RoshDTO roshResultado = roshService.atualizaRoshPorId(idRosh, roshDTO);
+    @GetMapping("/listar")
+    public ResponseEntity<List<RoshDTO>> listarRoshs(){
+        List<RoshDTO> listaRoshResultado = roshService.listarRosh();
 
-        return new ResponseEntity<>(roshResultado, HttpStatus.OK);
-    }
+        if(listaRoshResultado.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
 
-    @DeleteMapping("/{idRosh}")
-    public ResponseEntity<Void> deletaRoshPorId (@PathVariable Long idRosh){
-        roshService.deletaRoshPorId(idRosh);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(listaRoshResultado, HttpStatus.OK);
     }
 
     @GetMapping("/marcas-rosh")
@@ -113,7 +99,7 @@ public class RoshController {
     }
 
     @GetMapping("/quantidade-estoque")
-    public ResponseEntity<List<RoshDTO>> buscaRoshPorQuantidadeEstoque (@RequestParam Integer quantidadeEstoqueRosh){
+    public ResponseEntity<List<RoshDTO>> procuraRoshPorQuantidadeEstoque (@RequestParam Integer quantidadeEstoqueRosh){
         List<RoshDTO> listaRoshResultado = roshService.procuraRoshPorQuantidadeEstoqueRosh(quantidadeEstoqueRosh);
 
         if(listaRoshResultado.isEmpty()){
@@ -121,6 +107,20 @@ public class RoshController {
         }
 
         return new ResponseEntity<>(listaRoshResultado, HttpStatus.OK);
+    }
+
+    @PutMapping("/{idRosh}")
+    public ResponseEntity<RoshDTO> atualizaRoshPorId (@PathVariable Long idRosh, @Valid @RequestBody RoshDTO roshDTO){
+        RoshDTO roshResultado = roshService.atualizaRoshPorId(idRosh, roshDTO);
+
+        return new ResponseEntity<>(roshResultado, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{idRosh}")
+    public ResponseEntity<Void> apagaRoshPorId (@PathVariable Long idRosh){
+        roshService.deletaRoshPorId(idRosh);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/apagar-marca-rosh")
