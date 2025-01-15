@@ -52,20 +52,6 @@ public class CarvaoController {
         return new ResponseEntity<>(carvaoResultado, HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/{idCarvao}")
-    public ResponseEntity<CarvaoDTO> atualizaCarvaoPorId (@PathVariable Long idCarvao, @Valid @RequestBody CarvaoDTO carvaoDTO){
-        CarvaoDTO carvaoResultado = carvaoService.atualizarCarvaoPorId(idCarvao, carvaoDTO);
-
-        return new ResponseEntity<>(carvaoResultado, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{idCarvao}")
-    public ResponseEntity<Void> deletaCarvaoPorId (@PathVariable Long idCarvao){
-        carvaoService.deletaCarvaoPorId(idCarvao);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
     @GetMapping("/marca-carvao")
     public ResponseEntity<List<CarvaoDTO>> procuraCarvaoPorMarca (@RequestParam MarcaCarvao marcaCarvao){
         List<CarvaoDTO> listaCarvaoResultado = carvaoService.procuraCarvaoPorMarcaCarvao(marcaCarvao);
@@ -133,7 +119,7 @@ public class CarvaoController {
     }
 
     @GetMapping("/quantidade-estoque")
-    public ResponseEntity<List<CarvaoDTO>> buscaCarvaoPorQuantidadeEstoque (@RequestParam Integer quantidadeEstoqueCarvao){
+    public ResponseEntity<List<CarvaoDTO>> procuraCarvaoPorQuantidadeEstoque (@RequestParam Integer quantidadeEstoqueCarvao){
         List<CarvaoDTO> listaCarvaoResultado = carvaoService.procuraCarvaoPorQuantidadeEmEstoque(quantidadeEstoqueCarvao);
 
         if(listaCarvaoResultado.isEmpty()){
@@ -143,8 +129,22 @@ public class CarvaoController {
         return new ResponseEntity<>(listaCarvaoResultado, HttpStatus.OK);
     }
 
+    @PutMapping("/{idCarvao}")
+    public ResponseEntity<CarvaoDTO> atualizaCarvaoPorId (@PathVariable Long idCarvao, @Valid @RequestBody CarvaoDTO carvaoDTO){
+        CarvaoDTO carvaoResultado = carvaoService.atualizarCarvaoPorId(idCarvao, carvaoDTO);
+
+        return new ResponseEntity<>(carvaoResultado, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{idCarvao}")
+    public ResponseEntity<Void> deletaCarvaoPorId (@PathVariable Long idCarvao){
+        carvaoService.deletaCarvaoPorId(idCarvao);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @DeleteMapping("/apagar-marca-carvao")
-    public ResponseEntity<Void> apagarCarvaoPorMarca (@RequestParam MarcaCarvao marcaCarvao){
+    public ResponseEntity<Void> deletarCarvaoPorMarca (@RequestParam MarcaCarvao marcaCarvao){
         carvaoService.deletarCarvaoPorMarcaCarvao(marcaCarvao);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
