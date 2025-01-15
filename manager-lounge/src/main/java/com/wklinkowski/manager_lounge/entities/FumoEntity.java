@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.beans.BeanUtils;
 
+import java.util.List;
+
 @Entity
 @Table(name = "FUMOS")
 @AllArgsConstructor
@@ -32,6 +34,9 @@ public class FumoEntity {
 
     @Column(nullable = false)
     private Integer quantidadeEstoqueFumo = 1;
+
+    @OneToMany(mappedBy = "id")
+    private List<AluguelEntity> aluguelFumo;
 
     public FumoEntity (FumoDTO fumoDTO){
         BeanUtils.copyProperties(fumoDTO, this);
