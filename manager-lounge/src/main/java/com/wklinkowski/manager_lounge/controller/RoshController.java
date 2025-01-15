@@ -1,5 +1,6 @@
 package com.wklinkowski.manager_lounge.controller;
 
+import com.wklinkowski.manager_lounge.dtos.NarguileDTO;
 import com.wklinkowski.manager_lounge.dtos.RoshDTO;
 import com.wklinkowski.manager_lounge.enums.MarcaCarvao;
 import com.wklinkowski.manager_lounge.enums.MarcasRosh;
@@ -26,38 +27,38 @@ public class RoshController {
 
     @PostMapping("/criar")
     public ResponseEntity<RoshDTO> criarRosh (@Valid @RequestBody RoshDTO roshDTO){
-        RoshDTO roshResponse = roshService.criarRosh(roshDTO);
+        RoshDTO roshResultado = roshService.criarRosh(roshDTO);
 
-        return new ResponseEntity<>(roshResponse, HttpStatus.CREATED);
+        return new ResponseEntity<>(roshResultado, HttpStatus.CREATED);
     }
 
     @GetMapping("/listar")
     public ResponseEntity<List<RoshDTO>> listarRoshs(){
-        List<RoshDTO> listaRosh = roshService.listarRosh();
+        List<RoshDTO> listaRoshResultado = roshService.listarRosh();
 
-        if(listaRosh.isEmpty()){
+        if(listaRoshResultado.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(listaRosh, HttpStatus.OK);
+        return new ResponseEntity<>(listaRoshResultado, HttpStatus.OK);
     }
 
     @GetMapping("/{idRosh}")
     public ResponseEntity<RoshDTO> procuraRoshPorId (@PathVariable Long idRosh){
-        RoshDTO roshResult = roshService.procuraRoshPorId(idRosh);
+        RoshDTO roshResultado = roshService.procuraRoshPorId(idRosh);
 
-        if(roshResult == null){
+        if(roshResultado == null){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(roshResult, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(roshResultado, HttpStatus.ACCEPTED);
     }
 
     @PutMapping("/{idRosh}")
     public ResponseEntity<RoshDTO> atualizaRoshPorId (@PathVariable Long idRosh, @Valid @RequestBody RoshDTO roshDTO){
-        RoshDTO roshResult = roshService.atualizaRoshPorId(idRosh, roshDTO);
+        RoshDTO roshResultado = roshService.atualizaRoshPorId(idRosh, roshDTO);
 
-        return new ResponseEntity<>(roshResult, HttpStatus.OK);
+        return new ResponseEntity<>(roshResultado, HttpStatus.OK);
     }
 
     @DeleteMapping("/{idRosh}")
@@ -69,46 +70,57 @@ public class RoshController {
 
     @GetMapping("/marcas-rosh")
     public ResponseEntity<List<RoshDTO>> procuraRoshPorMarcasRosh (@RequestParam MarcasRosh marcasRosh){
-        List<RoshDTO> listaRoshResult = roshService.procuraRoshPorMarcasRosh(marcasRosh);
+        List<RoshDTO> listaRoshResultado = roshService.procuraRoshPorMarcasRosh(marcasRosh);
 
-        if(listaRoshResult.isEmpty()){
+        if(listaRoshResultado.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(listaRoshResult, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(listaRoshResultado, HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/material-rosh")
     public ResponseEntity<List<RoshDTO>> procuraRoshPorMaterialRosh (@RequestParam MaterialRosh materialRosh){
-        List<RoshDTO> listaRoshResult = roshService.procuraRoshPorMaterialRosh(materialRosh);
+        List<RoshDTO> listaRoshResultado = roshService.procuraRoshPorMaterialRosh(materialRosh);
 
-        if(listaRoshResult.isEmpty()){
+        if(listaRoshResultado.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(listaRoshResult, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(listaRoshResultado, HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/sugestao-marcas-rosh")
     public ResponseEntity<List<RoshDTO>> procuraMarcasRoshComMetodoLike (@RequestParam String marcaRosh){
-        List<RoshDTO> listaRoshResult = roshService.procuraMarcasRoshComMetodoLike(marcaRosh);
+        List<RoshDTO> listaRoshResultado = roshService.procuraMarcasRoshComMetodoLike(marcaRosh);
 
-        if(listaRoshResult.isEmpty()){
+        if(listaRoshResultado.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(listaRoshResult, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(listaRoshResultado, HttpStatus.ACCEPTED);
     }
 
     @GetMapping("/sugestao-material-rosh")
     public ResponseEntity<List<RoshDTO>> procuraMaterialRoshComMetodoLike (@RequestParam String materialRosh){
-        List<RoshDTO> listaRoshResult = roshService.procuraMaterialRoshComMetodoLike(materialRosh);
+        List<RoshDTO> listaRoshResultado = roshService.procuraMaterialRoshComMetodoLike(materialRosh);
 
-        if(listaRoshResult.isEmpty()){
+        if(listaRoshResultado.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
-        return new ResponseEntity<>(listaRoshResult, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(listaRoshResultado, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/quantidade-estoque")
+    public ResponseEntity<List<RoshDTO>> buscaRoshPorQuantidadeEstoque (@RequestParam Integer quantidadeEstoqueRosh){
+        List<RoshDTO> listaRoshResultado = roshService.procuraRoshPorQuantidadeEstoqueRosh(quantidadeEstoqueRosh);
+
+        if(listaRoshResultado.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(listaRoshResultado, HttpStatus.OK);
     }
 
     @DeleteMapping("/apagar-marca-rosh")
