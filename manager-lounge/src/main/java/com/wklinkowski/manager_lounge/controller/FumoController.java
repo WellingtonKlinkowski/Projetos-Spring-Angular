@@ -30,17 +30,6 @@ public class FumoController {
         return new ResponseEntity<>(fumoResultado, HttpStatus.CREATED);
     }
 
-    @GetMapping("/listar")
-    public ResponseEntity<List<FumoDTO>> listarFumos (){
-        List<FumoDTO> listaFumoResultado = fumoService.listarFumos();
-
-        if(listaFumoResultado.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-
-        return new ResponseEntity<>(listaFumoResultado, HttpStatus.OK);
-    }
-
     @GetMapping("/{idFumo}")
     public ResponseEntity<FumoDTO> procuraFumoPorId (@PathVariable Long idFumo){
         FumoDTO fumoResultado = fumoService.procurarFumoPorId(idFumo);
@@ -52,18 +41,15 @@ public class FumoController {
         return new ResponseEntity<>(fumoResultado, HttpStatus.ACCEPTED);
     }
 
-    @PutMapping("/{idFumo}")
-    public ResponseEntity<FumoDTO> atualizaFumoPorId (@PathVariable Long idFumo, @Valid @RequestBody FumoDTO fumoDTO){
-        FumoDTO fumoResultado = fumoService.atualizaFumoPorId(idFumo, fumoDTO);
+    @GetMapping("/listar")
+    public ResponseEntity<List<FumoDTO>> listarFumos (){
+        List<FumoDTO> listaFumoResultado = fumoService.listarFumos();
 
-        return new ResponseEntity<>(fumoResultado, HttpStatus.OK);
-    }
+        if(listaFumoResultado.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
 
-    @DeleteMapping("/{idFumo}")
-    public ResponseEntity<Void> deletaFumoPorId (@PathVariable Long idFumo){
-        fumoService.deletaFumoPorId(idFumo);
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(listaFumoResultado, HttpStatus.OK);
     }
 
     @GetMapping("marcas-fumo")
@@ -133,7 +119,7 @@ public class FumoController {
     }
 
     @GetMapping("/quantidade-estoque")
-    public ResponseEntity<List<FumoDTO>> buscaFumoPorQuantidadeEstoque (@RequestParam Integer quantidadeFumoEstoque){
+    public ResponseEntity<List<FumoDTO>> procuraFumoPorQuantidadeEstoque (@RequestParam Integer quantidadeFumoEstoque){
         List<FumoDTO> listaFumoResultado = fumoService.procuraFumoPorQuantidadeEmEstoque(quantidadeFumoEstoque);
 
         if(listaFumoResultado.isEmpty()){
@@ -141,6 +127,20 @@ public class FumoController {
         }
 
         return new ResponseEntity<>(listaFumoResultado, HttpStatus.OK);
+    }
+
+    @PutMapping("/{idFumo}")
+    public ResponseEntity<FumoDTO> atualizaFumoPorId (@PathVariable Long idFumo, @Valid @RequestBody FumoDTO fumoDTO){
+        FumoDTO fumoResultado = fumoService.atualizaFumoPorId(idFumo, fumoDTO);
+
+        return new ResponseEntity<>(fumoResultado, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{idFumo}")
+    public ResponseEntity<Void> deletaFumoPorId (@PathVariable Long idFumo){
+        fumoService.deletaFumoPorId(idFumo);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/apaga-marca-fumo")
