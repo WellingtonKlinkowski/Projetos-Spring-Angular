@@ -164,7 +164,7 @@ public class NarguileController {
 
     @DeleteMapping("/{idNarguile}")
     public ResponseEntity<Void> apagaNarguilePorId (@PathVariable Long idNarguile) {
-        narguileService.deletaNarguilePorId(idNarguile);
+        narguileService.apagaNarguilePorId(idNarguile);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

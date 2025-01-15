@@ -32,13 +32,6 @@ public class NarguileService {
     }
 
     @Transactional
-    public List<NarguileDTO> listarNarguiles (){
-        List<NarguileEntity> listaNarguileEntity = narguileRepository.findAll();
-
-        return listaNarguileEntity.stream().map(narguile -> new NarguileDTO(narguile)).collect(Collectors.toList());
-    }
-
-    @Transactional
     public NarguileDTO procuraNarguilePorId (Long idNarguile){
         Optional<NarguileEntity> opationalNarguile = narguileRepository.findById(idNarguile);
 
@@ -46,25 +39,10 @@ public class NarguileService {
     }
 
     @Transactional
-    public NarguileDTO atualizaNarguilePorId (Long idNarguile, NarguileDTO narguileDTO){
-        NarguileEntity narguileEntity = narguileRepository.findById(idNarguile).orElseThrow(() ->
-                new EntidadeNaoEncontrada());
+    public List<NarguileDTO> listarNarguiles (){
+        List<NarguileEntity> listaNarguileEntity = narguileRepository.findAll();
 
-        narguileEntity.setMarcasNarguile(narguileDTO.getMarcasNarguile());
-        narguileEntity.setMaterialNarguile(narguileDTO.getMaterialNarguile());
-        narguileEntity.setNomeNarguile(narguileDTO.getNomeNarguile());
-        narguileEntity.setQuantidadeMangueirasNarguile(narguileDTO.getQuantidadeMangueirasNarguile());
-        narguileEntity.setQuantidadeEstoqueNarguile(narguileDTO.getQuantidadeEstoqueNarguile());
-
-        return new NarguileDTO(narguileRepository.save(narguileEntity));
-    }
-
-    @Transactional
-    public void deletaNarguilePorId (Long idNarguile) {
-        NarguileEntity narguileEntity = narguileRepository.findById(idNarguile).orElseThrow( () ->
-                new EntidadeNaoEncontrada());
-
-        narguileRepository.delete(narguileEntity);
+        return listaNarguileEntity.stream().map(narguile -> new NarguileDTO(narguile)).collect(Collectors.toList());
     }
 
     @Transactional
@@ -146,6 +124,28 @@ public class NarguileService {
 
         return listaNarguilePorQuantidadeEstoque.stream().map(narguile ->
                 new NarguileDTO(narguile)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public NarguileDTO atualizaNarguilePorId (Long idNarguile, NarguileDTO narguileDTO){
+        NarguileEntity narguileEntity = narguileRepository.findById(idNarguile).orElseThrow(() ->
+                new EntidadeNaoEncontrada());
+
+        narguileEntity.setMarcasNarguile(narguileDTO.getMarcasNarguile());
+        narguileEntity.setMaterialNarguile(narguileDTO.getMaterialNarguile());
+        narguileEntity.setNomeNarguile(narguileDTO.getNomeNarguile());
+        narguileEntity.setQuantidadeMangueirasNarguile(narguileDTO.getQuantidadeMangueirasNarguile());
+        narguileEntity.setQuantidadeEstoqueNarguile(narguileDTO.getQuantidadeEstoqueNarguile());
+
+        return new NarguileDTO(narguileRepository.save(narguileEntity));
+    }
+
+    @Transactional
+    public void apagaNarguilePorId (Long idNarguile) {
+        NarguileEntity narguileEntity = narguileRepository.findById(idNarguile).orElseThrow( () ->
+                new EntidadeNaoEncontrada());
+
+        narguileRepository.delete(narguileEntity);
     }
 
     @Transactional
