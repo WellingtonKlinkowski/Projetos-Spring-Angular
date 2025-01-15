@@ -32,14 +32,6 @@ public class CarvaoService {
     }
 
     @Transactional
-    public List<CarvaoDTO> listarCarvoes (){
-        List<CarvaoEntity> listaCarvaoEntity = carvaoRepository.findAll();
-
-        return listaCarvaoEntity.stream().map(carvao ->
-                new CarvaoDTO(carvao)).collect(Collectors.toList());
-    }
-
-    @Transactional
     public CarvaoDTO procurarCarvaoPorId (Long id){
         Optional<CarvaoEntity> optionalCarvao = carvaoRepository.findById(id);
 
@@ -47,25 +39,11 @@ public class CarvaoService {
     }
 
     @Transactional
-    public CarvaoDTO atualizarCarvaoPorId (Long idCarvao, CarvaoDTO carvao){
+    public List<CarvaoDTO> listarCarvoes (){
+        List<CarvaoEntity> listaCarvao = carvaoRepository.findAll();
 
-        CarvaoEntity carvaoEntity = carvaoRepository.findById(idCarvao).orElseThrow(() ->
-                new EntidadeNaoEncontrada());
-
-        carvaoEntity.setMarcaCarvao(carvao.getMarcaCarvao());
-        carvaoEntity.setPesoCarvao(carvao.getPesoCarvao());
-        carvaoEntity.setQuantidadeCarvao(carvao.getQuantidadeCarvao());
-        carvaoEntity.setQuantidadeEstoqueCarvao(carvao.getQuantidadeEstoqueCarvao());
-
-        return new CarvaoDTO(carvaoRepository.save(carvaoEntity));
-    }
-
-    @Transactional
-    public void deletaCarvaoPorId (Long idCarvao) {
-        CarvaoEntity carvaoEntity = carvaoRepository.findById(idCarvao).orElseThrow( () ->
-                new EntidadeNaoEncontrada());
-
-        carvaoRepository.delete(carvaoEntity);
+        return listaCarvao.stream().map(carvao ->
+                new CarvaoDTO(carvao)).collect(Collectors.toList());
     }
 
     @Transactional
@@ -125,6 +103,28 @@ public class CarvaoService {
 
         return listaCarvaoPorQuantidadeEstoque.stream().map(carvao ->
                 new CarvaoDTO(carvao)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public CarvaoDTO atualizarCarvaoPorId (Long idCarvao, CarvaoDTO carvao){
+
+        CarvaoEntity carvaoEntity = carvaoRepository.findById(idCarvao).orElseThrow(() ->
+                new EntidadeNaoEncontrada());
+
+        carvaoEntity.setMarcaCarvao(carvao.getMarcaCarvao());
+        carvaoEntity.setPesoCarvao(carvao.getPesoCarvao());
+        carvaoEntity.setQuantidadeCarvao(carvao.getQuantidadeCarvao());
+        carvaoEntity.setQuantidadeEstoqueCarvao(carvao.getQuantidadeEstoqueCarvao());
+
+        return new CarvaoDTO(carvaoRepository.save(carvaoEntity));
+    }
+
+    @Transactional
+    public void deletaCarvaoPorId (Long idCarvao) {
+        CarvaoEntity carvaoEntity = carvaoRepository.findById(idCarvao).orElseThrow( () ->
+                new EntidadeNaoEncontrada());
+
+        carvaoRepository.delete(carvaoEntity);
     }
 
     @Transactional
