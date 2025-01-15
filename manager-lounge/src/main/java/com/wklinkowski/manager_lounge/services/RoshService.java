@@ -32,13 +32,6 @@ public class RoshService {
     }
 
     @Transactional
-    public List<RoshDTO> listarRosh (){
-        List<RoshEntity> listaRoshEntity = roshRepository.findAll();
-
-        return listaRoshEntity.stream().map(rosh -> new RoshDTO(rosh)).collect(Collectors.toList());
-    }
-
-    @Transactional
     public RoshDTO procuraRoshPorId (Long idRosh){
         Optional<RoshEntity> optionalRosh = roshRepository.findById(idRosh);
 
@@ -46,23 +39,10 @@ public class RoshService {
     }
 
     @Transactional
-    public RoshDTO atualizaRoshPorId (Long idRosh, RoshDTO roshDTO){
-        RoshEntity roshEntity = roshRepository.findById(idRosh).orElseThrow(() ->
-                new EntidadeNaoEncontrada());
+    public List<RoshDTO> listarRosh (){
+        List<RoshEntity> listaRoshEntity = roshRepository.findAll();
 
-        roshEntity.setMaterialRosh(roshDTO.getMaterialRosh());
-        roshEntity.setMarcasRosh(roshDTO.getMarcasRosh());
-        roshEntity.setQuantidadeEstoqueRosh(roshDTO.getQuantidadeEstoqueRosh());
-
-        return new RoshDTO(roshRepository.save(roshEntity));
-    }
-
-    @Transactional
-    public void deletaRoshPorId (Long idRosh) {
-        RoshEntity roshEntity = roshRepository.findById(idRosh).orElseThrow(() ->
-                new EntidadeNaoEncontrada());
-
-        roshRepository.delete(roshEntity);
+        return listaRoshEntity.stream().map(rosh -> new RoshDTO(rosh)).collect(Collectors.toList());
     }
 
     @Transactional
@@ -103,6 +83,26 @@ public class RoshService {
 
         return listaRoshPorQuantidadeEstoque.stream().map(rosh ->
                 new RoshDTO(rosh)).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public RoshDTO atualizaRoshPorId (Long idRosh, RoshDTO roshDTO){
+        RoshEntity roshEntity = roshRepository.findById(idRosh).orElseThrow(() ->
+                new EntidadeNaoEncontrada());
+
+        roshEntity.setMaterialRosh(roshDTO.getMaterialRosh());
+        roshEntity.setMarcasRosh(roshDTO.getMarcasRosh());
+        roshEntity.setQuantidadeEstoqueRosh(roshDTO.getQuantidadeEstoqueRosh());
+
+        return new RoshDTO(roshRepository.save(roshEntity));
+    }
+
+    @Transactional
+    public void deletaRoshPorId (Long idRosh) {
+        RoshEntity roshEntity = roshRepository.findById(idRosh).orElseThrow(() ->
+                new EntidadeNaoEncontrada());
+
+        roshRepository.delete(roshEntity);
     }
 
     @Transactional
