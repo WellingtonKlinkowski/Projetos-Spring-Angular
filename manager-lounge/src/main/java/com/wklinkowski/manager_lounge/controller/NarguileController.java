@@ -18,7 +18,6 @@ public class NarguileController {
 
     private final NarguileService narguileService;
 
-    @Autowired
     public NarguileController(NarguileService narguileService) {
         this.narguileService = narguileService;
     }

@@ -18,7 +18,6 @@ public class FumoService {
 
     private final FumoRepository fumoRepository;
 
-    @Autowired
     public FumoService(FumoRepository fumoRepository) {
         this.fumoRepository = fumoRepository;
     }

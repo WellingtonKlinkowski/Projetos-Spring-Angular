@@ -18,7 +18,6 @@ public class RoshController {
 
     private final RoshService roshService;
 
-    @Autowired
     public RoshController(RoshService roshService) {
         this.roshService = roshService;
     }

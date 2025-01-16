@@ -17,7 +17,6 @@ public class FumoController {
 
     private final FumoService fumoService;
 
-    @Autowired
     public FumoController(FumoService fumoService) {
         this.fumoService = fumoService;
     }

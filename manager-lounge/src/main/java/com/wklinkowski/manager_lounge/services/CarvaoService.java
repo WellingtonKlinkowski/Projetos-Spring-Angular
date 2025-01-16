@@ -18,7 +18,6 @@ public class CarvaoService {
 
     private final CarvaoRepository carvaoRepository;
 
-    @Autowired
     public CarvaoService(CarvaoRepository carvaoRepository) {
         this.carvaoRepository = carvaoRepository;
     }

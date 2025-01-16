@@ -13,7 +13,6 @@ public class AluguelService {
     private final FumoService fumoService;
     private final NarguileService narguileService;
 
-    @Autowired
     public AluguelService(AluguelRepository aluguelRepository, CarvaoService carvaoService, RoshService roshService,
                                 FumoService fumoService, NarguileService narguileService) {
         this.aluguelRepository = aluguelRepository;

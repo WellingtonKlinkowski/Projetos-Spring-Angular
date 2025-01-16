@@ -19,7 +19,6 @@ public class NarguileService {
 
     private final NarguileRepository narguileRepository;
 
-    @Autowired
     public NarguileService(NarguileRepository narguileRepository) {
         this.narguileRepository = narguileRepository;
     }

@@ -19,7 +19,6 @@ public class RoshService {
 
     private final RoshRepository roshRepository;
 
-    @Autowired
     public RoshService(RoshRepository roshRepository) {
         this.roshRepository = roshRepository;
     }

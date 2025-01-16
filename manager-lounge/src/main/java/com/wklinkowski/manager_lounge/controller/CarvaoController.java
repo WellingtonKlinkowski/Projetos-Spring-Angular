@@ -17,7 +17,6 @@ public class CarvaoController {
 
     private final CarvaoService carvaoService;
 
-    @Autowired
     public CarvaoController(CarvaoService carvaoService) {
         this.carvaoService = carvaoService;
     }
