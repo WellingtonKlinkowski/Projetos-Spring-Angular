@@ -3,7 +3,9 @@ package com.wklinkowski.manager_lounge.entities;
 import com.wklinkowski.manager_lounge.dtos.FumoDTO;
 import com.wklinkowski.manager_lounge.enums.MarcasFumo;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
