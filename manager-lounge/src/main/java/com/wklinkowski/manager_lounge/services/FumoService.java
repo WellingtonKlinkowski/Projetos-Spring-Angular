@@ -26,23 +26,23 @@ public class FumoService {
 
     @Transactional
     public FumoDTO criarFumo(FumoDTO fumoDTO) {
-        FumoEntity fumoEntity = fumoRepository.save(new FumoEntity(fumoDTO));
+        FumoEntity fumoEntity = fumoRepository.save(fumoMapper.toEntity(fumoDTO));
 
-        return new FumoDTO(fumoEntity);
+        return fumoMapper.toDto(fumoEntity);
     }
 
     @Transactional
     public FumoDTO procurarFumoPorId(Long idFumo) {
         Optional<FumoEntity> optionalFumo = fumoRepository.findById(idFumo);
 
-        return optionalFumo.map(FumoDTO::new).orElse(null);
+        return optionalFumo.map(fumoMapper::toDto).orElse(null);
     }
 
     @Transactional
     public List<FumoDTO> listarFumos() {
         List<FumoEntity> listaFumoEntity = fumoRepository.findAll();
 
-        return listaFumoEntity.stream().map(fumo -> new FumoDTO(fumo)).collect(Collectors.toList());
+        return listaFumoEntity.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -50,8 +50,7 @@ public class FumoService {
         List<FumoEntity> listaFumoPorMarcasFumo =
                 fumoRepository.findByMarcasFumoOrderByMarcasFumoDesc(marcasFumo);
 
-        return listaFumoPorMarcasFumo.stream().map( fumo ->
-                new FumoDTO(fumo)).collect(Collectors.toList());
+        return listaFumoPorMarcasFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -59,8 +58,7 @@ public class FumoService {
         List<FumoEntity> listaFumoPorSaborFumo =
                 fumoRepository.findBySaborFumoOrderBySaborFumoDesc(saborFumo);
 
-        return listaFumoPorSaborFumo.stream().map( fumo ->
-                new FumoDTO(fumo)).collect(Collectors.toList());
+        return listaFumoPorSaborFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -68,8 +66,7 @@ public class FumoService {
         List<FumoEntity> listaFumoPorPesoFumo =
                 fumoRepository.findByPesoFumoOrderByPesoFumoDesc(pesoFumo);
 
-        return listaFumoPorPesoFumo.stream().map( fumo ->
-                new FumoDTO(fumo)).collect(Collectors.toList());
+        return listaFumoPorPesoFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -77,8 +74,7 @@ public class FumoService {
         List<FumoEntity> listaFumoPorMarcasFumo =
                 fumoRepository.procuraMarcasFumoComMetodoLike(marcasFumo);
 
-        return listaFumoPorMarcasFumo.stream().map( fumo ->
-                new FumoDTO(fumo)).collect(Collectors.toList());
+        return listaFumoPorMarcasFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -86,8 +82,7 @@ public class FumoService {
         List<FumoEntity> listaFumoPorSaborFumo =
                 fumoRepository.procuraSaborFumoComMetodoLike(saborFumo);
 
-        return listaFumoPorSaborFumo.stream().map( fumo ->
-                new FumoDTO(fumo)).collect(Collectors.toList());
+        return listaFumoPorSaborFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -95,8 +90,7 @@ public class FumoService {
         List<FumoEntity> listaFumoPorPesoFumo =
                 fumoRepository.findByPesoFumoBetween(pesoMinimoFumo, pesoMaximoFumo);
 
-        return listaFumoPorPesoFumo.stream().map( fumo ->
-                new FumoDTO(fumo)).collect(Collectors.toList());
+        return listaFumoPorPesoFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -104,8 +98,7 @@ public class FumoService {
         List<FumoEntity> listaFumoPorQuantidadeEstoque =
                 fumoRepository.findByQuantidadeEstoqueFumoOrderByQuantidadeEstoqueFumoDesc(quantidadeEstoqueFumo);
 
-        return listaFumoPorQuantidadeEstoque.stream().map( fumo ->
-                new FumoDTO(fumo)).collect(Collectors.toList());
+        return listaFumoPorQuantidadeEstoque.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -118,7 +111,7 @@ public class FumoService {
         fumoEntity.setSaborFumo(fumoDTO.getSaborFumo());
         fumoEntity.setQuantidadeEstoqueFumo(fumoDTO.getQuantidadeEstoqueFumo());
 
-        return new FumoDTO(fumoRepository.save(fumoEntity));
+        return fumoMapper.toDto(fumoRepository.save(fumoEntity));
     }
 
     @Transactional
