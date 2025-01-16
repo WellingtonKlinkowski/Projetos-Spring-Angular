@@ -26,24 +26,23 @@ public class CarvaoService {
 
     @Transactional
     public CarvaoDTO criarCarvao(CarvaoDTO carvaoDTO) {
-        CarvaoEntity carvaoEntity = carvaoRepository.save(new CarvaoEntity(carvaoDTO));
+        CarvaoEntity carvaoEntity = carvaoRepository.save(carvaoMapper.toEntity(carvaoDTO));
 
-        return new CarvaoDTO(carvaoEntity);
+        return carvaoMapper.toDto(carvaoEntity);
     }
 
     @Transactional
     public CarvaoDTO procurarCarvaoPorId(Long id) {
         Optional<CarvaoEntity> optionalCarvao = carvaoRepository.findById(id);
 
-        return optionalCarvao.map(CarvaoDTO::new).orElse(null);
+        return optionalCarvao.map(carvaoMapper::toDto).orElse(null);
     }
 
     @Transactional
     public List<CarvaoDTO> listarCarvoes() {
         List<CarvaoEntity> listaCarvao = carvaoRepository.findAll();
 
-        return listaCarvao.stream().map(carvao ->
-                new CarvaoDTO(carvao)).collect(Collectors.toList());
+        return listaCarvao.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -51,16 +50,14 @@ public class CarvaoService {
 
         List<CarvaoEntity> listaCarvaoPorMarcaCarvao = carvaoRepository.findByMarcaCarvaoOrderByMarcaCarvaoDesc(marcaCarvao);
 
-        return listaCarvaoPorMarcaCarvao.stream().map(carvao ->
-                new CarvaoDTO(carvao)).collect(Collectors.toList());
+        return listaCarvaoPorMarcaCarvao.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
     public List<CarvaoDTO> procuraCarvaoPorPesoCarvao(Integer pesoCarvao) {
         List<CarvaoEntity> listaCarvaoPorPeso = carvaoRepository.findByPesoCarvaoOrderByPesoCarvaoDesc(pesoCarvao);
 
-        return listaCarvaoPorPeso.stream().map(carvao ->
-                new CarvaoDTO(carvao)).collect(Collectors.toList());
+        return listaCarvaoPorPeso.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -68,32 +65,28 @@ public class CarvaoService {
         List<CarvaoEntity> listaCarvaoPorQuantidadeCarvao =
                 carvaoRepository.findByQuantidadeCarvaoOrderByQuantidadeCarvaoDesc(quantidadeCarvao);
 
-        return listaCarvaoPorQuantidadeCarvao.stream().map(carvao ->
-                new CarvaoDTO(carvao)).collect(Collectors.toList());
+        return listaCarvaoPorQuantidadeCarvao.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
     public List<CarvaoDTO> procuraCarvaoPorMarcaEPeso(MarcaCarvao marcaCarvao, Integer pesoCarvao) {
         List<CarvaoEntity> listaCarvaoPorMarcaEPesoCarvao = carvaoRepository.procuraCarvaoPorMarcaEPeso(marcaCarvao, pesoCarvao);
 
-        return listaCarvaoPorMarcaEPesoCarvao.stream().map(carvao ->
-                new CarvaoDTO(carvao)).collect(Collectors.toList());
+        return listaCarvaoPorMarcaEPesoCarvao.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
     public List<CarvaoDTO> procuraMarcaCarvaoUsandoLike(String marcaCarvao) {
         List<CarvaoEntity> listaCarvaoPorMarca = carvaoRepository.procuraMarcaCarvaoComMetodoLike(marcaCarvao);
 
-        return listaCarvaoPorMarca.stream().map(carvao ->
-                new CarvaoDTO(carvao)).collect(Collectors.toList());
+        return listaCarvaoPorMarca.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
     public List<CarvaoDTO> procuraCarvaoComPesoEntreDoisValores(Integer pesoMinimo, Integer pesoMaximo) {
         List<CarvaoEntity> listaCarvaoComPesoEntreDoisValores = carvaoRepository.findByPesoCarvaoBetween(pesoMinimo, pesoMaximo);
 
-        return listaCarvaoComPesoEntreDoisValores.stream().map(carvao ->
-                new CarvaoDTO(carvao)).collect(Collectors.toList());
+        return listaCarvaoComPesoEntreDoisValores.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -101,8 +94,7 @@ public class CarvaoService {
         List<CarvaoEntity> listaCarvaoPorQuantidadeEstoque =
                 carvaoRepository.findByQuantidadeEstoqueCarvaoOrderByQuantidadeEstoqueCarvaoDesc(quantidadeEstoqueCarvao);
 
-        return listaCarvaoPorQuantidadeEstoque.stream().map(carvao ->
-                new CarvaoDTO(carvao)).collect(Collectors.toList());
+        return listaCarvaoPorQuantidadeEstoque.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -116,7 +108,7 @@ public class CarvaoService {
         carvaoEntity.setQuantidadeCarvao(carvao.getQuantidadeCarvao());
         carvaoEntity.setQuantidadeEstoqueCarvao(carvao.getQuantidadeEstoqueCarvao());
 
-        return new CarvaoDTO(carvaoRepository.save(carvaoEntity));
+        return carvaoMapper.toDto(carvaoRepository.save(carvaoEntity));
     }
 
     @Transactional
