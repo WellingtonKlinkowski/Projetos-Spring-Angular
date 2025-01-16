@@ -11,21 +11,21 @@ import java.util.List;
 @Repository
 public interface FumoRepository extends JpaRepository<FumoEntity, Long> {
 
-    List<FumoEntity> findByMarcasFumoOrderByMarcasFumoDesc (MarcasFumo marcasFumo);
+    List<FumoEntity> findByMarcasFumoOrderByMarcasFumoDesc(MarcasFumo marcasFumo);
 
-    List<FumoEntity> findBySaborFumoOrderBySaborFumoDesc (String saborFumo);
+    List<FumoEntity> findBySaborFumoOrderBySaborFumoDesc(String saborFumo);
 
-    List<FumoEntity> findByPesoFumoOrderByPesoFumoDesc (Integer pesoFumo);
+    List<FumoEntity> findByPesoFumoOrderByPesoFumoDesc(Integer pesoFumo);
 
     @Query(value = "SELECT * FROM FUMOS f WHERE f.marcas_fumo LIKE %?1%", nativeQuery = true)
-    List<FumoEntity> procuraMarcasFumoComMetodoLike (String marcasFumo);
+    List<FumoEntity> procuraMarcasFumoComMetodoLike(String marcasFumo);
 
     @Query(value = "SELECT * FROM FUMOS f WHERE f.sabor_fumo LIKE %?1%", nativeQuery = true)
-    List<FumoEntity> procuraSaborFumoComMetodoLike (String saborFumo);
+    List<FumoEntity> procuraSaborFumoComMetodoLike(String saborFumo);
 
-    List<FumoEntity> findByPesoFumoBetween (Integer pesoMinimo, Integer pesoMaximo);
+    List<FumoEntity> findByPesoFumoBetween(Integer pesoMinimo, Integer pesoMaximo);
 
-    List<FumoEntity> findByQuantidadeEstoqueFumoOrderByQuantidadeEstoqueFumoDesc (Integer quantidadeEstoqueFumo);
+    List<FumoEntity> findByQuantidadeEstoqueFumoOrderByQuantidadeEstoqueFumoDesc(Integer quantidadeEstoqueFumo);
 
     void deleteByMarcasFumo(MarcasFumo marcasFumo);
 }
