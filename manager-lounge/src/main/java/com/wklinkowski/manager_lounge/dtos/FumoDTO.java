@@ -13,10 +13,7 @@ import org.springframework.beans.BeanUtils;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@ToString
-@Getter
-@Setter
+@Data
 public class FumoDTO {
 
     @NotNull(message = "A marca do fumo não pode estar vazio.")
