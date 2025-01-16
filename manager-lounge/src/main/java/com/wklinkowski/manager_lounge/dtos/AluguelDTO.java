@@ -35,8 +35,4 @@ public class AluguelDTO {
 
     @NotNull(message = "É preciso informar a situação em que o aluguel está.")
     private boolean ativoAluguel;
-
-    public AluguelDTO(AluguelEntity aluguelEntity) {
-        BeanUtils.copyProperties(aluguelEntity, this);
-    }
 }

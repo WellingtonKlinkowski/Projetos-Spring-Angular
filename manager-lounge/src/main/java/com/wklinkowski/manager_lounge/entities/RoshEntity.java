@@ -35,8 +35,4 @@ public class RoshEntity {
 
     @OneToMany(mappedBy = "id")
     private List<AluguelEntity> aluguelRosh;
-
-    public RoshEntity(RoshDTO roshDTO) {
-        BeanUtils.copyProperties(roshDTO, this);
-    }
 }

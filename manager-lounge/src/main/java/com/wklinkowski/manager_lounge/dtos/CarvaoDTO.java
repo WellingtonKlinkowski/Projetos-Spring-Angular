@@ -26,8 +26,4 @@ public class CarvaoDTO {
 
     @Min(value = 1, message = "A quantidade mínima de caixa de carvão permitida é 1.")
     private Integer quantidadeEstoqueCarvao = 1;
-
-    public CarvaoDTO(CarvaoEntity carvaoEntity) {
-        BeanUtils.copyProperties(carvaoEntity, this);
-    }
 }

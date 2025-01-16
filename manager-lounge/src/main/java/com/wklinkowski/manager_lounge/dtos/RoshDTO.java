@@ -25,8 +25,4 @@ public class RoshDTO {
 
     @Min(value = 1, message = "A quantidade de rosh deve ser igual a 1.")
     private Integer quantidadeEstoqueRosh = 1;
-
-    public RoshDTO(RoshEntity roshEntity) {
-        BeanUtils.copyProperties(roshEntity, this);
-    }
 }

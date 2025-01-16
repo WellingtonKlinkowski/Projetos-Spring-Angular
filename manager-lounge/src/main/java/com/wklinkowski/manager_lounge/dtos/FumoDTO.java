@@ -29,8 +29,4 @@ public class FumoDTO {
 
     @Min(value = 1, message = "A quantidade de caixa de fumo não pode ser menor que 1.")
     private Integer quantidadeEstoqueFumo = 1;
-
-    public FumoDTO(FumoEntity fumoEntity) {
-        BeanUtils.copyProperties(fumoEntity, this);
-    }
 }

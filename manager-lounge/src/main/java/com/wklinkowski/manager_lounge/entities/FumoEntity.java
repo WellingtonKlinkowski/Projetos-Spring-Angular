@@ -36,8 +36,4 @@ public class FumoEntity {
 
     @OneToMany(mappedBy = "id")
     private List<AluguelEntity> aluguelFumo;
-
-    public FumoEntity(FumoDTO fumoDTO) {
-        BeanUtils.copyProperties(fumoDTO, this);
-    }
 }
