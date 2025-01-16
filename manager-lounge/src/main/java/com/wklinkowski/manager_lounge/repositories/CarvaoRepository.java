@@ -11,21 +11,21 @@ import java.util.List;
 @Repository
 public interface CarvaoRepository extends JpaRepository<CarvaoEntity, Long> {
 
-    List<CarvaoEntity> findByMarcaCarvaoOrderByMarcaCarvaoDesc (MarcaCarvao marcaCarvao);
+    List<CarvaoEntity> findByMarcaCarvaoOrderByMarcaCarvaoDesc(MarcaCarvao marcaCarvao);
 
-    List<CarvaoEntity> findByPesoCarvaoOrderByPesoCarvaoDesc (Integer pesoCarvao);
+    List<CarvaoEntity> findByPesoCarvaoOrderByPesoCarvaoDesc(Integer pesoCarvao);
 
-    List<CarvaoEntity> findByQuantidadeCarvaoOrderByQuantidadeCarvaoDesc (Integer quantidadeCarvao);
+    List<CarvaoEntity> findByQuantidadeCarvaoOrderByQuantidadeCarvaoDesc(Integer quantidadeCarvao);
 
     @Query("SELECT c FROM CarvaoEntity c WHERE c.marcaCarvao = :marcaCarvao AND c.pesoCarvao = :pesoCarvao")
-    List<CarvaoEntity> procuraCarvaoPorMarcaEPeso (MarcaCarvao marcaCarvao, Integer pesoCarvao);
+    List<CarvaoEntity> procuraCarvaoPorMarcaEPeso(MarcaCarvao marcaCarvao, Integer pesoCarvao);
 
     @Query(value = "SELECT * FROM CARVOES c WHERE c.marca_carvao LIKE %?1%", nativeQuery = true)
-    List<CarvaoEntity> procuraMarcaCarvaoComMetodoLike (String marcaCarvao);
+    List<CarvaoEntity> procuraMarcaCarvaoComMetodoLike(String marcaCarvao);
 
-    List<CarvaoEntity> findByPesoCarvaoBetween (Integer pesoMinimoCarvao, Integer pesoMaximoCarvao);
+    List<CarvaoEntity> findByPesoCarvaoBetween(Integer pesoMinimoCarvao, Integer pesoMaximoCarvao);
 
-    List<CarvaoEntity> findByQuantidadeEstoqueCarvaoOrderByQuantidadeEstoqueCarvaoDesc (Integer quantidadeEstoqueCarvao);
+    List<CarvaoEntity> findByQuantidadeEstoqueCarvaoOrderByQuantidadeEstoqueCarvaoDesc(Integer quantidadeEstoqueCarvao);
 
-    void deleteByMarcaCarvao (MarcaCarvao marcaCarvao);
+    void deleteByMarcaCarvao(MarcaCarvao marcaCarvao);
 }
