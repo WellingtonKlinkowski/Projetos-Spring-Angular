@@ -13,20 +13,20 @@ import java.util.Optional;
 @Repository
 public interface AluguelRepository extends JpaRepository<AluguelEntity, Long> {
 
-    Optional<AluguelEntity> findByNumeroMesaAluguel (Integer numeroMesaAluguel);
+    Optional<AluguelEntity> findByNumeroMesaAluguel(Integer numeroMesaAluguel);
 
-    List<AluguelEntity> findByFumoAluguel (FumoEntity fumoEntity);
+    List<AluguelEntity> findByFumoAluguel(FumoEntity fumoEntity);
 
-    List<AluguelEntity> findByCarvaoAluguel (CarvaoEntity carvaoEntity);
+    List<AluguelEntity> findByCarvaoAluguel(CarvaoEntity carvaoEntity);
 
-    List<AluguelEntity> findByRoshAluguel (RoshEntity roshEntity);
+    List<AluguelEntity> findByRoshAluguel(RoshEntity roshEntity);
 
-    List<AluguelEntity> findByNarguileAluguel (NarguileEntity narguileEntity);
+    List<AluguelEntity> findByNarguileAluguel(NarguileEntity narguileEntity);
 
-    List<AluguelEntity> findByDataAluguel (LocalDate dataAluguel);
+    List<AluguelEntity> findByDataAluguel(LocalDate dataAluguel);
 
-    List<AluguelEntity> findByHoraAluguel (LocalDateTime horaAluguel);
+    List<AluguelEntity> findByHoraAluguel(LocalDateTime horaAluguel);
 
-    List<AluguelEntity> findByDuracaoAluguelBetween (Duration minimoDuracaoAluguel, Duration maximoDuracaoAluguel);
+    List<AluguelEntity> findByDuracaoAluguelBetween(Duration minimoDuracaoAluguel, Duration maximoDuracaoAluguel);
 
 }
