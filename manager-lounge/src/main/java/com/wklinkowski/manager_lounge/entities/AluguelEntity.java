@@ -1,5 +1,6 @@
 package com.wklinkowski.manager_lounge.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wklinkowski.manager_lounge.converters.DurationConverter;
 import com.wklinkowski.manager_lounge.dtos.AluguelDTO;
 import jakarta.persistence.*;
@@ -39,9 +40,11 @@ public class AluguelEntity {
     private NarguileEntity narguileAluguel;
 
     @Column(nullable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataAluguel = LocalDate.now();
 
     @Column(nullable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime horaAluguel = LocalDateTime.now();
 
     @Column(nullable = false)
