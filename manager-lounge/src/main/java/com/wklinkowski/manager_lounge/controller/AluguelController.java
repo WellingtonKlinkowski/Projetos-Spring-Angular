@@ -12,7 +12,7 @@ public class AluguelController {
     private final AluguelService aluguelService;
 
     @Autowired
-    public AluguelController (AluguelService aluguelService){
+    public AluguelController(AluguelService aluguelService) {
         this.aluguelService = aluguelService;
     }
 }
