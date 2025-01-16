@@ -5,9 +5,9 @@ import com.wklinkowski.manager_lounge.entities.NarguileEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasNarguile;
 import com.wklinkowski.manager_lounge.enums.MaterialNarguile;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
+import com.wklinkowski.manager_lounge.mappers.NarguileMapper;
 import com.wklinkowski.manager_lounge.repositories.NarguileRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,9 +18,11 @@ import java.util.stream.Collectors;
 public class NarguileService {
 
     private final NarguileRepository narguileRepository;
+    private final NarguileMapper narguileMapper;
 
-    public NarguileService(NarguileRepository narguileRepository) {
+    public NarguileService(NarguileRepository narguileRepository, NarguileMapper narguileMapper) {
         this.narguileRepository = narguileRepository;
+        this.narguileMapper = narguileMapper;
     }
 
     @Transactional

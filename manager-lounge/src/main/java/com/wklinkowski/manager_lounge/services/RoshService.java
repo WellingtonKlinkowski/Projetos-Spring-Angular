@@ -5,9 +5,9 @@ import com.wklinkowski.manager_lounge.entities.RoshEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasRosh;
 import com.wklinkowski.manager_lounge.enums.MaterialRosh;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
+import com.wklinkowski.manager_lounge.mappers.RoshMapper;
 import com.wklinkowski.manager_lounge.repositories.RoshRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,9 +18,11 @@ import java.util.stream.Collectors;
 public class RoshService {
 
     private final RoshRepository roshRepository;
+    private final RoshMapper roshMapper;
 
-    public RoshService(RoshRepository roshRepository) {
+    public RoshService(RoshRepository roshRepository, RoshMapper roshMapper) {
         this.roshRepository = roshRepository;
+        this.roshMapper = roshMapper;
     }
 
     @Transactional

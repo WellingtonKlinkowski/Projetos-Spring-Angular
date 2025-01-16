@@ -4,9 +4,9 @@ import com.wklinkowski.manager_lounge.dtos.FumoDTO;
 import com.wklinkowski.manager_lounge.entities.FumoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasFumo;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
+import com.wklinkowski.manager_lounge.mappers.FumoMapper;
 import com.wklinkowski.manager_lounge.repositories.FumoRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +17,11 @@ import java.util.stream.Collectors;
 public class FumoService {
 
     private final FumoRepository fumoRepository;
+    private final FumoMapper fumoMapper;
 
-    public FumoService(FumoRepository fumoRepository) {
+    public FumoService(FumoRepository fumoRepository, FumoMapper fumoMapper) {
         this.fumoRepository = fumoRepository;
+        this.fumoMapper = fumoMapper;
     }
 
     @Transactional

@@ -4,9 +4,9 @@ import com.wklinkowski.manager_lounge.dtos.CarvaoDTO;
 import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcaCarvao;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
+import com.wklinkowski.manager_lounge.mappers.CarvaoMapper;
 import com.wklinkowski.manager_lounge.repositories.CarvaoRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,9 +17,11 @@ import java.util.stream.Collectors;
 public class CarvaoService {
 
     private final CarvaoRepository carvaoRepository;
+    private final CarvaoMapper carvaoMapper;
 
-    public CarvaoService(CarvaoRepository carvaoRepository) {
+    public CarvaoService(CarvaoRepository carvaoRepository, CarvaoMapper carvaoMapper) {
         this.carvaoRepository = carvaoRepository;
+        this.carvaoMapper = carvaoMapper;
     }
 
     @Transactional
