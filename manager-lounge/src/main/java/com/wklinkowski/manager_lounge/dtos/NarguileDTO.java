@@ -14,10 +14,7 @@ import org.springframework.beans.BeanUtils;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@ToString
-@Getter
-@Setter
+@Data
 public class NarguileDTO {
 
     @NotBlank(message = "O nome não pode estar vazio.")
@@ -38,7 +35,7 @@ public class NarguileDTO {
     @Min(value = 1, message = "A quantidade de narguile deve ser igual a 1.")
     private Integer quantidadeEstoqueNarguile = 1;
 
-    public NarguileDTO (NarguileEntity narguileEntity){
+    public NarguileDTO(NarguileEntity narguileEntity) {
         BeanUtils.copyProperties(narguileEntity, this);
     }
 }
