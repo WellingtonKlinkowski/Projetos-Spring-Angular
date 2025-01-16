@@ -15,7 +15,4 @@ public class AluguelController {
     public AluguelController (AluguelService aluguelService){
         this.aluguelService = aluguelService;
     }
-
-    
-
 }
