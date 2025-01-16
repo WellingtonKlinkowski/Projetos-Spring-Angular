@@ -3,7 +3,6 @@ package com.wklinkowski.manager_lounge.services;
 import com.wklinkowski.manager_lounge.dtos.CarvaoDTO;
 import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcaCarvao;
-import com.wklinkowski.manager_lounge.enums.MarcasRosh;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
 import com.wklinkowski.manager_lounge.repositories.CarvaoRepository;
 import jakarta.transaction.Transactional;
@@ -20,26 +19,26 @@ public class CarvaoService {
     private final CarvaoRepository carvaoRepository;
 
     @Autowired
-    public CarvaoService(CarvaoRepository carvaoRepository){
+    public CarvaoService(CarvaoRepository carvaoRepository) {
         this.carvaoRepository = carvaoRepository;
     }
 
     @Transactional
-    public CarvaoDTO criarCarvao (CarvaoDTO carvaoDTO){
+    public CarvaoDTO criarCarvao(CarvaoDTO carvaoDTO) {
         CarvaoEntity carvaoEntity = carvaoRepository.save(new CarvaoEntity(carvaoDTO));
 
         return new CarvaoDTO(carvaoEntity);
     }
 
     @Transactional
-    public CarvaoDTO procurarCarvaoPorId (Long id){
+    public CarvaoDTO procurarCarvaoPorId(Long id) {
         Optional<CarvaoEntity> optionalCarvao = carvaoRepository.findById(id);
 
         return optionalCarvao.map(CarvaoDTO::new).orElse(null);
     }
 
     @Transactional
-    public List<CarvaoDTO> listarCarvoes (){
+    public List<CarvaoDTO> listarCarvoes() {
         List<CarvaoEntity> listaCarvao = carvaoRepository.findAll();
 
         return listaCarvao.stream().map(carvao ->
@@ -47,7 +46,7 @@ public class CarvaoService {
     }
 
     @Transactional
-    public List<CarvaoDTO> procuraCarvaoPorMarcaCarvao (MarcaCarvao marcaCarvao){
+    public List<CarvaoDTO> procuraCarvaoPorMarcaCarvao(MarcaCarvao marcaCarvao) {
 
         List<CarvaoEntity> listaCarvaoPorMarcaCarvao = carvaoRepository.findByMarcaCarvaoOrderByMarcaCarvaoDesc(marcaCarvao);
 
@@ -56,7 +55,7 @@ public class CarvaoService {
     }
 
     @Transactional
-    public List<CarvaoDTO> procuraCarvaoPorPesoCarvao (Integer pesoCarvao){
+    public List<CarvaoDTO> procuraCarvaoPorPesoCarvao(Integer pesoCarvao) {
         List<CarvaoEntity> listaCarvaoPorPeso = carvaoRepository.findByPesoCarvaoOrderByPesoCarvaoDesc(pesoCarvao);
 
         return listaCarvaoPorPeso.stream().map(carvao ->
@@ -64,7 +63,7 @@ public class CarvaoService {
     }
 
     @Transactional
-    public List<CarvaoDTO> procuraCarvaoPorQuantidadeCarvao (Integer quantidadeCarvao){
+    public List<CarvaoDTO> procuraCarvaoPorQuantidadeCarvao(Integer quantidadeCarvao) {
         List<CarvaoEntity> listaCarvaoPorQuantidadeCarvao =
                 carvaoRepository.findByQuantidadeCarvaoOrderByQuantidadeCarvaoDesc(quantidadeCarvao);
 
@@ -73,7 +72,7 @@ public class CarvaoService {
     }
 
     @Transactional
-    public List<CarvaoDTO> procuraCarvaoPorMarcaEPeso (MarcaCarvao marcaCarvao, Integer pesoCarvao){
+    public List<CarvaoDTO> procuraCarvaoPorMarcaEPeso(MarcaCarvao marcaCarvao, Integer pesoCarvao) {
         List<CarvaoEntity> listaCarvaoPorMarcaEPesoCarvao = carvaoRepository.procuraCarvaoPorMarcaEPeso(marcaCarvao, pesoCarvao);
 
         return listaCarvaoPorMarcaEPesoCarvao.stream().map(carvao ->
@@ -81,7 +80,7 @@ public class CarvaoService {
     }
 
     @Transactional
-    public List<CarvaoDTO> procuraMarcaCarvaoUsandoLike (String marcaCarvao){
+    public List<CarvaoDTO> procuraMarcaCarvaoUsandoLike(String marcaCarvao) {
         List<CarvaoEntity> listaCarvaoPorMarca = carvaoRepository.procuraMarcaCarvaoComMetodoLike(marcaCarvao);
 
         return listaCarvaoPorMarca.stream().map(carvao ->
@@ -89,7 +88,7 @@ public class CarvaoService {
     }
 
     @Transactional
-    public List<CarvaoDTO> procuraCarvaoComPesoEntreDoisValores (Integer pesoMinimo, Integer pesoMaximo){
+    public List<CarvaoDTO> procuraCarvaoComPesoEntreDoisValores(Integer pesoMinimo, Integer pesoMaximo) {
         List<CarvaoEntity> listaCarvaoComPesoEntreDoisValores = carvaoRepository.findByPesoCarvaoBetween(pesoMinimo, pesoMaximo);
 
         return listaCarvaoComPesoEntreDoisValores.stream().map(carvao ->
@@ -97,7 +96,7 @@ public class CarvaoService {
     }
 
     @Transactional
-    public List<CarvaoDTO> procuraCarvaoPorQuantidadeEmEstoque (Integer quantidadeEstoqueCarvao){
+    public List<CarvaoDTO> procuraCarvaoPorQuantidadeEmEstoque(Integer quantidadeEstoqueCarvao) {
         List<CarvaoEntity> listaCarvaoPorQuantidadeEstoque =
                 carvaoRepository.findByQuantidadeEstoqueCarvaoOrderByQuantidadeEstoqueCarvaoDesc(quantidadeEstoqueCarvao);
 
@@ -106,7 +105,7 @@ public class CarvaoService {
     }
 
     @Transactional
-    public CarvaoDTO atualizarCarvaoPorId (Long idCarvao, CarvaoDTO carvao){
+    public CarvaoDTO atualizarCarvaoPorId(Long idCarvao, CarvaoDTO carvao) {
 
         CarvaoEntity carvaoEntity = carvaoRepository.findById(idCarvao).orElseThrow(() ->
                 new EntidadeNaoEncontrada());
@@ -120,7 +119,7 @@ public class CarvaoService {
     }
 
     @Transactional
-    public void deletaCarvaoPorId (Long idCarvao) {
+    public void deletaCarvaoPorId(Long idCarvao) {
         CarvaoEntity carvaoEntity = carvaoRepository.findById(idCarvao).orElseThrow( () ->
                 new EntidadeNaoEncontrada());
 
@@ -128,7 +127,7 @@ public class CarvaoService {
     }
 
     @Transactional
-    public void deletarCarvaoPorMarcaCarvao (MarcaCarvao marcaCarvao){
+    public void deletarCarvaoPorMarcaCarvao(MarcaCarvao marcaCarvao) {
         carvaoRepository.deleteByMarcaCarvao(marcaCarvao);
     }
 }
