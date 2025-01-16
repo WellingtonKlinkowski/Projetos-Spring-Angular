@@ -11,10 +11,7 @@ import java.time.Duration;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@ToString
-@Getter
-@Setter
+@Data
 public class AluguelDTO {
 
     @Min(value = 1, message = "O número da mesa mínimo para o aluguel é 1.")
@@ -38,7 +35,7 @@ public class AluguelDTO {
     @NotNull(message = "É preciso informar a situação em que o aluguel está.")
     private boolean ativoAluguel;
 
-    public AluguelDTO(AluguelEntity aluguelEntity){
+    public AluguelDTO(AluguelEntity aluguelEntity) {
         BeanUtils.copyProperties(aluguelEntity, this);
     }
 }
