@@ -27,23 +27,23 @@ public class NarguileService {
 
     @Transactional
     public NarguileDTO criarNarguile(NarguileDTO narguileDTO) {
-        NarguileEntity narguileEntity = narguileRepository.save(new NarguileEntity(narguileDTO));
+        NarguileEntity narguileEntity = narguileRepository.save(narguileMapper.toEntity(narguileDTO));
 
-        return new NarguileDTO(narguileEntity);
+        return narguileMapper.toDto(narguileEntity);
     }
 
     @Transactional
     public NarguileDTO procuraNarguilePorId(Long idNarguile) {
         Optional<NarguileEntity> opationalNarguile = narguileRepository.findById(idNarguile);
 
-        return opationalNarguile.map(NarguileDTO::new).orElse(null);
+        return opationalNarguile.map(narguileMapper::toDto).orElse(null);
     }
 
     @Transactional
     public List<NarguileDTO> listarNarguiles() {
         List<NarguileEntity> listaNarguileEntity = narguileRepository.findAll();
 
-        return listaNarguileEntity.stream().map(narguile -> new NarguileDTO(narguile)).collect(Collectors.toList());
+        return listaNarguileEntity.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -51,8 +51,7 @@ public class NarguileService {
         List<NarguileEntity> listaNarguilePorNome =
                 narguileRepository.findByNomeNarguileOrderByNomeNarguileDesc(nomeNarguile);
 
-        return listaNarguilePorNome.stream().map(narguile ->
-                new NarguileDTO(narguile)).collect(Collectors.toList());
+        return listaNarguilePorNome.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -60,8 +59,7 @@ public class NarguileService {
         List<NarguileEntity> listaNarguilePorMarca =
                 narguileRepository.findByMarcasNarguileOrderByMarcasNarguileDesc(marcaNarguile);
 
-        return listaNarguilePorMarca.stream().map(narguile ->
-                new NarguileDTO(narguile)).collect(Collectors.toList());
+        return listaNarguilePorMarca.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -69,8 +67,7 @@ public class NarguileService {
         List<NarguileEntity> listaNarguilePorQuantidadeMangueiras =
                 narguileRepository.findByQuantidadeMangueirasNarguileOrderByQuantidadeMangueirasNarguileDesc(quantidadeMangueirasNarguile);
 
-        return listaNarguilePorQuantidadeMangueiras.stream().map(narguile ->
-                new NarguileDTO(narguile)).collect(Collectors.toList());
+        return listaNarguilePorQuantidadeMangueiras.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -78,8 +75,7 @@ public class NarguileService {
         List<NarguileEntity> listaNarguilePorMaterial =
                 narguileRepository.findByMaterialNarguileOrderByMaterialNarguileDesc(materialNarguile);
 
-        return listaNarguilePorMaterial.stream().map(narguile ->
-                new NarguileDTO(narguile)).collect(Collectors.toList());
+        return listaNarguilePorMaterial.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -87,8 +83,7 @@ public class NarguileService {
         List<NarguileEntity> listaNarguilePorMaterial =
                 narguileRepository.procuraNomeNarguileComMetodoLike(nomeNarguile);
 
-        return listaNarguilePorMaterial.stream().map(narguile ->
-                new NarguileDTO(narguile)).collect(Collectors.toList());
+        return listaNarguilePorMaterial.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -96,8 +91,7 @@ public class NarguileService {
         List<NarguileEntity> listaNarguilePorMarca =
                 narguileRepository.procuraMarcasNarguileComMetodoLike(marcaNarguile);
 
-        return listaNarguilePorMarca.stream().map(narguile ->
-                new NarguileDTO(narguile)).collect(Collectors.toList());
+        return listaNarguilePorMarca.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -105,8 +99,7 @@ public class NarguileService {
         List<NarguileEntity> listaNarguilePorMaterial =
                 narguileRepository.procuraMaterialNarguileComMetodoLike(materialNarguile);
 
-        return listaNarguilePorMaterial.stream().map(narguile ->
-                new NarguileDTO(narguile)).collect(Collectors.toList());
+        return listaNarguilePorMaterial.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -114,8 +107,7 @@ public class NarguileService {
         List<NarguileEntity> listaNarguilePorQuantidadeMangueiras =
                 narguileRepository.findByQuantidadeMangueirasNarguileBetween(quantidadeMangueirasMinimo, quantidadeMangueirasMaximo);
 
-        return listaNarguilePorQuantidadeMangueiras.stream().map(narguile ->
-                new NarguileDTO(narguile)).collect(Collectors.toList());
+        return listaNarguilePorQuantidadeMangueiras.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -123,8 +115,7 @@ public class NarguileService {
         List<NarguileEntity> listaNarguilePorQuantidadeEstoque =
                 narguileRepository.findByQuantidadeEstoqueNarguileOrderByQuantidadeEstoqueNarguileDesc(quantidadeEstoqueNarguile);
 
-        return listaNarguilePorQuantidadeEstoque.stream().map(narguile ->
-                new NarguileDTO(narguile)).collect(Collectors.toList());
+        return listaNarguilePorQuantidadeEstoque.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
     @Transactional
@@ -138,7 +129,7 @@ public class NarguileService {
         narguileEntity.setQuantidadeMangueirasNarguile(narguileDTO.getQuantidadeMangueirasNarguile());
         narguileEntity.setQuantidadeEstoqueNarguile(narguileDTO.getQuantidadeEstoqueNarguile());
 
-        return new NarguileDTO(narguileRepository.save(narguileEntity));
+        return narguileMapper.toDto(narguileRepository.save(narguileEntity));
     }
 
     @Transactional
