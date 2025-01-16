@@ -11,10 +11,7 @@ import org.springframework.beans.BeanUtils;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@ToString
-@Getter
-@Setter
+@Data
 public class CarvaoDTO {
 
     @NotNull(message = "A marca do carvão não pode estar vazia.")
@@ -30,7 +27,7 @@ public class CarvaoDTO {
     @Min(value = 1, message = "A quantidade mínima de caixa de carvão permitida é 1.")
     private Integer quantidadeEstoqueCarvao = 1;
 
-    public CarvaoDTO (CarvaoEntity carvaoEntity){
+    public CarvaoDTO(CarvaoEntity carvaoEntity) {
         BeanUtils.copyProperties(carvaoEntity, this);
     }
 }
