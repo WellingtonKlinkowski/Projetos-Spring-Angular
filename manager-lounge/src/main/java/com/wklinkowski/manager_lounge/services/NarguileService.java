@@ -20,33 +20,33 @@ public class NarguileService {
     private final NarguileRepository narguileRepository;
 
     @Autowired
-    public NarguileService (NarguileRepository narguileRepository){
+    public NarguileService(NarguileRepository narguileRepository) {
         this.narguileRepository = narguileRepository;
     }
 
     @Transactional
-    public NarguileDTO criarNarguile(NarguileDTO narguileDTO){
+    public NarguileDTO criarNarguile(NarguileDTO narguileDTO) {
         NarguileEntity narguileEntity = narguileRepository.save(new NarguileEntity(narguileDTO));
 
         return new NarguileDTO(narguileEntity);
     }
 
     @Transactional
-    public NarguileDTO procuraNarguilePorId (Long idNarguile){
+    public NarguileDTO procuraNarguilePorId(Long idNarguile) {
         Optional<NarguileEntity> opationalNarguile = narguileRepository.findById(idNarguile);
 
         return opationalNarguile.map(NarguileDTO::new).orElse(null);
     }
 
     @Transactional
-    public List<NarguileDTO> listarNarguiles (){
+    public List<NarguileDTO> listarNarguiles() {
         List<NarguileEntity> listaNarguileEntity = narguileRepository.findAll();
 
         return listaNarguileEntity.stream().map(narguile -> new NarguileDTO(narguile)).collect(Collectors.toList());
     }
 
     @Transactional
-    public List<NarguileDTO> procuraNarguilePorNomeNarguile (String nomeNarguile) {
+    public List<NarguileDTO> procuraNarguilePorNomeNarguile(String nomeNarguile) {
         List<NarguileEntity> listaNarguilePorNome =
                 narguileRepository.findByNomeNarguileOrderByNomeNarguileDesc(nomeNarguile);
 
@@ -55,7 +55,7 @@ public class NarguileService {
     }
 
     @Transactional
-    public List<NarguileDTO> procuraNarguilePorMarcaNarguile (MarcasNarguile marcaNarguile) {
+    public List<NarguileDTO> procuraNarguilePorMarcaNarguile(MarcasNarguile marcaNarguile) {
         List<NarguileEntity> listaNarguilePorMarca =
                 narguileRepository.findByMarcasNarguileOrderByMarcasNarguileDesc(marcaNarguile);
 
@@ -64,7 +64,7 @@ public class NarguileService {
     }
 
     @Transactional
-    public List<NarguileDTO> procuraNarguilePorQuantidadeMangueirasNarguile (Integer quantidadeMangueirasNarguile) {
+    public List<NarguileDTO> procuraNarguilePorQuantidadeMangueirasNarguile(Integer quantidadeMangueirasNarguile) {
         List<NarguileEntity> listaNarguilePorQuantidadeMangueiras =
                 narguileRepository.findByQuantidadeMangueirasNarguileOrderByQuantidadeMangueirasNarguileDesc(quantidadeMangueirasNarguile);
 
@@ -73,7 +73,7 @@ public class NarguileService {
     }
 
     @Transactional
-    public List<NarguileDTO> procuraNarguilePorMaterialNarguile (MaterialNarguile materialNarguile) {
+    public List<NarguileDTO> procuraNarguilePorMaterialNarguile(MaterialNarguile materialNarguile) {
         List<NarguileEntity> listaNarguilePorMaterial =
                 narguileRepository.findByMaterialNarguileOrderByMaterialNarguileDesc(materialNarguile);
 
@@ -82,7 +82,7 @@ public class NarguileService {
     }
 
     @Transactional
-    public List<NarguileDTO> procuraNarguilePorNomeNarguileComMetodoLike (String nomeNarguile) {
+    public List<NarguileDTO> procuraNarguilePorNomeNarguileComMetodoLike(String nomeNarguile) {
         List<NarguileEntity> listaNarguilePorMaterial =
                 narguileRepository.procuraNomeNarguileComMetodoLike(nomeNarguile);
 
@@ -91,7 +91,7 @@ public class NarguileService {
     }
 
     @Transactional
-    public List<NarguileDTO> procuraNarguilePorMarcasNarguileComMetodoLike (String marcaNarguile) {
+    public List<NarguileDTO> procuraNarguilePorMarcasNarguileComMetodoLike(String marcaNarguile) {
         List<NarguileEntity> listaNarguilePorMarca =
                 narguileRepository.procuraMarcasNarguileComMetodoLike(marcaNarguile);
 
@@ -100,7 +100,7 @@ public class NarguileService {
     }
 
     @Transactional
-    public List<NarguileDTO> procuraNarguilePorMaterialNarguileComMetodoLike (String materialNarguile) {
+    public List<NarguileDTO> procuraNarguilePorMaterialNarguileComMetodoLike(String materialNarguile) {
         List<NarguileEntity> listaNarguilePorMaterial =
                 narguileRepository.procuraMaterialNarguileComMetodoLike(materialNarguile);
 
@@ -109,7 +109,7 @@ public class NarguileService {
     }
 
     @Transactional
-    public List<NarguileDTO> procuraNarguileEntreQuantidadeMangueirasNarguile (Integer quantidadeMangueirasMinimo, Integer quantidadeMangueirasMaximo) {
+    public List<NarguileDTO> procuraNarguileEntreQuantidadeMangueirasNarguile(Integer quantidadeMangueirasMinimo, Integer quantidadeMangueirasMaximo) {
         List<NarguileEntity> listaNarguilePorQuantidadeMangueiras =
                 narguileRepository.findByQuantidadeMangueirasNarguileBetween(quantidadeMangueirasMinimo, quantidadeMangueirasMaximo);
 
@@ -118,7 +118,7 @@ public class NarguileService {
     }
 
     @Transactional
-    public List<NarguileDTO> procuraNarguilePorQuantidadeEstoqueNarguile (Integer quantidadeEstoqueNarguile) {
+    public List<NarguileDTO> procuraNarguilePorQuantidadeEstoqueNarguile(Integer quantidadeEstoqueNarguile) {
         List<NarguileEntity> listaNarguilePorQuantidadeEstoque =
                 narguileRepository.findByQuantidadeEstoqueNarguileOrderByQuantidadeEstoqueNarguileDesc(quantidadeEstoqueNarguile);
 
@@ -127,7 +127,7 @@ public class NarguileService {
     }
 
     @Transactional
-    public NarguileDTO atualizaNarguilePorId (Long idNarguile, NarguileDTO narguileDTO){
+    public NarguileDTO atualizaNarguilePorId(Long idNarguile, NarguileDTO narguileDTO) {
         NarguileEntity narguileEntity = narguileRepository.findById(idNarguile).orElseThrow(() ->
                 new EntidadeNaoEncontrada());
 
@@ -141,12 +141,12 @@ public class NarguileService {
     }
 
     @Transactional
-    public void apagaNarguilePorMarcasNarguile (MarcasNarguile marcasNarguile) {
+    public void apagaNarguilePorMarcasNarguile(MarcasNarguile marcasNarguile) {
         narguileRepository.deleteByMarcasNarguile(marcasNarguile);
     }
 
     @Transactional
-    public void apagaNarguilePorId (Long idNarguile) {
+    public void apagaNarguilePorId(Long idNarguile) {
         NarguileEntity narguileEntity = narguileRepository.findById(idNarguile).orElseThrow( () ->
                 new EntidadeNaoEncontrada());
 
@@ -154,12 +154,12 @@ public class NarguileService {
     }
 
     @Transactional
-    public void apagaNarguilePorMaterialNarguile (MaterialNarguile materialNarguile) {
+    public void apagaNarguilePorMaterialNarguile(MaterialNarguile materialNarguile) {
         narguileRepository.deleteByMaterialNarguile(materialNarguile);
     }
 
     @Transactional
-    public void apagaNarguilePorQuantidadeMangueirasNarguile (Integer quantidadeMangueirasNarguile) {
+    public void apagaNarguilePorQuantidadeMangueirasNarguile(Integer quantidadeMangueirasNarguile) {
         narguileRepository.deleteByQuantidadeMangueirasNarguile(quantidadeMangueirasNarguile);
     }
 }
