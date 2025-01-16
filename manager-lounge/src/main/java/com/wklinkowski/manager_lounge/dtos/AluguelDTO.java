@@ -1,10 +1,11 @@
 package com.wklinkowski.manager_lounge.dtos;
 
 import com.wklinkowski.manager_lounge.entities.*;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import java.time.Duration;
