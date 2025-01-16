@@ -1,6 +1,5 @@
 package com.wklinkowski.manager_lounge.controller;
 
-import com.wklinkowski.manager_lounge.dtos.FumoDTO;
 import com.wklinkowski.manager_lounge.dtos.NarguileDTO;
 import com.wklinkowski.manager_lounge.enums.MarcasNarguile;
 import com.wklinkowski.manager_lounge.enums.MaterialNarguile;

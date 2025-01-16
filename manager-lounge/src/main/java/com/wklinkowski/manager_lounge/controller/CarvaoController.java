@@ -1,7 +1,6 @@
 package com.wklinkowski.manager_lounge.controller;
 
 import com.wklinkowski.manager_lounge.dtos.CarvaoDTO;
-import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcaCarvao;
 import com.wklinkowski.manager_lounge.services.CarvaoService;
 import jakarta.validation.Valid;
