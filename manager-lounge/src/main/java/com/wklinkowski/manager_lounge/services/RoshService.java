@@ -20,33 +20,33 @@ public class RoshService {
     private final RoshRepository roshRepository;
 
     @Autowired
-    public RoshService (RoshRepository roshRepository){
+    public RoshService(RoshRepository roshRepository) {
         this.roshRepository = roshRepository;
     }
 
     @Transactional
-    public RoshDTO criarRosh (RoshDTO roshDTO){
+    public RoshDTO criarRosh(RoshDTO roshDTO) {
         RoshEntity roshEntity = roshRepository.save(new RoshEntity(roshDTO));
 
         return new RoshDTO(roshEntity);
     }
 
     @Transactional
-    public RoshDTO procuraRoshPorId (Long idRosh){
+    public RoshDTO procuraRoshPorId(Long idRosh) {
         Optional<RoshEntity> optionalRosh = roshRepository.findById(idRosh);
 
         return optionalRosh.map(RoshDTO::new).orElse(null);
     }
 
     @Transactional
-    public List<RoshDTO> listarRosh (){
+    public List<RoshDTO> listarRosh() {
         List<RoshEntity> listaRoshEntity = roshRepository.findAll();
 
         return listaRoshEntity.stream().map(rosh -> new RoshDTO(rosh)).collect(Collectors.toList());
     }
 
     @Transactional
-    public List<RoshDTO> procuraRoshPorMarcasRosh (MarcasRosh marcasRosh) {
+    public List<RoshDTO> procuraRoshPorMarcasRosh(MarcasRosh marcasRosh) {
         List<RoshEntity> listaRoshPorMarca = roshRepository.findByMarcasRoshOrderByMarcasRoshDesc(marcasRosh);
 
         return listaRoshPorMarca.stream().map(rosh ->
@@ -54,7 +54,7 @@ public class RoshService {
     }
 
     @Transactional
-    public List<RoshDTO> procuraRoshPorMaterialRosh (MaterialRosh materialRosh) {
+    public List<RoshDTO> procuraRoshPorMaterialRosh(MaterialRosh materialRosh) {
         List<RoshEntity> listaRoshPorMaterial = roshRepository.findByMaterialRoshOrderByMaterialRoshDesc(materialRosh);
 
         return listaRoshPorMaterial.stream().map(rosh ->
@@ -62,7 +62,7 @@ public class RoshService {
     }
 
     @Transactional
-    public List<RoshDTO> procuraMarcasRoshComMetodoLike (String marcaRosh) {
+    public List<RoshDTO> procuraMarcasRoshComMetodoLike(String marcaRosh) {
         List<RoshEntity> listaRoshPorMarca = roshRepository.procuraMarcasRoshComMetodoLike(marcaRosh);
 
         return listaRoshPorMarca.stream().map(rosh ->
@@ -70,7 +70,7 @@ public class RoshService {
     }
 
     @Transactional
-    public List<RoshDTO> procuraMaterialRoshComMetodoLike (String materialRosh) {
+    public List<RoshDTO> procuraMaterialRoshComMetodoLike(String materialRosh) {
         List<RoshEntity> listaRoshPorMaterial = roshRepository.procuraMaterialRoshComMetodoLike(materialRosh);
 
         return listaRoshPorMaterial.stream().map(rosh ->
@@ -78,7 +78,7 @@ public class RoshService {
     }
 
     @Transactional
-    public List<RoshDTO> procuraRoshPorQuantidadeEstoqueRosh (int quantidadeEstoqueRosh) {
+    public List<RoshDTO> procuraRoshPorQuantidadeEstoqueRosh(int quantidadeEstoqueRosh) {
         List<RoshEntity> listaRoshPorQuantidadeEstoque = roshRepository.findByQuantidadeEstoqueRoshOrderByQuantidadeEstoqueRoshDesc(quantidadeEstoqueRosh);
 
         return listaRoshPorQuantidadeEstoque.stream().map(rosh ->
@@ -86,7 +86,7 @@ public class RoshService {
     }
 
     @Transactional
-    public RoshDTO atualizaRoshPorId (Long idRosh, RoshDTO roshDTO){
+    public RoshDTO atualizaRoshPorId(Long idRosh, RoshDTO roshDTO) {
         RoshEntity roshEntity = roshRepository.findById(idRosh).orElseThrow(() ->
                 new EntidadeNaoEncontrada());
 
@@ -98,7 +98,7 @@ public class RoshService {
     }
 
     @Transactional
-    public void deletaRoshPorId (Long idRosh) {
+    public void deletaRoshPorId(Long idRosh) {
         RoshEntity roshEntity = roshRepository.findById(idRosh).orElseThrow(() ->
                 new EntidadeNaoEncontrada());
 
@@ -106,12 +106,12 @@ public class RoshService {
     }
 
     @Transactional
-    public void apagaRoshPorMarcasRosh (MarcasRosh marcasRosh) {
+    public void apagaRoshPorMarcasRosh(MarcasRosh marcasRosh) {
         roshRepository.deleteByMarcasRosh(marcasRosh);
     }
 
     @Transactional
-    public void apagaRoshPorMaterialRosh (MaterialRosh materialRosh) {
+    public void apagaRoshPorMaterialRosh(MaterialRosh materialRosh) {
         roshRepository.deleteByMaterialRosh(materialRosh);
     }
 }
