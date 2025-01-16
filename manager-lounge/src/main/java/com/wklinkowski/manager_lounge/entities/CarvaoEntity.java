@@ -12,10 +12,7 @@ import java.util.List;
 @Table(name = "CARVOES")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@ToString
-@Getter
-@Setter
+@Data
 public class CarvaoEntity {
 
     @Id
@@ -38,7 +35,7 @@ public class CarvaoEntity {
     @OneToMany(mappedBy = "id")
     private List<AluguelEntity> aluguelCarvao;
 
-    public CarvaoEntity (CarvaoDTO carvaoDTO){
+    public CarvaoEntity(CarvaoDTO carvaoDTO) {
         BeanUtils.copyProperties(carvaoDTO, this);
     }
 }
