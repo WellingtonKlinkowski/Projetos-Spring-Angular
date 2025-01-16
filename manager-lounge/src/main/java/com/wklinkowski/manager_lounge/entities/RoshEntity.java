@@ -4,7 +4,9 @@ import com.wklinkowski.manager_lounge.dtos.RoshDTO;
 import com.wklinkowski.manager_lounge.enums.MarcasRosh;
 import com.wklinkowski.manager_lounge.enums.MaterialRosh;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
@@ -13,10 +15,7 @@ import java.util.List;
 @Table(name = "ROSHS")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@ToString
-@Getter
-@Setter
+@Data
 public class RoshEntity {
 
     @Id
@@ -37,7 +36,7 @@ public class RoshEntity {
     @OneToMany(mappedBy = "id")
     private List<AluguelEntity> aluguelRosh;
 
-    public RoshEntity (RoshDTO roshDTO){
+    public RoshEntity(RoshDTO roshDTO) {
         BeanUtils.copyProperties(roshDTO, this);
     }
 }
