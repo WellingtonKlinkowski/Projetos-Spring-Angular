@@ -19,33 +19,33 @@ public class FumoService {
     private final FumoRepository fumoRepository;
 
     @Autowired
-    public FumoService (FumoRepository fumoRepository){
+    public FumoService(FumoRepository fumoRepository) {
         this.fumoRepository = fumoRepository;
     }
 
     @Transactional
-    public FumoDTO criarFumo (FumoDTO fumoDTO){
+    public FumoDTO criarFumo(FumoDTO fumoDTO) {
         FumoEntity fumoEntity = fumoRepository.save(new FumoEntity(fumoDTO));
 
         return new FumoDTO(fumoEntity);
     }
 
     @Transactional
-    public FumoDTO procurarFumoPorId (Long idFumo){
+    public FumoDTO procurarFumoPorId(Long idFumo) {
         Optional<FumoEntity> optionalFumo = fumoRepository.findById(idFumo);
 
         return optionalFumo.map(FumoDTO::new).orElse(null);
     }
 
     @Transactional
-    public List<FumoDTO> listarFumos (){
+    public List<FumoDTO> listarFumos() {
         List<FumoEntity> listaFumoEntity = fumoRepository.findAll();
 
         return listaFumoEntity.stream().map(fumo -> new FumoDTO(fumo)).collect(Collectors.toList());
     }
 
     @Transactional
-    public List<FumoDTO> procuraFumoPorMarcasFumo (MarcasFumo marcasFumo){
+    public List<FumoDTO> procuraFumoPorMarcasFumo(MarcasFumo marcasFumo) {
         List<FumoEntity> listaFumoPorMarcasFumo =
                 fumoRepository.findByMarcasFumoOrderByMarcasFumoDesc(marcasFumo);
 
@@ -54,7 +54,7 @@ public class FumoService {
     }
 
     @Transactional
-    public List<FumoDTO> procuraFumoPorSaborFumo (String saborFumo){
+    public List<FumoDTO> procuraFumoPorSaborFumo(String saborFumo) {
         List<FumoEntity> listaFumoPorSaborFumo =
                 fumoRepository.findBySaborFumoOrderBySaborFumoDesc(saborFumo);
 
@@ -63,7 +63,7 @@ public class FumoService {
     }
 
     @Transactional
-    public List<FumoDTO> procuraFumoPorPesoFumo (Integer pesoFumo){
+    public List<FumoDTO> procuraFumoPorPesoFumo(Integer pesoFumo) {
         List<FumoEntity> listaFumoPorPesoFumo =
                 fumoRepository.findByPesoFumoOrderByPesoFumoDesc(pesoFumo);
 
@@ -72,7 +72,7 @@ public class FumoService {
     }
 
     @Transactional
-    public List<FumoDTO> procuraFumoPorMarcasFumoUsandoLike (String marcasFumo){
+    public List<FumoDTO> procuraFumoPorMarcasFumoUsandoLike(String marcasFumo) {
         List<FumoEntity> listaFumoPorMarcasFumo =
                 fumoRepository.procuraMarcasFumoComMetodoLike(marcasFumo);
 
@@ -81,7 +81,7 @@ public class FumoService {
     }
 
     @Transactional
-    public List<FumoDTO> procuraFumoPorSaborFumoUsandoLike (String saborFumo){
+    public List<FumoDTO> procuraFumoPorSaborFumoUsandoLike(String saborFumo) {
         List<FumoEntity> listaFumoPorSaborFumo =
                 fumoRepository.procuraSaborFumoComMetodoLike(saborFumo);
 
@@ -90,7 +90,7 @@ public class FumoService {
     }
 
     @Transactional
-    public List<FumoDTO> procuraFumoEntrePesos (Integer pesoMinimoFumo, Integer pesoMaximoFumo){
+    public List<FumoDTO> procuraFumoEntrePesos(Integer pesoMinimoFumo, Integer pesoMaximoFumo) {
         List<FumoEntity> listaFumoPorPesoFumo =
                 fumoRepository.findByPesoFumoBetween(pesoMinimoFumo, pesoMaximoFumo);
 
@@ -99,7 +99,7 @@ public class FumoService {
     }
 
     @Transactional
-    public List<FumoDTO> procuraFumoPorQuantidadeEmEstoque (Integer quantidadeEstoqueFumo){
+    public List<FumoDTO> procuraFumoPorQuantidadeEmEstoque(Integer quantidadeEstoqueFumo) {
         List<FumoEntity> listaFumoPorQuantidadeEstoque =
                 fumoRepository.findByQuantidadeEstoqueFumoOrderByQuantidadeEstoqueFumoDesc(quantidadeEstoqueFumo);
 
@@ -108,7 +108,7 @@ public class FumoService {
     }
 
     @Transactional
-    public FumoDTO atualizaFumoPorId (Long idFumo, FumoDTO fumoDTO){
+    public FumoDTO atualizaFumoPorId(Long idFumo, FumoDTO fumoDTO) {
         FumoEntity fumoEntity = fumoRepository.findById(idFumo).orElseThrow(() ->
                 new EntidadeNaoEncontrada());
 
@@ -121,7 +121,7 @@ public class FumoService {
     }
 
     @Transactional
-    public void deletaFumoPorId (Long idFumo) {
+    public void deletaFumoPorId(Long idFumo) {
         FumoEntity fumoEntity = fumoRepository.findById(idFumo).orElseThrow(() ->
                 new EntidadeNaoEncontrada());
 
@@ -129,7 +129,7 @@ public class FumoService {
     }
 
     @Transactional
-    public void apagaFumoPorMarcasFumo (MarcasFumo marcasFumo){
+    public void apagaFumoPorMarcasFumo(MarcasFumo marcasFumo) {
 
         fumoRepository.deleteByMarcasFumo(marcasFumo);
     }
