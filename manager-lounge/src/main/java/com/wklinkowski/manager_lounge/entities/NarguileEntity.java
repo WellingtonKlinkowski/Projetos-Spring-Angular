@@ -4,7 +4,9 @@ import com.wklinkowski.manager_lounge.dtos.NarguileDTO;
 import com.wklinkowski.manager_lounge.enums.MarcasNarguile;
 import com.wklinkowski.manager_lounge.enums.MaterialNarguile;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
@@ -13,10 +15,7 @@ import java.util.List;
 @Table(name = "NARGUILES")
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode
-@ToString
-@Getter
-@Setter
+@Data
 public class NarguileEntity {
 
     @Id
@@ -43,7 +42,7 @@ public class NarguileEntity {
     @OneToMany(mappedBy = "id")
     private List<AluguelEntity> aluguelNarguile;
 
-    public NarguileEntity (NarguileDTO narguileDTO){
+    public NarguileEntity(NarguileDTO narguileDTO) {
         BeanUtils.copyProperties(narguileDTO, this);
     }
 }
