@@ -32,8 +32,15 @@ public class CarvaoEntity {
     private Integer quantidadeCarvao = 1;
 
     @Column(nullable = false)
-    private Integer quantidadeEstoqueCarvao = 1;
+    private Integer quantidadeEstoqueCaixaCarvao = 1;
+
+    @Column(nullable = false)
+    private Integer quantidadeTotalCarvao;
 
     @OneToMany(mappedBy = "id")
     private List<AluguelEntity> aluguelCarvao;
+
+    public void calculaQuantidadeTotalDeCarvao() {
+        this.quantidadeTotalCarvao = quantidadeEstoqueCaixaCarvao * quantidadeCarvao;
+    }
 }
