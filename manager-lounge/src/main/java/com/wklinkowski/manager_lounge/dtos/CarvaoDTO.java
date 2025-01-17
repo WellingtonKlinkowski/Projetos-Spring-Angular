@@ -2,6 +2,7 @@ package com.wklinkowski.manager_lounge.dtos;
 
 import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcaCarvao;
+import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Min;
@@ -25,5 +26,9 @@ public class CarvaoDTO {
     private Integer quantidadeCarvao = 1;
 
     @Min(value = 1, message = "A quantidade mínima de caixa de carvão permitida é 1.")
-    private Integer quantidadeEstoqueCarvao = 1;
+    private Integer quantidadeEstoqueCaixaCarvao = 1;
+
+    @Setter(AccessLevel.NONE)
+    private Integer quantidadeTotalCarvao;
+    
 }
