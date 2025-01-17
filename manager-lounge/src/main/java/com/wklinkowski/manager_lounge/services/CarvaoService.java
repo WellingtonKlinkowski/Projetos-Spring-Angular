@@ -4,6 +4,7 @@ import com.wklinkowski.manager_lounge.dtos.CarvaoDTO;
 import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcaCarvao;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
+import com.wklinkowski.manager_lounge.exceptions.InsumoInsuficienteException;
 import com.wklinkowski.manager_lounge.mappers.CarvaoMapper;
 import com.wklinkowski.manager_lounge.repositories.CarvaoRepository;
 import jakarta.transaction.Transactional;
@@ -26,9 +27,11 @@ public class CarvaoService {
 
     @Transactional
     public CarvaoDTO criarCarvao(CarvaoDTO carvaoDTO) {
-        CarvaoEntity carvaoEntity = carvaoRepository.save(carvaoMapper.toEntity(carvaoDTO));
+        CarvaoEntity carvaoEntity = carvaoMapper.toEntity(carvaoDTO);
 
-        return carvaoMapper.toDto(carvaoEntity);
+        carvaoEntity.calculaQuantidadeTotalDeCarvao();
+
+        return carvaoMapper.toDto(carvaoRepository.save(carvaoEntity));
     }
 
     @Transactional
@@ -106,9 +109,32 @@ public class CarvaoService {
         carvaoEntity.setMarcaCarvao(carvao.getMarcaCarvao());
         carvaoEntity.setPesoCarvao(carvao.getPesoCarvao());
         carvaoEntity.setQuantidadeCarvao(carvao.getQuantidadeCarvao());
-        carvaoEntity.setQuantidadeEstoqueCarvao(carvao.getQuantidadeEstoqueCarvao());
+        carvaoEntity.setQuantidadeEstoqueCaixaCarvao(carvao.getQuantidadeEstoqueCaixaCarvao());
+        carvaoEntity.calculaQuantidadeTotalDeCarvao();
 
         return carvaoMapper.toDto(carvaoRepository.save(carvaoEntity));
+    }
+
+    @Transactional
+    public void consomeCarvaoDoEstoqueQuandoAlugado(Long idCarvao, Integer quantidadeCarvaoUsado) throws InsumoInsuficienteException {
+        CarvaoEntity carvaoResultado = carvaoRepository.findById(idCarvao)
+                .orElseThrow(EntidadeNaoEncontrada::new);
+
+        if(carvaoResultado.getQuantidadeTotalCarvao() < quantidadeCarvaoUsado) {
+            throw new InsumoInsuficienteException(carvaoResultado.getMarcaCarvao().toString());
+        }
+
+        carvaoResultado.setQuantidadeTotalCarvao(carvaoResultado.getQuantidadeTotalCarvao() - quantidadeCarvaoUsado);
+        atualizarEstoqueDeCaixasCarvao(carvaoResultado);
+
+        carvaoRepository.save(carvaoResultado);
+    }
+
+    @Transactional
+    public void atualizarEstoqueDeCaixasCarvao(CarvaoEntity carvaoEntity) {
+        int totalCaixasFechadas = carvaoEntity.getQuantidadeTotalCarvao() / carvaoEntity.getQuantidadeCarvao();
+
+        carvaoEntity.setQuantidadeEstoqueCaixaCarvao(totalCaixasFechadas);
     }
 
     @Transactional
