@@ -1,14 +1,11 @@
 package com.wklinkowski.manager_lounge.dtos;
 
-import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcaCarvao;
-import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.springframework.beans.BeanUtils;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,5 +27,5 @@ public class CarvaoDTO {
 
     @Setter(AccessLevel.NONE)
     private Integer quantidadeTotalCarvao;
-    
+
 }

@@ -1,14 +1,14 @@
 package com.wklinkowski.manager_lounge.dtos;
 
-import com.wklinkowski.manager_lounge.entities.RoshEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasRosh;
 import com.wklinkowski.manager_lounge.enums.MaterialRosh;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
-import org.springframework.beans.BeanUtils;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor

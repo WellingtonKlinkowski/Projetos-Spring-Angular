@@ -2,12 +2,10 @@ package com.wklinkowski.manager_lounge.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wklinkowski.manager_lounge.converters.DurationConverter;
-import com.wklinkowski.manager_lounge.dtos.AluguelDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.BeanUtils;
 
 import java.time.Duration;
 import java.time.LocalDate;

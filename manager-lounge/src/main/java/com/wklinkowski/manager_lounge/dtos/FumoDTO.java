@@ -1,6 +1,5 @@
 package com.wklinkowski.manager_lounge.dtos;
 
-import com.wklinkowski.manager_lounge.entities.FumoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasFumo;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -8,8 +7,9 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
-import org.springframework.beans.BeanUtils;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor

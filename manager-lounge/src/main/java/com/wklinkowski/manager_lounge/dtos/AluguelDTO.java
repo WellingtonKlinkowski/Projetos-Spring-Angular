@@ -1,12 +1,14 @@
 package com.wklinkowski.manager_lounge.dtos;
 
-import com.wklinkowski.manager_lounge.entities.*;
+import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
+import com.wklinkowski.manager_lounge.entities.FumoEntity;
+import com.wklinkowski.manager_lounge.entities.NarguileEntity;
+import com.wklinkowski.manager_lounge.entities.RoshEntity;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.BeanUtils;
 
 import java.time.Duration;
 
