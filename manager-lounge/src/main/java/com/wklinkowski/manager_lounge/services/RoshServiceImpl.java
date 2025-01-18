@@ -5,6 +5,7 @@ import com.wklinkowski.manager_lounge.entities.RoshEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasRosh;
 import com.wklinkowski.manager_lounge.enums.MaterialRosh;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
+import com.wklinkowski.manager_lounge.interfaces.RoshService;
 import com.wklinkowski.manager_lounge.mappers.RoshMapper;
 import com.wklinkowski.manager_lounge.repositories.RoshRepository;
 import jakarta.transaction.Transactional;
@@ -15,16 +16,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class RoshService {
+public class RoshServiceImpl implements RoshService {
 
     private final RoshRepository roshRepository;
     private final RoshMapper roshMapper;
 
-    public RoshService(RoshRepository roshRepository, RoshMapper roshMapper) {
+    public RoshServiceImpl(RoshRepository roshRepository, RoshMapper roshMapper) {
         this.roshRepository = roshRepository;
         this.roshMapper = roshMapper;
     }
 
+    @Override
     @Transactional
     public RoshDTO criarRosh(RoshDTO roshDTO) {
         RoshEntity roshEntity = roshRepository.save(roshMapper.toEntity(roshDTO));
@@ -32,6 +34,7 @@ public class RoshService {
         return roshMapper.toDto(roshEntity);
     }
 
+    @Override
     @Transactional
     public RoshDTO procuraRoshPorId(Long idRosh) {
         Optional<RoshEntity> optionalRosh = roshRepository.findById(idRosh);
@@ -39,6 +42,7 @@ public class RoshService {
         return optionalRosh.map(roshMapper::toDto).orElse(null);
     }
 
+    @Override
     @Transactional
     public List<RoshDTO> listarRosh() {
         List<RoshEntity> listaRoshEntity = roshRepository.findAll();
@@ -46,6 +50,7 @@ public class RoshService {
         return listaRoshEntity.stream().map(roshMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<RoshDTO> procuraRoshPorMarcasRosh(MarcasRosh marcasRosh) {
         List<RoshEntity> listaRoshPorMarca = roshRepository.findByMarcasRoshOrderByMarcasRoshDesc(marcasRosh);
@@ -53,6 +58,7 @@ public class RoshService {
         return listaRoshPorMarca.stream().map(roshMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<RoshDTO> procuraRoshPorMaterialRosh(MaterialRosh materialRosh) {
         List<RoshEntity> listaRoshPorMaterial = roshRepository.findByMaterialRoshOrderByMaterialRoshDesc(materialRosh);
@@ -60,6 +66,7 @@ public class RoshService {
         return listaRoshPorMaterial.stream().map(roshMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<RoshDTO> procuraMarcasRoshComMetodoLike(String marcaRosh) {
         List<RoshEntity> listaRoshPorMarca = roshRepository.procuraMarcasRoshComMetodoLike(marcaRosh);
@@ -67,6 +74,7 @@ public class RoshService {
         return listaRoshPorMarca.stream().map(roshMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<RoshDTO> procuraMaterialRoshComMetodoLike(String materialRosh) {
         List<RoshEntity> listaRoshPorMaterial = roshRepository.procuraMaterialRoshComMetodoLike(materialRosh);
@@ -74,6 +82,7 @@ public class RoshService {
         return listaRoshPorMaterial.stream().map(roshMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<RoshDTO> procuraRoshPorQuantidadeEstoqueRosh(int quantidadeEstoqueRosh) {
         List<RoshEntity> listaRoshPorQuantidadeEstoque = roshRepository.findByQuantidadeEstoqueRoshOrderByQuantidadeEstoqueRoshDesc(quantidadeEstoqueRosh);
@@ -81,6 +90,7 @@ public class RoshService {
         return listaRoshPorQuantidadeEstoque.stream().map(roshMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public RoshDTO atualizaRoshPorId(Long idRosh, RoshDTO roshDTO) {
         RoshEntity roshEntity = roshRepository.findById(idRosh).orElseThrow(() ->
@@ -93,6 +103,7 @@ public class RoshService {
         return roshMapper.toDto(roshRepository.save(roshEntity));
     }
 
+    @Override
     @Transactional
     public void deletaRoshPorId(Long idRosh) {
         RoshEntity roshEntity = roshRepository.findById(idRosh).orElseThrow(() ->
@@ -101,11 +112,13 @@ public class RoshService {
         roshRepository.delete(roshEntity);
     }
 
+    @Override
     @Transactional
     public void apagaRoshPorMarcasRosh(MarcasRosh marcasRosh) {
         roshRepository.deleteByMarcasRosh(marcasRosh);
     }
 
+    @Override
     @Transactional
     public void apagaRoshPorMaterialRosh(MaterialRosh materialRosh) {
         roshRepository.deleteByMaterialRosh(materialRosh);

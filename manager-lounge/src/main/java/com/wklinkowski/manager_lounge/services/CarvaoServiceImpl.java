@@ -5,6 +5,7 @@ import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcaCarvao;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
 import com.wklinkowski.manager_lounge.exceptions.InsumoInsuficienteException;
+import com.wklinkowski.manager_lounge.interfaces.CarvaoService;
 import com.wklinkowski.manager_lounge.mappers.CarvaoMapper;
 import com.wklinkowski.manager_lounge.repositories.CarvaoRepository;
 import jakarta.transaction.Transactional;
@@ -15,16 +16,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CarvaoService {
+public class CarvaoServiceImpl implements CarvaoService {
 
     private final CarvaoRepository carvaoRepository;
     private final CarvaoMapper carvaoMapper;
 
-    public CarvaoService(CarvaoRepository carvaoRepository, CarvaoMapper carvaoMapper) {
+    public CarvaoServiceImpl(CarvaoRepository carvaoRepository, CarvaoMapper carvaoMapper) {
         this.carvaoRepository = carvaoRepository;
         this.carvaoMapper = carvaoMapper;
     }
 
+    @Override
     @Transactional
     public CarvaoDTO criarCarvao(CarvaoDTO carvaoDTO) {
         CarvaoEntity carvaoEntity = carvaoMapper.toEntity(carvaoDTO);
@@ -34,6 +36,7 @@ public class CarvaoService {
         return carvaoMapper.toDto(carvaoRepository.save(carvaoEntity));
     }
 
+    @Override
     @Transactional
     public CarvaoDTO procurarCarvaoPorId(Long id) {
         Optional<CarvaoEntity> optionalCarvao = carvaoRepository.findById(id);
@@ -41,6 +44,7 @@ public class CarvaoService {
         return optionalCarvao.map(carvaoMapper::toDto).orElse(null);
     }
 
+    @Override
     @Transactional
     public List<CarvaoDTO> listarCarvoes() {
         List<CarvaoEntity> listaCarvao = carvaoRepository.findAll();
@@ -48,6 +52,7 @@ public class CarvaoService {
         return listaCarvao.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<CarvaoDTO> procuraCarvaoPorMarcaCarvao(MarcaCarvao marcaCarvao) {
 
@@ -56,6 +61,7 @@ public class CarvaoService {
         return listaCarvaoPorMarcaCarvao.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<CarvaoDTO> procuraCarvaoPorPesoCarvao(Integer pesoCarvao) {
         List<CarvaoEntity> listaCarvaoPorPeso = carvaoRepository.findByPesoCarvaoOrderByPesoCarvaoDesc(pesoCarvao);
@@ -63,6 +69,7 @@ public class CarvaoService {
         return listaCarvaoPorPeso.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<CarvaoDTO> procuraCarvaoPorQuantidadeCarvao(Integer quantidadeCarvao) {
         List<CarvaoEntity> listaCarvaoPorQuantidadeCarvao =
@@ -71,6 +78,7 @@ public class CarvaoService {
         return listaCarvaoPorQuantidadeCarvao.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<CarvaoDTO> procuraCarvaoPorMarcaEPeso(MarcaCarvao marcaCarvao, Integer pesoCarvao) {
         List<CarvaoEntity> listaCarvaoPorMarcaEPesoCarvao = carvaoRepository.procuraCarvaoPorMarcaEPeso(marcaCarvao, pesoCarvao);
@@ -78,6 +86,7 @@ public class CarvaoService {
         return listaCarvaoPorMarcaEPesoCarvao.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<CarvaoDTO> procuraMarcaCarvaoUsandoLike(String marcaCarvao) {
         List<CarvaoEntity> listaCarvaoPorMarca = carvaoRepository.procuraMarcaCarvaoComMetodoLike(marcaCarvao);
@@ -85,6 +94,7 @@ public class CarvaoService {
         return listaCarvaoPorMarca.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<CarvaoDTO> procuraCarvaoComPesoEntreDoisValores(Integer pesoMinimo, Integer pesoMaximo) {
         List<CarvaoEntity> listaCarvaoComPesoEntreDoisValores = carvaoRepository.findByPesoCarvaoBetween(pesoMinimo, pesoMaximo);
@@ -92,6 +102,7 @@ public class CarvaoService {
         return listaCarvaoComPesoEntreDoisValores.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<CarvaoDTO> procuraCarvaoPorQuantidadeEmEstoque(Integer quantidadeEstoqueCarvao) {
         List<CarvaoEntity> listaCarvaoPorQuantidadeEstoque =
@@ -100,6 +111,7 @@ public class CarvaoService {
         return listaCarvaoPorQuantidadeEstoque.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public CarvaoDTO atualizarCarvaoPorId(Long idCarvao, CarvaoDTO carvao) {
 
@@ -115,6 +127,7 @@ public class CarvaoService {
         return carvaoMapper.toDto(carvaoRepository.save(carvaoEntity));
     }
 
+    @Override
     @Transactional
     public void consomeCarvaoDoEstoqueQuandoAlugado(Long idCarvao, Integer quantidadeCarvaoUsado) throws InsumoInsuficienteException {
         CarvaoEntity carvaoResultado = carvaoRepository.findById(idCarvao)
@@ -130,6 +143,7 @@ public class CarvaoService {
         carvaoRepository.save(carvaoResultado);
     }
 
+    @Override
     @Transactional
     public void atualizarEstoqueDeCaixasCarvao(CarvaoEntity carvaoEntity) {
         int totalCaixasFechadas = carvaoEntity.getQuantidadeTotalCarvao() / carvaoEntity.getQuantidadeCarvao();
@@ -137,6 +151,7 @@ public class CarvaoService {
         carvaoEntity.setQuantidadeEstoqueCaixaCarvao(totalCaixasFechadas);
     }
 
+    @Override
     @Transactional
     public void deletaCarvaoPorId(Long idCarvao) {
         CarvaoEntity carvaoEntity = carvaoRepository.findById(idCarvao).orElseThrow( () ->
@@ -145,6 +160,7 @@ public class CarvaoService {
         carvaoRepository.delete(carvaoEntity);
     }
 
+    @Override
     @Transactional
     public void deletarCarvaoPorMarcaCarvao(MarcaCarvao marcaCarvao) {
         carvaoRepository.deleteByMarcaCarvao(marcaCarvao);

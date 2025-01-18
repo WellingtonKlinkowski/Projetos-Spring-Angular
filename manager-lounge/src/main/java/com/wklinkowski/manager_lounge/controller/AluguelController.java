@@ -1,6 +1,6 @@
 package com.wklinkowski.manager_lounge.controller;
 
-import com.wklinkowski.manager_lounge.services.AluguelService;
+import com.wklinkowski.manager_lounge.services.AluguelServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/aluguel")
 public class AluguelController {
 
-    private final AluguelService aluguelService;
+    private final AluguelServiceImpl aluguelServiceImpl;
 
-    public AluguelController(AluguelService aluguelService) {
-        this.aluguelService = aluguelService;
+    public AluguelController(AluguelServiceImpl aluguelServiceImpl) {
+        this.aluguelServiceImpl = aluguelServiceImpl;
     }
 }

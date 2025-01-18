@@ -4,6 +4,7 @@ import com.wklinkowski.manager_lounge.dtos.FumoDTO;
 import com.wklinkowski.manager_lounge.entities.FumoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasFumo;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
+import com.wklinkowski.manager_lounge.interfaces.FumoService;
 import com.wklinkowski.manager_lounge.mappers.FumoMapper;
 import com.wklinkowski.manager_lounge.repositories.FumoRepository;
 import jakarta.transaction.Transactional;
@@ -14,16 +15,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class FumoService {
+public class FumoServiceImpl implements FumoService {
 
     private final FumoRepository fumoRepository;
     private final FumoMapper fumoMapper;
 
-    public FumoService(FumoRepository fumoRepository, FumoMapper fumoMapper) {
+    public FumoServiceImpl(FumoRepository fumoRepository, FumoMapper fumoMapper) {
         this.fumoRepository = fumoRepository;
         this.fumoMapper = fumoMapper;
     }
 
+    @Override
     @Transactional
     public FumoDTO criarFumo(FumoDTO fumoDTO) {
         FumoEntity fumoEntity = fumoRepository.save(fumoMapper.toEntity(fumoDTO));
@@ -31,6 +33,7 @@ public class FumoService {
         return fumoMapper.toDto(fumoEntity);
     }
 
+    @Override
     @Transactional
     public FumoDTO procurarFumoPorId(Long idFumo) {
         Optional<FumoEntity> optionalFumo = fumoRepository.findById(idFumo);
@@ -38,6 +41,7 @@ public class FumoService {
         return optionalFumo.map(fumoMapper::toDto).orElse(null);
     }
 
+    @Override
     @Transactional
     public List<FumoDTO> listarFumos() {
         List<FumoEntity> listaFumoEntity = fumoRepository.findAll();
@@ -45,6 +49,7 @@ public class FumoService {
         return listaFumoEntity.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<FumoDTO> procuraFumoPorMarcasFumo(MarcasFumo marcasFumo) {
         List<FumoEntity> listaFumoPorMarcasFumo =
@@ -53,6 +58,7 @@ public class FumoService {
         return listaFumoPorMarcasFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<FumoDTO> procuraFumoPorSaborFumo(String saborFumo) {
         List<FumoEntity> listaFumoPorSaborFumo =
@@ -61,6 +67,7 @@ public class FumoService {
         return listaFumoPorSaborFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<FumoDTO> procuraFumoPorPesoFumo(Integer pesoFumo) {
         List<FumoEntity> listaFumoPorPesoFumo =
@@ -69,6 +76,7 @@ public class FumoService {
         return listaFumoPorPesoFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<FumoDTO> procuraFumoPorMarcasFumoUsandoLike(String marcasFumo) {
         List<FumoEntity> listaFumoPorMarcasFumo =
@@ -77,6 +85,7 @@ public class FumoService {
         return listaFumoPorMarcasFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<FumoDTO> procuraFumoPorSaborFumoUsandoLike(String saborFumo) {
         List<FumoEntity> listaFumoPorSaborFumo =
@@ -85,6 +94,7 @@ public class FumoService {
         return listaFumoPorSaborFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<FumoDTO> procuraFumoEntrePesos(Integer pesoMinimoFumo, Integer pesoMaximoFumo) {
         List<FumoEntity> listaFumoPorPesoFumo =
@@ -93,6 +103,7 @@ public class FumoService {
         return listaFumoPorPesoFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<FumoDTO> procuraFumoPorQuantidadeEmEstoque(Integer quantidadeEstoqueFumo) {
         List<FumoEntity> listaFumoPorQuantidadeEstoque =
@@ -101,6 +112,7 @@ public class FumoService {
         return listaFumoPorQuantidadeEstoque.stream().map(fumoMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public FumoDTO atualizaFumoPorId(Long idFumo, FumoDTO fumoDTO) {
         FumoEntity fumoEntity = fumoRepository.findById(idFumo).orElseThrow(() ->
@@ -114,6 +126,7 @@ public class FumoService {
         return fumoMapper.toDto(fumoRepository.save(fumoEntity));
     }
 
+    @Override
     @Transactional
     public void deletaFumoPorId(Long idFumo) {
         FumoEntity fumoEntity = fumoRepository.findById(idFumo).orElseThrow(() ->
@@ -122,6 +135,7 @@ public class FumoService {
         fumoRepository.delete(fumoEntity);
     }
 
+    @Override
     @Transactional
     public void apagaFumoPorMarcasFumo(MarcasFumo marcasFumo) {
 

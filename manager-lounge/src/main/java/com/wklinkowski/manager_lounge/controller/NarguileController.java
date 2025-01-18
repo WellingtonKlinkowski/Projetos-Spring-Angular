@@ -3,7 +3,7 @@ package com.wklinkowski.manager_lounge.controller;
 import com.wklinkowski.manager_lounge.dtos.NarguileDTO;
 import com.wklinkowski.manager_lounge.enums.MarcasNarguile;
 import com.wklinkowski.manager_lounge.enums.MaterialNarguile;
-import com.wklinkowski.manager_lounge.services.NarguileService;
+import com.wklinkowski.manager_lounge.services.NarguileServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,22 +15,22 @@ import java.util.List;
 @RequestMapping("/narguiles")
 public class NarguileController {
 
-    private final NarguileService narguileService;
+    private final NarguileServiceImpl narguileServiceImpl;
 
-    public NarguileController(NarguileService narguileService) {
-        this.narguileService = narguileService;
+    public NarguileController(NarguileServiceImpl narguileServiceImpl) {
+        this.narguileServiceImpl = narguileServiceImpl;
     }
 
     @PostMapping("/criar")
     public ResponseEntity<NarguileDTO> criarNarguile(@Valid @RequestBody NarguileDTO narguileDTO) {
-        NarguileDTO narguileResultado = narguileService.criarNarguile(narguileDTO);
+        NarguileDTO narguileResultado = narguileServiceImpl.criarNarguile(narguileDTO);
 
         return new ResponseEntity<>(narguileResultado, HttpStatus.CREATED);
     }
 
     @GetMapping("/{idNarguile}")
     public ResponseEntity<NarguileDTO> procuraNarguilePorId(@PathVariable Long idNarguile) {
-        NarguileDTO narguileResultado = narguileService.procuraNarguilePorId(idNarguile);
+        NarguileDTO narguileResultado = narguileServiceImpl.procuraNarguilePorId(idNarguile);
 
         if( narguileResultado == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -41,7 +41,7 @@ public class NarguileController {
 
     @GetMapping("/listar")
     public ResponseEntity<List<NarguileDTO>> listarNarguiles() {
-        List<NarguileDTO> listaNarguileResultado = narguileService.listarNarguiles();
+        List<NarguileDTO> listaNarguileResultado = narguileServiceImpl.listarNarguiles();
 
         if( listaNarguileResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -52,7 +52,7 @@ public class NarguileController {
 
     @GetMapping("nome-narguile")
     public ResponseEntity<List<NarguileDTO>> procuraNarguilePorNomeNarguile(@RequestParam String nomeNarguile) {
-        List<NarguileDTO> listaNarguileResultado = narguileService.procuraNarguilePorNomeNarguile(nomeNarguile);
+        List<NarguileDTO> listaNarguileResultado = narguileServiceImpl.procuraNarguilePorNomeNarguile(nomeNarguile);
 
         if(listaNarguileResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -63,7 +63,7 @@ public class NarguileController {
 
     @GetMapping("marca-narguile")
     public ResponseEntity<List<NarguileDTO>> procuraNarguilePorMarcaNarguile(@RequestParam MarcasNarguile marcaNarguile) {
-        List<NarguileDTO> listaNarguileResultado = narguileService.procuraNarguilePorMarcaNarguile(marcaNarguile);
+        List<NarguileDTO> listaNarguileResultado = narguileServiceImpl.procuraNarguilePorMarcaNarguile(marcaNarguile);
 
         if(listaNarguileResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -74,7 +74,7 @@ public class NarguileController {
 
     @GetMapping("quantidade-mangueiras-narguile")
     public ResponseEntity<List<NarguileDTO>> procuraNarguilePorQuantidadeMangueirasNarguile(@RequestParam Integer quantidadeMangueirasNarguile) {
-        List<NarguileDTO> listaNarguileResultado = narguileService.procuraNarguilePorQuantidadeMangueirasNarguile(quantidadeMangueirasNarguile);
+        List<NarguileDTO> listaNarguileResultado = narguileServiceImpl.procuraNarguilePorQuantidadeMangueirasNarguile(quantidadeMangueirasNarguile);
 
         if(listaNarguileResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -85,7 +85,7 @@ public class NarguileController {
 
     @GetMapping("material-narguile")
     public ResponseEntity<List<NarguileDTO>> procuraNarguilePorMaterialNarguile(@RequestParam MaterialNarguile materialNarguile) {
-        List<NarguileDTO> listaNarguileResultado = narguileService.procuraNarguilePorMaterialNarguile(materialNarguile);
+        List<NarguileDTO> listaNarguileResultado = narguileServiceImpl.procuraNarguilePorMaterialNarguile(materialNarguile);
 
         if(listaNarguileResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -96,7 +96,7 @@ public class NarguileController {
 
     @GetMapping("sugestao-nome-narguile")
     public ResponseEntity<List<NarguileDTO>> procuraNarguilePorNomeNarguileComMetodoLike(@RequestParam String nomeNarguile) {
-        List<NarguileDTO> listaNarguileResultado = narguileService.procuraNarguilePorNomeNarguileComMetodoLike(nomeNarguile);
+        List<NarguileDTO> listaNarguileResultado = narguileServiceImpl.procuraNarguilePorNomeNarguileComMetodoLike(nomeNarguile);
 
         if(listaNarguileResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -107,7 +107,7 @@ public class NarguileController {
 
     @GetMapping("sugestao-marcas-narguile")
     public ResponseEntity<List<NarguileDTO>> procuraNarguilePorMarcasNarguileComMetodoLike(@RequestParam String marcaNarguile) {
-        List<NarguileDTO> listaNarguileResultado = narguileService.procuraNarguilePorMarcasNarguileComMetodoLike(marcaNarguile);
+        List<NarguileDTO> listaNarguileResultado = narguileServiceImpl.procuraNarguilePorMarcasNarguileComMetodoLike(marcaNarguile);
 
         if(listaNarguileResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -118,7 +118,7 @@ public class NarguileController {
 
     @GetMapping("sugestao-material-narguile")
     public ResponseEntity<List<NarguileDTO>> procuraNarguilePorMaterialNarguileComMetodoLike(@RequestParam String materialNarguile) {
-        List<NarguileDTO> listaNarguileResultado = narguileService.procuraNarguilePorMaterialNarguileComMetodoLike(materialNarguile);
+        List<NarguileDTO> listaNarguileResultado = narguileServiceImpl.procuraNarguilePorMaterialNarguileComMetodoLike(materialNarguile);
 
         if(listaNarguileResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -132,7 +132,7 @@ public class NarguileController {
             @RequestParam Integer quantidadeMangueirasNarguileMinimo, @RequestParam Integer quantidadeMangueirasNarguileMaximo) {
 
         List<NarguileDTO> listaNarguileResultado =
-                narguileService.procuraNarguileEntreQuantidadeMangueirasNarguile(quantidadeMangueirasNarguileMinimo, quantidadeMangueirasNarguileMaximo);
+                narguileServiceImpl.procuraNarguileEntreQuantidadeMangueirasNarguile(quantidadeMangueirasNarguileMinimo, quantidadeMangueirasNarguileMaximo);
 
         if(listaNarguileResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -143,7 +143,7 @@ public class NarguileController {
 
     @GetMapping("/quantidade-estoque")
     public ResponseEntity<List<NarguileDTO>> procuraNarguilePorQuantidadeEstoque(@RequestParam Integer quantidadeEstoqueNarguile) {
-        List<NarguileDTO> listaNarguileResultado = narguileService.procuraNarguilePorQuantidadeEstoqueNarguile(quantidadeEstoqueNarguile);
+        List<NarguileDTO> listaNarguileResultado = narguileServiceImpl.procuraNarguilePorQuantidadeEstoqueNarguile(quantidadeEstoqueNarguile);
 
         if(listaNarguileResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -154,35 +154,35 @@ public class NarguileController {
 
     @PutMapping("/{idNarguile}")
     public ResponseEntity<NarguileDTO> atualizaNarguilePorId(@PathVariable Long idNarguile, @Valid @RequestBody NarguileDTO narguileDTO) {
-        NarguileDTO narguileResultado = narguileService.atualizaNarguilePorId(idNarguile, narguileDTO);
+        NarguileDTO narguileResultado = narguileServiceImpl.atualizaNarguilePorId(idNarguile, narguileDTO);
 
         return new ResponseEntity<>(narguileResultado, HttpStatus.OK);
     }
 
     @DeleteMapping("/{idNarguile}")
     public ResponseEntity<Void> apagaNarguilePorId(@PathVariable Long idNarguile) {
-        narguileService.apagaNarguilePorId(idNarguile);
+        narguileServiceImpl.apagaNarguilePorId(idNarguile);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/apagar-marca-narguile")
     public ResponseEntity<Void> apagaNarguilePorMarcasNarguile(@RequestParam MarcasNarguile marcaNarguile) {
-        narguileService.apagaNarguilePorMarcasNarguile(marcaNarguile);
+        narguileServiceImpl.apagaNarguilePorMarcasNarguile(marcaNarguile);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/apagar-material-narguile")
     public ResponseEntity<Void> apagaNarguilePorMaterialNarguile(@RequestParam MaterialNarguile materialNarguile) {
-        narguileService.apagaNarguilePorMaterialNarguile(materialNarguile);
+        narguileServiceImpl.apagaNarguilePorMaterialNarguile(materialNarguile);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/apagar-quantidade-mangueiras-narguile")
     public ResponseEntity<Void> apagaNarguilePorQuantidadeMangueirasNarguile(@RequestParam Integer quantidadeMangueirasNarguile) {
-        narguileService.apagaNarguilePorQuantidadeMangueirasNarguile(quantidadeMangueirasNarguile);
+        narguileServiceImpl.apagaNarguilePorQuantidadeMangueirasNarguile(quantidadeMangueirasNarguile);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

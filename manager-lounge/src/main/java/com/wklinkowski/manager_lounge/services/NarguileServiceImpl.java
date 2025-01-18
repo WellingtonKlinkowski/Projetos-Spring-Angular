@@ -5,6 +5,7 @@ import com.wklinkowski.manager_lounge.entities.NarguileEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasNarguile;
 import com.wklinkowski.manager_lounge.enums.MaterialNarguile;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
+import com.wklinkowski.manager_lounge.interfaces.NarguileService;
 import com.wklinkowski.manager_lounge.mappers.NarguileMapper;
 import com.wklinkowski.manager_lounge.repositories.NarguileRepository;
 import jakarta.transaction.Transactional;
@@ -15,16 +16,17 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class NarguileService {
+public class NarguileServiceImpl implements NarguileService {
 
     private final NarguileRepository narguileRepository;
     private final NarguileMapper narguileMapper;
 
-    public NarguileService(NarguileRepository narguileRepository, NarguileMapper narguileMapper) {
+    public NarguileServiceImpl(NarguileRepository narguileRepository, NarguileMapper narguileMapper) {
         this.narguileRepository = narguileRepository;
         this.narguileMapper = narguileMapper;
     }
 
+    @Override
     @Transactional
     public NarguileDTO criarNarguile(NarguileDTO narguileDTO) {
         NarguileEntity narguileEntity = narguileRepository.save(narguileMapper.toEntity(narguileDTO));
@@ -32,6 +34,7 @@ public class NarguileService {
         return narguileMapper.toDto(narguileEntity);
     }
 
+    @Override
     @Transactional
     public NarguileDTO procuraNarguilePorId(Long idNarguile) {
         Optional<NarguileEntity> opationalNarguile = narguileRepository.findById(idNarguile);
@@ -39,6 +42,7 @@ public class NarguileService {
         return opationalNarguile.map(narguileMapper::toDto).orElse(null);
     }
 
+    @Override
     @Transactional
     public List<NarguileDTO> listarNarguiles() {
         List<NarguileEntity> listaNarguileEntity = narguileRepository.findAll();
@@ -46,6 +50,7 @@ public class NarguileService {
         return listaNarguileEntity.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<NarguileDTO> procuraNarguilePorNomeNarguile(String nomeNarguile) {
         List<NarguileEntity> listaNarguilePorNome =
@@ -54,6 +59,7 @@ public class NarguileService {
         return listaNarguilePorNome.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<NarguileDTO> procuraNarguilePorMarcaNarguile(MarcasNarguile marcaNarguile) {
         List<NarguileEntity> listaNarguilePorMarca =
@@ -62,6 +68,7 @@ public class NarguileService {
         return listaNarguilePorMarca.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<NarguileDTO> procuraNarguilePorQuantidadeMangueirasNarguile(Integer quantidadeMangueirasNarguile) {
         List<NarguileEntity> listaNarguilePorQuantidadeMangueiras =
@@ -70,6 +77,7 @@ public class NarguileService {
         return listaNarguilePorQuantidadeMangueiras.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<NarguileDTO> procuraNarguilePorMaterialNarguile(MaterialNarguile materialNarguile) {
         List<NarguileEntity> listaNarguilePorMaterial =
@@ -78,6 +86,7 @@ public class NarguileService {
         return listaNarguilePorMaterial.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<NarguileDTO> procuraNarguilePorNomeNarguileComMetodoLike(String nomeNarguile) {
         List<NarguileEntity> listaNarguilePorMaterial =
@@ -86,6 +95,7 @@ public class NarguileService {
         return listaNarguilePorMaterial.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<NarguileDTO> procuraNarguilePorMarcasNarguileComMetodoLike(String marcaNarguile) {
         List<NarguileEntity> listaNarguilePorMarca =
@@ -94,6 +104,7 @@ public class NarguileService {
         return listaNarguilePorMarca.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<NarguileDTO> procuraNarguilePorMaterialNarguileComMetodoLike(String materialNarguile) {
         List<NarguileEntity> listaNarguilePorMaterial =
@@ -102,6 +113,7 @@ public class NarguileService {
         return listaNarguilePorMaterial.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<NarguileDTO> procuraNarguileEntreQuantidadeMangueirasNarguile(Integer quantidadeMangueirasMinimo, Integer quantidadeMangueirasMaximo) {
         List<NarguileEntity> listaNarguilePorQuantidadeMangueiras =
@@ -110,6 +122,7 @@ public class NarguileService {
         return listaNarguilePorQuantidadeMangueiras.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public List<NarguileDTO> procuraNarguilePorQuantidadeEstoqueNarguile(Integer quantidadeEstoqueNarguile) {
         List<NarguileEntity> listaNarguilePorQuantidadeEstoque =
@@ -118,6 +131,7 @@ public class NarguileService {
         return listaNarguilePorQuantidadeEstoque.stream().map(narguileMapper::toDto).collect(Collectors.toList());
     }
 
+    @Override
     @Transactional
     public NarguileDTO atualizaNarguilePorId(Long idNarguile, NarguileDTO narguileDTO) {
         NarguileEntity narguileEntity = narguileRepository.findById(idNarguile).orElseThrow(() ->
@@ -132,11 +146,13 @@ public class NarguileService {
         return narguileMapper.toDto(narguileRepository.save(narguileEntity));
     }
 
+    @Override
     @Transactional
     public void apagaNarguilePorMarcasNarguile(MarcasNarguile marcasNarguile) {
         narguileRepository.deleteByMarcasNarguile(marcasNarguile);
     }
 
+    @Override
     @Transactional
     public void apagaNarguilePorId(Long idNarguile) {
         NarguileEntity narguileEntity = narguileRepository.findById(idNarguile).orElseThrow( () ->
@@ -145,11 +161,13 @@ public class NarguileService {
         narguileRepository.delete(narguileEntity);
     }
 
+    @Override
     @Transactional
     public void apagaNarguilePorMaterialNarguile(MaterialNarguile materialNarguile) {
         narguileRepository.deleteByMaterialNarguile(materialNarguile);
     }
 
+    @Override
     @Transactional
     public void apagaNarguilePorQuantidadeMangueirasNarguile(Integer quantidadeMangueirasNarguile) {
         narguileRepository.deleteByQuantidadeMangueirasNarguile(quantidadeMangueirasNarguile);

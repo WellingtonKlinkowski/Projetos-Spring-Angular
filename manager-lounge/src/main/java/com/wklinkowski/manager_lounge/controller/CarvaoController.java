@@ -2,7 +2,7 @@ package com.wklinkowski.manager_lounge.controller;
 
 import com.wklinkowski.manager_lounge.dtos.CarvaoDTO;
 import com.wklinkowski.manager_lounge.enums.MarcaCarvao;
-import com.wklinkowski.manager_lounge.services.CarvaoService;
+import com.wklinkowski.manager_lounge.services.CarvaoServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,22 +14,22 @@ import java.util.List;
 @RequestMapping("/carvoes")
 public class CarvaoController {
 
-    private final CarvaoService carvaoService;
+    private final CarvaoServiceImpl carvaoServiceImpl;
 
-    public CarvaoController(CarvaoService carvaoService) {
-        this.carvaoService = carvaoService;
+    public CarvaoController(CarvaoServiceImpl carvaoServiceImpl) {
+        this.carvaoServiceImpl = carvaoServiceImpl;
     }
 
     @PostMapping("/criar")
     public ResponseEntity<CarvaoDTO> criarCarvao(@Valid @RequestBody CarvaoDTO carvaoDTO) {
-        CarvaoDTO carvaoResultado = carvaoService.criarCarvao(carvaoDTO);
+        CarvaoDTO carvaoResultado = carvaoServiceImpl.criarCarvao(carvaoDTO);
 
         return new ResponseEntity<>(carvaoResultado, HttpStatus.CREATED);
     }
 
     @GetMapping("/listar")
     public ResponseEntity<List<CarvaoDTO>> listarCarvoes() {
-        List<CarvaoDTO> listaCarvaoResultado = carvaoService.listarCarvoes();
+        List<CarvaoDTO> listaCarvaoResultado = carvaoServiceImpl.listarCarvoes();
 
         if(listaCarvaoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -40,7 +40,7 @@ public class CarvaoController {
 
     @GetMapping("/{idCarvao}")
     public ResponseEntity<CarvaoDTO> procurarCarvaoPorId(@PathVariable Long idCarvao) {
-        CarvaoDTO carvaoResultado = carvaoService.procurarCarvaoPorId(idCarvao);
+        CarvaoDTO carvaoResultado = carvaoServiceImpl.procurarCarvaoPorId(idCarvao);
 
         if(carvaoResultado == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -51,7 +51,7 @@ public class CarvaoController {
 
     @GetMapping("/marca-carvao")
     public ResponseEntity<List<CarvaoDTO>> procuraCarvaoPorMarca(@RequestParam MarcaCarvao marcaCarvao) {
-        List<CarvaoDTO> listaCarvaoResultado = carvaoService.procuraCarvaoPorMarcaCarvao(marcaCarvao);
+        List<CarvaoDTO> listaCarvaoResultado = carvaoServiceImpl.procuraCarvaoPorMarcaCarvao(marcaCarvao);
 
         if(listaCarvaoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -62,7 +62,7 @@ public class CarvaoController {
 
     @GetMapping("/peso-carvao")
     public ResponseEntity<List<CarvaoDTO>> procuraCarvaoPorPeso(@RequestParam Integer pesoCarvao) {
-        List<CarvaoDTO> listaCarvaoResultado = carvaoService.procuraCarvaoPorPesoCarvao(pesoCarvao);
+        List<CarvaoDTO> listaCarvaoResultado = carvaoServiceImpl.procuraCarvaoPorPesoCarvao(pesoCarvao);
 
         if(listaCarvaoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -73,7 +73,7 @@ public class CarvaoController {
 
     @GetMapping("/quantidade-carvao")
     public ResponseEntity<List<CarvaoDTO>> procuraCarvaoPorQuantidade(@RequestParam Integer quantidadeCarvao) {
-        List<CarvaoDTO> listaCarvaoResultado = carvaoService.procuraCarvaoPorQuantidadeCarvao(quantidadeCarvao);
+        List<CarvaoDTO> listaCarvaoResultado = carvaoServiceImpl.procuraCarvaoPorQuantidadeCarvao(quantidadeCarvao);
 
         if(listaCarvaoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -84,7 +84,7 @@ public class CarvaoController {
 
     @GetMapping("/marca-peso-carvao")
     public ResponseEntity<List<CarvaoDTO>> procuraCarvaoPorMarcaEPeso(@RequestParam MarcaCarvao marcaCarvao, @RequestParam Integer pesoCarvao) {
-        List<CarvaoDTO> listaCarvaoResultado = carvaoService.procuraCarvaoPorMarcaEPeso(marcaCarvao, pesoCarvao);
+        List<CarvaoDTO> listaCarvaoResultado = carvaoServiceImpl.procuraCarvaoPorMarcaEPeso(marcaCarvao, pesoCarvao);
 
         if(listaCarvaoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -95,7 +95,7 @@ public class CarvaoController {
 
     @GetMapping("/sugestao-marca-carvao")
     public ResponseEntity<List<CarvaoDTO>> procuraMarcaCarvaoUsandoLike(@RequestParam String marcaCarvao) {
-        List<CarvaoDTO> listaCarvaoResultado = carvaoService.procuraMarcaCarvaoUsandoLike(marcaCarvao);
+        List<CarvaoDTO> listaCarvaoResultado = carvaoServiceImpl.procuraMarcaCarvaoUsandoLike(marcaCarvao);
 
         if(listaCarvaoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -106,7 +106,7 @@ public class CarvaoController {
 
     @GetMapping("/entre-peso-carvao")
     public ResponseEntity<List<CarvaoDTO>> procuraCarvaoComPesoEntreDoisValores(@RequestParam Integer pesoMinimo, @RequestParam Integer pesoMaximo) {
-        List<CarvaoDTO> listaCarvaoResultado = carvaoService.procuraCarvaoComPesoEntreDoisValores(pesoMinimo, pesoMaximo);
+        List<CarvaoDTO> listaCarvaoResultado = carvaoServiceImpl.procuraCarvaoComPesoEntreDoisValores(pesoMinimo, pesoMaximo);
 
         if(listaCarvaoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -117,7 +117,7 @@ public class CarvaoController {
 
     @GetMapping("/quantidade-estoque")
     public ResponseEntity<List<CarvaoDTO>> procuraCarvaoPorQuantidadeEstoque(@RequestParam Integer quantidadeEstoqueCarvao) {
-        List<CarvaoDTO> listaCarvaoResultado = carvaoService.procuraCarvaoPorQuantidadeEmEstoque(quantidadeEstoqueCarvao);
+        List<CarvaoDTO> listaCarvaoResultado = carvaoServiceImpl.procuraCarvaoPorQuantidadeEmEstoque(quantidadeEstoqueCarvao);
 
         if(listaCarvaoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -128,21 +128,21 @@ public class CarvaoController {
 
     @PutMapping("/{idCarvao}")
     public ResponseEntity<CarvaoDTO> atualizaCarvaoPorId(@PathVariable Long idCarvao, @Valid @RequestBody CarvaoDTO carvaoDTO) {
-        CarvaoDTO carvaoResultado = carvaoService.atualizarCarvaoPorId(idCarvao, carvaoDTO);
+        CarvaoDTO carvaoResultado = carvaoServiceImpl.atualizarCarvaoPorId(idCarvao, carvaoDTO);
 
         return new ResponseEntity<>(carvaoResultado, HttpStatus.OK);
     }
 
     @DeleteMapping("/{idCarvao}")
     public ResponseEntity<Void> deletaCarvaoPorId(@PathVariable Long idCarvao) {
-        carvaoService.deletaCarvaoPorId(idCarvao);
+        carvaoServiceImpl.deletaCarvaoPorId(idCarvao);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/apagar-marca-carvao")
     public ResponseEntity<Void> deletarCarvaoPorMarca(@RequestParam MarcaCarvao marcaCarvao) {
-        carvaoService.deletarCarvaoPorMarcaCarvao(marcaCarvao);
+        carvaoServiceImpl.deletarCarvaoPorMarcaCarvao(marcaCarvao);
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
