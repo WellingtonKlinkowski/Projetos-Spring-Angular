@@ -2,9 +2,11 @@ package com.wklinkowski.manager_lounge.converters;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
+import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 
+@Component
 @Converter(autoApply = true)
 public class DurationConverter implements AttributeConverter<Duration, Long> {
     @Override
