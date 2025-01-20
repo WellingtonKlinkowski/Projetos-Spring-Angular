@@ -17,4 +17,9 @@ O próximo passo seria a criação dos testes e um possível front-end usando An
 ![IntelliJ](https://img.shields.io/badge/IntelliJ%20IDEA-000000.svg?style=for-the-badge&logo=IntelliJ-IDEA&logoColor=white)
 ![VSCode](https://img.shields.io/badge/Visual%20Studio%20Code-007ACC.svg?style=for-the-badge&logo=Visual-Studio-Code&logoColor=white)
 
+# UML
+
+![image](https://github.com/user-attachments/assets/70736a21-0586-4362-8fed-8b1b2c55e1ee)
+
+
 </div>
