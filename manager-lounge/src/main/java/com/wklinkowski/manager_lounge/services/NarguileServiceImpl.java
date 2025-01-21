@@ -5,6 +5,7 @@ import com.wklinkowski.manager_lounge.entities.NarguileEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasNarguile;
 import com.wklinkowski.manager_lounge.enums.MaterialNarguile;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
+import com.wklinkowski.manager_lounge.exceptions.InsumoInsuficienteException;
 import com.wklinkowski.manager_lounge.interfaces.NarguileService;
 import com.wklinkowski.manager_lounge.mappers.NarguileMapper;
 import com.wklinkowski.manager_lounge.repositories.NarguileRepository;
@@ -144,6 +145,22 @@ public class NarguileServiceImpl implements NarguileService {
         narguileEntity.setQuantidadeEstoqueNarguile(narguileDTO.getQuantidadeEstoqueNarguile());
 
         return narguileMapper.toDto(narguileRepository.save(narguileEntity));
+    }
+
+    @Override
+    @Transactional
+    public void consomeNarguileDoEstoqueQuandoAlugado(Long idNarguile, Integer quantidadeNarguileUsada) {
+        NarguileEntity narguileResultado = narguileRepository.findById(idNarguile)
+                .orElseThrow(EntidadeNaoEncontrada::new);
+
+        if(narguileResultado.getQuantidadeEstoqueNarguile() < quantidadeNarguileUsada){
+            throw new InsumoInsuficienteException(narguileResultado.getNomeNarguile());
+        }
+
+        narguileResultado.setQuantidadeEstoqueNarguile(
+                narguileResultado.getQuantidadeEstoqueNarguile() - quantidadeNarguileUsada);
+
+        narguileRepository.save(narguileResultado);
     }
 
     @Override

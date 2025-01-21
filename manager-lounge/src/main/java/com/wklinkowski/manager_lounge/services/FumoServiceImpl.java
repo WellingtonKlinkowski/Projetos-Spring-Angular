@@ -1,9 +1,11 @@
 package com.wklinkowski.manager_lounge.services;
 
 import com.wklinkowski.manager_lounge.dtos.FumoDTO;
+import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
 import com.wklinkowski.manager_lounge.entities.FumoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasFumo;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
+import com.wklinkowski.manager_lounge.exceptions.InsumoInsuficienteException;
 import com.wklinkowski.manager_lounge.interfaces.FumoService;
 import com.wklinkowski.manager_lounge.mappers.FumoMapper;
 import com.wklinkowski.manager_lounge.repositories.FumoRepository;
@@ -122,8 +124,33 @@ public class FumoServiceImpl implements FumoService {
         fumoEntity.setPesoFumo(fumoDTO.getPesoFumo());
         fumoEntity.setSaborFumo(fumoDTO.getSaborFumo());
         fumoEntity.setQuantidadeEstoqueFumo(fumoDTO.getQuantidadeEstoqueFumo());
+        fumoEntity.calculaQuantidadeTotalDeFumo();
 
         return fumoMapper.toDto(fumoRepository.save(fumoEntity));
+    }
+
+    @Override
+    @Transactional
+    public void consomeFumoDoEstoqueQuandoAlugado(Long idFumo, Integer quantidadeFumoUsado) {
+        FumoEntity fumoResultado = fumoRepository.findById(idFumo)
+                .orElseThrow(EntidadeNaoEncontrada::new);
+
+        if(fumoResultado.getQuantidadeTotalFumo() < quantidadeFumoUsado){
+            throw new InsumoInsuficienteException(fumoResultado.getMarcasFumo().toString());
+        }
+
+        fumoResultado.setQuantidadeTotalFumo(fumoResultado.getQuantidadeTotalFumo() - quantidadeFumoUsado);
+        atualizarEstoqueDeCaixasFumo(fumoResultado);
+
+        fumoRepository.save(fumoResultado);
+    }
+
+    @Override
+    @Transactional
+    public void atualizarEstoqueDeCaixasFumo(FumoEntity fumoEntity) {
+        int totalCaixasFechadas = fumoEntity.getQuantidadeTotalFumo() / fumoEntity.getPesoFumo();
+
+        fumoEntity.setQuantidadeEstoqueFumo(totalCaixasFechadas);
     }
 
     @Override

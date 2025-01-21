@@ -32,6 +32,13 @@ public class FumoEntity {
     @Column(nullable = false)
     private Integer quantidadeEstoqueFumo = 1;
 
+    @Column(nullable = false)
+    private Integer quantidadeTotalFumo;
+
     @OneToMany(mappedBy = "id")
     private List<AluguelEntity> aluguelFumo;
+
+    public void calculaQuantidadeTotalDeFumo() {
+        this.quantidadeTotalFumo = quantidadeEstoqueFumo * pesoFumo;
+    }
 }

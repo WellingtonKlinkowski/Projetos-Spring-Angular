@@ -34,6 +34,8 @@ public interface NarguileService {
 
     NarguileDTO atualizaNarguilePorId(Long idNarguile, NarguileDTO narguileDTO);
 
+    void consomeNarguileDoEstoqueQuandoAlugado(Long idNarguile, Integer quantidadeNarguileUsada);
+
     void apagaNarguilePorMarcasNarguile(MarcasNarguile marcasNarguile);
 
     void apagaNarguilePorId(Long idNarguile);

@@ -5,6 +5,7 @@ import com.wklinkowski.manager_lounge.entities.RoshEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasRosh;
 import com.wklinkowski.manager_lounge.enums.MaterialRosh;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
+import com.wklinkowski.manager_lounge.exceptions.InsumoInsuficienteException;
 import com.wklinkowski.manager_lounge.interfaces.RoshService;
 import com.wklinkowski.manager_lounge.mappers.RoshMapper;
 import com.wklinkowski.manager_lounge.repositories.RoshRepository;
@@ -12,6 +13,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -101,6 +103,21 @@ public class RoshServiceImpl implements RoshService {
         roshEntity.setQuantidadeEstoqueRosh(roshDTO.getQuantidadeEstoqueRosh());
 
         return roshMapper.toDto(roshRepository.save(roshEntity));
+    }
+
+    @Override
+    @Transactional
+    public void consomeRoshDoEstoqueQuandoAlugado(Long idRosh, Integer quantidadeRoshUsado) {
+        RoshEntity roshResultado = roshRepository.findById(idRosh)
+                .orElseThrow(EntidadeNaoEncontrada::new);
+
+        if(roshResultado.getQuantidadeEstoqueRosh() < quantidadeRoshUsado) {
+            throw new InsumoInsuficienteException(roshResultado.getMarcasRosh().toString());
+        }
+
+        roshResultado.setQuantidadeEstoqueRosh(roshResultado.getQuantidadeEstoqueRosh() - quantidadeRoshUsado);
+
+        roshRepository.save(roshResultado);
     }
 
     @Override

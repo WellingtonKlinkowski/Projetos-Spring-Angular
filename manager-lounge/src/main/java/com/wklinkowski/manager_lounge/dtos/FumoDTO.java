@@ -7,9 +7,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,4 +27,7 @@ public class FumoDTO {
 
     @Min(value = 1, message = "A quantidade de caixa de fumo não pode ser menor que 1.")
     private Integer quantidadeEstoqueFumo = 1;
+
+    @Setter(AccessLevel.NONE)
+    private Integer quantidadeTotalFumo;
 }

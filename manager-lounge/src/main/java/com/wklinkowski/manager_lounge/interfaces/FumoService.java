@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.interfaces;
 
 import com.wklinkowski.manager_lounge.dtos.FumoDTO;
+import com.wklinkowski.manager_lounge.entities.FumoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasFumo;
 
 import java.util.List;
@@ -28,6 +29,10 @@ public interface FumoService {
     List<FumoDTO> procuraFumoPorQuantidadeEmEstoque(Integer quantidadeEstoqueFumo);
 
     FumoDTO atualizaFumoPorId(Long idFumo, FumoDTO fumoDTO);
+
+    void consomeFumoDoEstoqueQuandoAlugado(Long idFumo, Integer quantidadeFumoUsado);
+
+    void atualizarEstoqueDeCaixasFumo(FumoEntity fumoEntity);
 
     void deletaFumoPorId(Long idFumo);
 
