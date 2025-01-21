@@ -9,11 +9,10 @@ import com.wklinkowski.manager_lounge.exceptions.InsumoInsuficienteException;
 import com.wklinkowski.manager_lounge.interfaces.NarguileService;
 import com.wklinkowski.manager_lounge.mappers.NarguileMapper;
 import com.wklinkowski.manager_lounge.repositories.NarguileRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,15 +35,16 @@ public class NarguileServiceImpl implements NarguileService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public NarguileDTO procuraNarguilePorId(Long idNarguile) {
-        Optional<NarguileEntity> opationalNarguile = narguileRepository.findById(idNarguile);
+        NarguileEntity narguileResultado = narguileRepository.findById(idNarguile)
+                .orElseThrow(EntidadeNaoEncontrada::new);
 
-        return opationalNarguile.map(narguileMapper::toDto).orElse(null);
+        return narguileMapper.toDto(narguileResultado);
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NarguileDTO> listarNarguiles() {
         List<NarguileEntity> listaNarguileEntity = narguileRepository.findAll();
 
@@ -52,7 +52,7 @@ public class NarguileServiceImpl implements NarguileService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NarguileDTO> procuraNarguilePorNomeNarguile(String nomeNarguile) {
         List<NarguileEntity> listaNarguilePorNome =
                 narguileRepository.findByNomeNarguileOrderByNomeNarguileDesc(nomeNarguile);
@@ -61,7 +61,7 @@ public class NarguileServiceImpl implements NarguileService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NarguileDTO> procuraNarguilePorMarcaNarguile(MarcasNarguile marcaNarguile) {
         List<NarguileEntity> listaNarguilePorMarca =
                 narguileRepository.findByMarcasNarguileOrderByMarcasNarguileDesc(marcaNarguile);
@@ -70,7 +70,7 @@ public class NarguileServiceImpl implements NarguileService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NarguileDTO> procuraNarguilePorQuantidadeMangueirasNarguile(Integer quantidadeMangueirasNarguile) {
         List<NarguileEntity> listaNarguilePorQuantidadeMangueiras =
                 narguileRepository.findByQuantidadeMangueirasNarguileOrderByQuantidadeMangueirasNarguileDesc(quantidadeMangueirasNarguile);
@@ -79,7 +79,7 @@ public class NarguileServiceImpl implements NarguileService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NarguileDTO> procuraNarguilePorMaterialNarguile(MaterialNarguile materialNarguile) {
         List<NarguileEntity> listaNarguilePorMaterial =
                 narguileRepository.findByMaterialNarguileOrderByMaterialNarguileDesc(materialNarguile);
@@ -88,7 +88,7 @@ public class NarguileServiceImpl implements NarguileService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NarguileDTO> procuraNarguilePorNomeNarguileComMetodoLike(String nomeNarguile) {
         List<NarguileEntity> listaNarguilePorMaterial =
                 narguileRepository.procuraNomeNarguileComMetodoLike(nomeNarguile);
@@ -97,7 +97,7 @@ public class NarguileServiceImpl implements NarguileService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NarguileDTO> procuraNarguilePorMarcasNarguileComMetodoLike(String marcaNarguile) {
         List<NarguileEntity> listaNarguilePorMarca =
                 narguileRepository.procuraMarcasNarguileComMetodoLike(marcaNarguile);
@@ -106,7 +106,7 @@ public class NarguileServiceImpl implements NarguileService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NarguileDTO> procuraNarguilePorMaterialNarguileComMetodoLike(String materialNarguile) {
         List<NarguileEntity> listaNarguilePorMaterial =
                 narguileRepository.procuraMaterialNarguileComMetodoLike(materialNarguile);
@@ -115,7 +115,7 @@ public class NarguileServiceImpl implements NarguileService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NarguileDTO> procuraNarguileEntreQuantidadeMangueirasNarguile(Integer quantidadeMangueirasMinimo, Integer quantidadeMangueirasMaximo) {
         List<NarguileEntity> listaNarguilePorQuantidadeMangueiras =
                 narguileRepository.findByQuantidadeMangueirasNarguileBetween(quantidadeMangueirasMinimo, quantidadeMangueirasMaximo);
@@ -124,7 +124,7 @@ public class NarguileServiceImpl implements NarguileService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<NarguileDTO> procuraNarguilePorQuantidadeEstoqueNarguile(Integer quantidadeEstoqueNarguile) {
         List<NarguileEntity> listaNarguilePorQuantidadeEstoque =
                 narguileRepository.findByQuantidadeEstoqueNarguileOrderByQuantidadeEstoqueNarguileDesc(quantidadeEstoqueNarguile);

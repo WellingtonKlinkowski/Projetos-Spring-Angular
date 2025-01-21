@@ -9,12 +9,10 @@ import com.wklinkowski.manager_lounge.exceptions.InsumoInsuficienteException;
 import com.wklinkowski.manager_lounge.interfaces.RoshService;
 import com.wklinkowski.manager_lounge.mappers.RoshMapper;
 import com.wklinkowski.manager_lounge.repositories.RoshRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,15 +35,16 @@ public class RoshServiceImpl implements RoshService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public RoshDTO procuraRoshPorId(Long idRosh) {
-        Optional<RoshEntity> optionalRosh = roshRepository.findById(idRosh);
+        RoshEntity roshResultado = roshRepository.findById(idRosh)
+                .orElseThrow(EntidadeNaoEncontrada::new);
 
-        return optionalRosh.map(roshMapper::toDto).orElse(null);
+        return roshMapper.toDto(roshResultado);
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<RoshDTO> listarRosh() {
         List<RoshEntity> listaRoshEntity = roshRepository.findAll();
 
@@ -53,7 +52,7 @@ public class RoshServiceImpl implements RoshService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<RoshDTO> procuraRoshPorMarcasRosh(MarcasRosh marcasRosh) {
         List<RoshEntity> listaRoshPorMarca = roshRepository.findByMarcasRoshOrderByMarcasRoshDesc(marcasRosh);
 
@@ -61,7 +60,7 @@ public class RoshServiceImpl implements RoshService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<RoshDTO> procuraRoshPorMaterialRosh(MaterialRosh materialRosh) {
         List<RoshEntity> listaRoshPorMaterial = roshRepository.findByMaterialRoshOrderByMaterialRoshDesc(materialRosh);
 
@@ -69,7 +68,7 @@ public class RoshServiceImpl implements RoshService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<RoshDTO> procuraMarcasRoshComMetodoLike(String marcaRosh) {
         List<RoshEntity> listaRoshPorMarca = roshRepository.procuraMarcasRoshComMetodoLike(marcaRosh);
 
@@ -77,7 +76,7 @@ public class RoshServiceImpl implements RoshService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<RoshDTO> procuraMaterialRoshComMetodoLike(String materialRosh) {
         List<RoshEntity> listaRoshPorMaterial = roshRepository.procuraMaterialRoshComMetodoLike(materialRosh);
 
@@ -85,7 +84,7 @@ public class RoshServiceImpl implements RoshService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<RoshDTO> procuraRoshPorQuantidadeEstoqueRosh(int quantidadeEstoqueRosh) {
         List<RoshEntity> listaRoshPorQuantidadeEstoque = roshRepository.findByQuantidadeEstoqueRoshOrderByQuantidadeEstoqueRoshDesc(quantidadeEstoqueRosh);
 

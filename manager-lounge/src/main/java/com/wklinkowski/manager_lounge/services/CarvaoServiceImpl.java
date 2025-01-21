@@ -8,11 +8,10 @@ import com.wklinkowski.manager_lounge.exceptions.InsumoInsuficienteException;
 import com.wklinkowski.manager_lounge.interfaces.CarvaoService;
 import com.wklinkowski.manager_lounge.mappers.CarvaoMapper;
 import com.wklinkowski.manager_lounge.repositories.CarvaoRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,15 +36,16 @@ public class CarvaoServiceImpl implements CarvaoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public CarvaoDTO procurarCarvaoPorId(Long id) {
-        Optional<CarvaoEntity> optionalCarvao = carvaoRepository.findById(id);
+        CarvaoEntity carvaoResultado = carvaoRepository.findById(id)
+                .orElseThrow(EntidadeNaoEncontrada::new);
 
-        return optionalCarvao.map(carvaoMapper::toDto).orElse(null);
+        return carvaoMapper.toDto(carvaoResultado);
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CarvaoDTO> listarCarvoes() {
         List<CarvaoEntity> listaCarvao = carvaoRepository.findAll();
 
@@ -53,7 +53,7 @@ public class CarvaoServiceImpl implements CarvaoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CarvaoDTO> procuraCarvaoPorMarcaCarvao(MarcaCarvao marcaCarvao) {
 
         List<CarvaoEntity> listaCarvaoPorMarcaCarvao = carvaoRepository.findByMarcaCarvaoOrderByMarcaCarvaoDesc(marcaCarvao);
@@ -62,7 +62,7 @@ public class CarvaoServiceImpl implements CarvaoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CarvaoDTO> procuraCarvaoPorPesoCarvao(Integer pesoCarvao) {
         List<CarvaoEntity> listaCarvaoPorPeso = carvaoRepository.findByPesoCarvaoOrderByPesoCarvaoDesc(pesoCarvao);
 
@@ -70,7 +70,7 @@ public class CarvaoServiceImpl implements CarvaoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CarvaoDTO> procuraCarvaoPorQuantidadeCarvao(Integer quantidadeCarvao) {
         List<CarvaoEntity> listaCarvaoPorQuantidadeCarvao =
                 carvaoRepository.findByQuantidadeCarvaoOrderByQuantidadeCarvaoDesc(quantidadeCarvao);
@@ -79,7 +79,7 @@ public class CarvaoServiceImpl implements CarvaoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CarvaoDTO> procuraCarvaoPorMarcaEPeso(MarcaCarvao marcaCarvao, Integer pesoCarvao) {
         List<CarvaoEntity> listaCarvaoPorMarcaEPesoCarvao = carvaoRepository.procuraCarvaoPorMarcaEPeso(marcaCarvao, pesoCarvao);
 
@@ -87,7 +87,7 @@ public class CarvaoServiceImpl implements CarvaoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CarvaoDTO> procuraMarcaCarvaoUsandoLike(String marcaCarvao) {
         List<CarvaoEntity> listaCarvaoPorMarca = carvaoRepository.procuraMarcaCarvaoComMetodoLike(marcaCarvao);
 
@@ -95,7 +95,7 @@ public class CarvaoServiceImpl implements CarvaoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CarvaoDTO> procuraCarvaoComPesoEntreDoisValores(Integer pesoMinimo, Integer pesoMaximo) {
         List<CarvaoEntity> listaCarvaoComPesoEntreDoisValores = carvaoRepository.findByPesoCarvaoBetween(pesoMinimo, pesoMaximo);
 
@@ -103,7 +103,7 @@ public class CarvaoServiceImpl implements CarvaoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CarvaoDTO> procuraCarvaoPorQuantidadeEmEstoque(Integer quantidadeEstoqueCarvao) {
         List<CarvaoEntity> listaCarvaoPorQuantidadeEstoque =
                 carvaoRepository.findByQuantidadeEstoqueCarvaoOrderByQuantidadeEstoqueCarvaoDesc(quantidadeEstoqueCarvao);

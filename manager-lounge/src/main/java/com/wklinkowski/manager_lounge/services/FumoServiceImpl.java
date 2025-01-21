@@ -1,7 +1,6 @@
 package com.wklinkowski.manager_lounge.services;
 
 import com.wklinkowski.manager_lounge.dtos.FumoDTO;
-import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
 import com.wklinkowski.manager_lounge.entities.FumoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasFumo;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
@@ -9,11 +8,10 @@ import com.wklinkowski.manager_lounge.exceptions.InsumoInsuficienteException;
 import com.wklinkowski.manager_lounge.interfaces.FumoService;
 import com.wklinkowski.manager_lounge.mappers.FumoMapper;
 import com.wklinkowski.manager_lounge.repositories.FumoRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,15 +34,16 @@ public class FumoServiceImpl implements FumoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public FumoDTO procurarFumoPorId(Long idFumo) {
-        Optional<FumoEntity> optionalFumo = fumoRepository.findById(idFumo);
+        FumoEntity fumoResultado = fumoRepository.findById(idFumo)
+                .orElseThrow(EntidadeNaoEncontrada::new);
 
-        return optionalFumo.map(fumoMapper::toDto).orElse(null);
+        return fumoMapper.toDto(fumoResultado);
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<FumoDTO> listarFumos() {
         List<FumoEntity> listaFumoEntity = fumoRepository.findAll();
 
@@ -52,7 +51,7 @@ public class FumoServiceImpl implements FumoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<FumoDTO> procuraFumoPorMarcasFumo(MarcasFumo marcasFumo) {
         List<FumoEntity> listaFumoPorMarcasFumo =
                 fumoRepository.findByMarcasFumoOrderByMarcasFumoDesc(marcasFumo);
@@ -61,7 +60,7 @@ public class FumoServiceImpl implements FumoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<FumoDTO> procuraFumoPorSaborFumo(String saborFumo) {
         List<FumoEntity> listaFumoPorSaborFumo =
                 fumoRepository.findBySaborFumoOrderBySaborFumoDesc(saborFumo);
@@ -70,7 +69,7 @@ public class FumoServiceImpl implements FumoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<FumoDTO> procuraFumoPorPesoFumo(Integer pesoFumo) {
         List<FumoEntity> listaFumoPorPesoFumo =
                 fumoRepository.findByPesoFumoOrderByPesoFumoDesc(pesoFumo);
@@ -79,7 +78,7 @@ public class FumoServiceImpl implements FumoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<FumoDTO> procuraFumoPorMarcasFumoUsandoLike(String marcasFumo) {
         List<FumoEntity> listaFumoPorMarcasFumo =
                 fumoRepository.procuraMarcasFumoComMetodoLike(marcasFumo);
@@ -88,7 +87,7 @@ public class FumoServiceImpl implements FumoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<FumoDTO> procuraFumoPorSaborFumoUsandoLike(String saborFumo) {
         List<FumoEntity> listaFumoPorSaborFumo =
                 fumoRepository.procuraSaborFumoComMetodoLike(saborFumo);
@@ -97,7 +96,7 @@ public class FumoServiceImpl implements FumoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<FumoDTO> procuraFumoEntrePesos(Integer pesoMinimoFumo, Integer pesoMaximoFumo) {
         List<FumoEntity> listaFumoPorPesoFumo =
                 fumoRepository.findByPesoFumoBetween(pesoMinimoFumo, pesoMaximoFumo);
@@ -106,7 +105,7 @@ public class FumoServiceImpl implements FumoService {
     }
 
     @Override
-    @Transactional
+    @Transactional(readOnly = true)
     public List<FumoDTO> procuraFumoPorQuantidadeEmEstoque(Integer quantidadeEstoqueFumo) {
         List<FumoEntity> listaFumoPorQuantidadeEstoque =
                 fumoRepository.findByQuantidadeEstoqueFumoOrderByQuantidadeEstoqueFumoDesc(quantidadeEstoqueFumo);
