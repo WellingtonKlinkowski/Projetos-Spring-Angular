@@ -55,7 +55,6 @@ public class CarvaoServiceImpl implements CarvaoService {
     @Override
     @Transactional(readOnly = true)
     public List<CarvaoDTO> procuraCarvaoPorMarcaCarvao(MarcaCarvao marcaCarvao) {
-
         List<CarvaoEntity> listaCarvaoPorMarcaCarvao = carvaoRepository.findByMarcaCarvaoOrderByMarcaCarvaoDesc(marcaCarvao);
 
         return listaCarvaoPorMarcaCarvao.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
@@ -114,7 +113,6 @@ public class CarvaoServiceImpl implements CarvaoService {
     @Override
     @Transactional
     public CarvaoDTO atualizarCarvaoPorId(Long idCarvao, CarvaoDTO carvao) {
-
         CarvaoEntity carvaoEntity = carvaoRepository.findById(idCarvao).orElseThrow(() ->
                 new EntidadeNaoEncontrada());
 
@@ -138,6 +136,18 @@ public class CarvaoServiceImpl implements CarvaoService {
         }
 
         carvaoResultado.setQuantidadeTotalCarvao(carvaoResultado.getQuantidadeTotalCarvao() - quantidadeCarvaoUsado);
+        atualizarEstoqueDeCaixasCarvao(carvaoResultado);
+
+        carvaoRepository.save(carvaoResultado);
+    }
+
+    @Override
+    @Transactional
+    public void retornaConsumoAluguelParaEstoque(Long idCarvao, Integer quantidadeCarvaoUsadoAluguel) {
+        CarvaoEntity carvaoResultado = carvaoRepository.findById(idCarvao)
+                .orElseThrow(EntidadeNaoEncontrada::new);
+
+        carvaoResultado.setQuantidadeTotalCarvao(carvaoResultado.getQuantidadeTotalCarvao() + quantidadeCarvaoUsadoAluguel);
         atualizarEstoqueDeCaixasCarvao(carvaoResultado);
 
         carvaoRepository.save(carvaoResultado);

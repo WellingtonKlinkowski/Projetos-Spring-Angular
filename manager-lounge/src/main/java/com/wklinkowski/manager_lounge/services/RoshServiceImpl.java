@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.services;
 
 import com.wklinkowski.manager_lounge.dtos.RoshDTO;
+import com.wklinkowski.manager_lounge.entities.NarguileEntity;
 import com.wklinkowski.manager_lounge.entities.RoshEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasRosh;
 import com.wklinkowski.manager_lounge.enums.MaterialRosh;
@@ -115,6 +116,17 @@ public class RoshServiceImpl implements RoshService {
         }
 
         roshResultado.setQuantidadeEstoqueRosh(roshResultado.getQuantidadeEstoqueRosh() - quantidadeRoshUsado);
+
+        roshRepository.save(roshResultado);
+    }
+
+    @Override
+    @Transactional
+    public void retornaConsumoAluguelParaEstoque(Long idRosh, Integer quantidadeRoshUsadoAluguel) {
+        RoshEntity roshResultado = roshRepository.findById(idRosh)
+                .orElseThrow(EntidadeNaoEncontrada::new);
+
+        roshResultado.setQuantidadeEstoqueRosh(roshResultado.getQuantidadeEstoqueRosh() + quantidadeRoshUsadoAluguel);
 
         roshRepository.save(roshResultado);
     }

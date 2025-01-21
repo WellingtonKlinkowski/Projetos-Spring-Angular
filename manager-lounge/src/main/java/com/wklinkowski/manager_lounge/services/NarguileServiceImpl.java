@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.services;
 
 import com.wklinkowski.manager_lounge.dtos.NarguileDTO;
+import com.wklinkowski.manager_lounge.entities.FumoEntity;
 import com.wklinkowski.manager_lounge.entities.NarguileEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasNarguile;
 import com.wklinkowski.manager_lounge.enums.MaterialNarguile;
@@ -159,6 +160,17 @@ public class NarguileServiceImpl implements NarguileService {
 
         narguileResultado.setQuantidadeEstoqueNarguile(
                 narguileResultado.getQuantidadeEstoqueNarguile() - quantidadeNarguileUsada);
+
+        narguileRepository.save(narguileResultado);
+    }
+
+    @Override
+    @Transactional
+    public void retornaConsumoAluguelParaEstoque(Long idNarguile, Integer quantidadeNarguileUsadoAluguel) {
+        NarguileEntity narguileResultado = narguileRepository.findById(idNarguile)
+                .orElseThrow(EntidadeNaoEncontrada::new);
+
+        narguileResultado.setQuantidadeEstoqueNarguile(narguileResultado.getQuantidadeEstoqueNarguile() + quantidadeNarguileUsadoAluguel);
 
         narguileRepository.save(narguileResultado);
     }

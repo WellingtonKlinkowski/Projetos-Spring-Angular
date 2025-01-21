@@ -30,6 +30,8 @@ public interface FumoService {
 
     FumoDTO atualizaFumoPorId(Long idFumo, FumoDTO fumoDTO);
 
+    void retornaConsumoAluguelParaEstoque(Long idFumo, Integer quantidadeFumoUsadoAluguel);
+
     void consomeFumoDoEstoqueQuandoAlugado(Long idFumo, Integer quantidadeFumoUsado);
 
     void atualizarEstoqueDeCaixasFumo(FumoEntity fumoEntity);

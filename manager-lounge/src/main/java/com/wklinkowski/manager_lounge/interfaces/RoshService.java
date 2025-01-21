@@ -26,6 +26,8 @@ public interface RoshService {
 
     RoshDTO atualizaRoshPorId(Long idRosh, RoshDTO roshDTO);
 
+    void retornaConsumoAluguelParaEstoque(Long idRosh, Integer quantidadeRoshUsadoAluguel);
+
     void consomeRoshDoEstoqueQuandoAlugado(Long idRosh, Integer quantidadeRoshUsado);
 
     void deletaRoshPorId(Long idRosh);

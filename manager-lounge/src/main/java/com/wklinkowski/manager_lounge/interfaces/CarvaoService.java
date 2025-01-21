@@ -31,6 +31,8 @@ public interface CarvaoService {
 
     CarvaoDTO atualizarCarvaoPorId(Long idCarvao, CarvaoDTO carvao);
 
+    void retornaConsumoAluguelParaEstoque(Long idCarvao, Integer quantidadeCarvaoUsadoAluguel);
+
     void consomeCarvaoDoEstoqueQuandoAlugado(Long idCarvao, Integer quantidadeCarvaoUsado) throws InsumoInsuficienteException;
 
     void atualizarEstoqueDeCaixasCarvao(CarvaoEntity carvaoEntity);

@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.services;
 
 import com.wklinkowski.manager_lounge.dtos.FumoDTO;
+import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
 import com.wklinkowski.manager_lounge.entities.FumoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasFumo;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
@@ -139,6 +140,18 @@ public class FumoServiceImpl implements FumoService {
         }
 
         fumoResultado.setQuantidadeTotalFumo(fumoResultado.getQuantidadeTotalFumo() - quantidadeFumoUsado);
+        atualizarEstoqueDeCaixasFumo(fumoResultado);
+
+        fumoRepository.save(fumoResultado);
+    }
+
+    @Override
+    @Transactional
+    public void retornaConsumoAluguelParaEstoque(Long idFumo, Integer quantidadeFumoUsadoAluguel) {
+        FumoEntity fumoResultado = fumoRepository.findById(idFumo)
+                .orElseThrow(EntidadeNaoEncontrada::new);
+
+        fumoResultado.setQuantidadeTotalFumo(fumoResultado.getQuantidadeTotalFumo() + quantidadeFumoUsadoAluguel);
         atualizarEstoqueDeCaixasFumo(fumoResultado);
 
         fumoRepository.save(fumoResultado);
