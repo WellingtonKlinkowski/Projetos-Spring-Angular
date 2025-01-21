@@ -15,13 +15,13 @@ public interface AluguelRepository extends JpaRepository<AluguelEntity, Long> {
 
     Optional<AluguelEntity> findByNumeroMesaAluguel(Integer numeroMesaAluguel);
 
-    List<AluguelEntity> findByFumoAluguel(FumoEntity fumoEntity);
+    List<AluguelEntity> findByFumoAluguel(Long idfumo);
 
-    List<AluguelEntity> findByCarvaoAluguel(CarvaoEntity carvaoEntity);
+    List<AluguelEntity> findByCarvaoAluguel(Long idCarvao);
 
-    List<AluguelEntity> findByRoshAluguel(RoshEntity roshEntity);
+    List<AluguelEntity> findByRoshAluguel(Long idRosh);
 
-    List<AluguelEntity> findByNarguileAluguel(NarguileEntity narguileEntity);
+    List<AluguelEntity> findByNarguileAluguel(Long idNarguile);
 
     List<AluguelEntity> findByDataAluguel(LocalDate dataAluguel);
 

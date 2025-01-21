@@ -28,14 +28,26 @@ public class AluguelEntity {
     @ManyToOne
     private FumoEntity fumoAluguel;
 
+    @Column(nullable = false)
+    private Integer quantidadeFumoUsado;
+
     @ManyToOne
     private CarvaoEntity carvaoAluguel;
+
+    @Column(nullable = false)
+    private Integer quantidadeCarvaoUsado;
 
     @ManyToOne
     private RoshEntity roshAluguel;
 
+    @Column(nullable = false)
+    private Integer quantidadeRoshUsado;
+
     @ManyToOne
     private NarguileEntity narguileAluguel;
+
+    @Column(nullable = false)
+    private Integer quantidadeNarguileUsado;
 
     @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy")
