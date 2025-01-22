@@ -15,6 +15,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Classe service usada para a manipulação
+ * dos alugueis, contendo toda a regra de
+ * negócio necessária.
+ *
+ * @author WellingtonKlinkowski
+ */
 @Service
 public class AluguelServiceImpl implements AluguelService {
 
@@ -36,6 +43,17 @@ public class AluguelServiceImpl implements AluguelService {
         this.narguileServiceImpl = narguileServiceImpl;
     }
 
+    /**
+     * Recebe os dados do endpoint já validados
+     * e cria uma instância da entidade Aluguel,
+     * salvando no banco, consumindo os materiais
+     * usados no aluguel e retornando os dados salvos.
+     *
+     * @param aluguelDTO os dados para criar o aluguel.
+     * @return dados salvos do aluguel.
+     *
+     * @author WellingtonKlinkowski
+     */
     @Override
     @Transactional
     public AluguelDTO criarAluguel(AluguelDTO aluguelDTO) {
@@ -46,6 +64,17 @@ public class AluguelServiceImpl implements AluguelService {
         return aluguelMapper.toDto(aluguelSalvo);
     }
 
+    /**
+     * Recebe o identificador do aluguel e faz
+     * a busca no banco, caso não haja registro
+     * lança exception informando sobre, caso
+     * contrário retorna os dados.
+     *
+     * @param idAluguel o identificador do aluguel.
+     * @return registro retornado do banco.
+     *
+     * @author WellingtonKlinkowski
+     */
     @Override
     @Transactional(readOnly = true)
     public AluguelDTO procuraAluguelPorId(Long idAluguel) {
@@ -55,6 +84,14 @@ public class AluguelServiceImpl implements AluguelService {
         return aluguelMapper.toDto(aluguelResultado);
     }
 
+    /**
+     * Faz a busca de todos os alugueis salvos no
+     * banco, indiferente se for ativo ou inativo.
+     *
+     * @return todos os alugueis do banco.
+     *
+     * @author WellingtonKlinkowski
+     */
     @Override
     @Transactional(readOnly = true)
     public List<AluguelDTO> listarAlugueis() {
@@ -63,6 +100,16 @@ public class AluguelServiceImpl implements AluguelService {
         return listaAluguel.stream().map(aluguelMapper::toDto).collect(Collectors.toList());
     }
 
+    /**
+     * Procura o aluguel que está ativo pelo
+     * número da mesa e retorna os dados se for
+     * encontrado registro com o valor passado.
+     *
+     * @param numeroMesaAluguel número da mesa salvo no aluguel.
+     * @return o aluguel que contém a mesa passada por parâmetro.
+     *
+     * @author WellingtonKlinkowski
+     */
     @Override
     @Transactional(readOnly = true)
     public AluguelDTO procuraAluguelPorNumeroDaMesa(Integer numeroMesaAluguel) {
@@ -72,6 +119,16 @@ public class AluguelServiceImpl implements AluguelService {
         return aluguelMapper.toDto(aluguelResultado);
     }
 
+    /**
+     * Procura os alugueis que usam o identificador
+     * do fumo passado por parâmetro, independente
+     * se estiver inativo ou ativo.
+     *
+     * @param idFumo identificador do fumo usado no aluguel.
+     * @return os alugueis que usam o fumo passado por parâmetro.
+     *
+     * @author WellingtonKlinkowski
+     */
     @Override
     @Transactional(readOnly = true)
     public List<AluguelDTO> procuraAluguelPorFumo(Long idFumo) {
@@ -80,6 +137,16 @@ public class AluguelServiceImpl implements AluguelService {
         return listaAluguelResultado.stream().map(aluguelMapper::toDto).collect(Collectors.toList());
     }
 
+    /**
+     * Procura os alugueis que usam o identificador
+     * do carvão passado por parâmetro, independente
+     * se estiver inativo ou ativo.
+     *
+     * @param idCarvao identificador do carvão usado no aluguel.
+     * @return os alugueis que usam o carvão passado por parâmetro.
+     *
+     * @author WellingtonKlinkowski
+     */
     @Override
     @Transactional(readOnly = true)
     public List<AluguelDTO> procuraAluguelPorCarvao(Long idCarvao) {
@@ -88,6 +155,16 @@ public class AluguelServiceImpl implements AluguelService {
         return listaAluguelResultado.stream().map(aluguelMapper::toDto).collect(Collectors.toList());
     }
 
+    /**
+     * Procura os alugueis que usam o identificador
+     * do rosh passado por parâmetro, independente
+     * se estiver inativo ou ativo.
+     *
+     * @param idRosh identificador do rosh usado no aluguel.
+     * @return os alugueis que usam o rosh passado por parâmetro.
+     *
+     * @author WellingtonKlinkowski
+     */
     @Override
     @Transactional(readOnly = true)
     public List<AluguelDTO> procuraAluguelPorRosh(Long idRosh) {
@@ -96,6 +173,16 @@ public class AluguelServiceImpl implements AluguelService {
         return listaAluguelResultado.stream().map(aluguelMapper::toDto).collect(Collectors.toList());
     }
 
+    /**
+     * Procura os alugueis que usam o identificador
+     * da narguile passada por parâmetro, independente
+     * se estiver inativo ou ativo.
+     *
+     * @param idNarguile identificador da narguile usada no aluguel.
+     * @return os alugueis que usam a narguile passada por parâmetro.
+     *
+     * @author WellingtonKlinkowski
+     */
     @Override
     @Transactional(readOnly = true)
     public List<AluguelDTO> procuraAluguelPorNarguile(Long idNarguile) {
@@ -104,6 +191,16 @@ public class AluguelServiceImpl implements AluguelService {
         return listaAluguelResultado.stream().map(aluguelMapper::toDto).collect(Collectors.toList());
     }
 
+    /**
+     * Procura os alugueis que foram criados na data
+     * passada por parâmetro, independente se estiver
+     * inativo ou ativo.
+     *
+     * @param dataAluguel data que o aluguel foi criado.
+     * @return os alugueis que foram criados nessa data.
+     *
+     * @author WellingtonKlinkowski
+     */
     @Override
     @Transactional(readOnly = true)
     public List<AluguelDTO> procuraAluguelPorData(LocalDate dataAluguel) {

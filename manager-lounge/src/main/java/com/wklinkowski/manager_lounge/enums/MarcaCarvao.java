@@ -1,8 +1,13 @@
 package com.wklinkowski.manager_lounge.enums;
 
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-
+/**
+ * Enum criado para estabelecer valores
+ * pré-definidos para a marca de carvão,
+ * mantendo um controle sobre as marcas
+ * usadas na criação.
+ *
+ * @author WellingtonKlinkowski
+ */
 public enum MarcaCarvao {
     AMAZON,
     COCO_BASS,

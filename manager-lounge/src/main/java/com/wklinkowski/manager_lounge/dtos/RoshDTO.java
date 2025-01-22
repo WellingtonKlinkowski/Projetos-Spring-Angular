@@ -10,6 +10,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Classe usada para ajudar na transferência
+ * e entrada de dados dos endpoints do rosh,
+ * controlando os dados que podem entrar e sair
+ * para o client.
+ *
+ * @author WellingtonKlinkowski
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

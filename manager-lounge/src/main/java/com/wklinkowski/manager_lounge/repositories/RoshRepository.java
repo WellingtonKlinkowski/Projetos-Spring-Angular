@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repositório para manipulação de roshs
+ * e agrupar métodos de consulta.
+ *
+ * @author WellingtonKlinkowski
+ */
 @Repository
 public interface RoshRepository extends JpaRepository<RoshEntity, Long> {
 

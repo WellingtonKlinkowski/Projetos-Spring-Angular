@@ -8,6 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repositório para manipulação de carvoes
+ * e agrupar métodos de consulta.
+ *
+ * @author WellingtonKlinkowski
+ */
 @Repository
 public interface CarvaoRepository extends JpaRepository<CarvaoEntity, Long> {
 

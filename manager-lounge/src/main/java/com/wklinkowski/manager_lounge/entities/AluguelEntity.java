@@ -11,6 +11,12 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * Entidade criada para representar de forma
+ * básica um aluguel de narguile.
+ *
+ * @author WellingtonKlinkowski
+ */
 @Entity
 @Table(name = "ALUGUEIS")
 @AllArgsConstructor
@@ -57,10 +63,25 @@ public class AluguelEntity {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime horaAluguel = LocalDateTime.now();
 
+    /**
+     * Atríbuto usado para identificar o estado
+     * atual do aluguel em tempo, comparando com
+     * a hora do aluguel e a duração recebida.
+     *
+     * @author WellingtonKlinkowski
+     */
     @Column(nullable = false)
     @Convert(converter = DurationConverter.class)
     private Duration duracaoAluguel;
 
+    /**
+     * Atríbuto usado para definir se o aluguel
+     * expirou/acabou ou se ainda está ativo,
+     * ajudando no controle dos materias não
+     * consumíveis.
+     *
+     * @author WellingtonKlinkowski
+     */
     @Column(nullable = false)
     private boolean ativoAluguel;
 }

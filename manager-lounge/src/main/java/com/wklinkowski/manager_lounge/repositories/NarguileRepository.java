@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repositório para manipulação de narguiles
+ * e agrupar métodos de consulta.
+ *
+ * @author WellingtonKlinkowski
+ */
 @Repository
 public interface NarguileRepository extends JpaRepository<NarguileEntity, Long> {
 

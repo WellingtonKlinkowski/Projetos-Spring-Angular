@@ -9,6 +9,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+/**
+ * Classe usada para ajudar na transferência
+ * e entrada de dados dos endpoints do fumo,
+ * controlando os dados que podem entrar e sair
+ * para o client.
+ *
+ * @author WellingtonKlinkowski
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -28,6 +36,13 @@ public class FumoDTO {
     @Min(value = 1, message = "A quantidade de caixa de fumo não pode ser menor que 1.")
     private Integer quantidadeEstoqueFumo = 1;
 
+    /**
+     * Atríbuto para controle total de fumo sem
+     * setter pois é feito por um método dentro da
+     * entidade fumo.
+     *
+     * @author WellingtonKlinkowski
+     */
     @Setter(AccessLevel.NONE)
     private Integer quantidadeTotalFumo;
 }

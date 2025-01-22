@@ -9,6 +9,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Entidade criada para representar de forma
+ * básica a narguile usada no aluguel.
+ *
+ * @author WellingtonKlinkowski
+ */
 @Entity
 @Table(name = "NARGUILES")
 @AllArgsConstructor

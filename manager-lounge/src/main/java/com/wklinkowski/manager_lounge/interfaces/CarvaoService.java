@@ -7,6 +7,14 @@ import com.wklinkowski.manager_lounge.exceptions.InsumoInsuficienteException;
 
 import java.util.List;
 
+/**
+ * Interface para agrupar métodos usados no
+ * gerenciamento dos carvões.
+ *
+ * Uso: CarvaoServiceImpl
+ *
+ * @author WellingtonKlinkowski
+ */
 public interface CarvaoService {
 
     CarvaoDTO criarCarvao(CarvaoDTO carvaoDTO);

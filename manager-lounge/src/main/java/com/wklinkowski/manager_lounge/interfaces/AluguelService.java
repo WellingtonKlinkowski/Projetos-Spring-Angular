@@ -8,6 +8,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Interface para agrupar métodos usados no
+ * gerenciamento dos alugueis.
+ *
+ * Uso: AluguelServiceImpl
+ *
+ * @author WellingtonKlinkowski
+ */
 public interface AluguelService {
 
     AluguelDTO criarAluguel(AluguelDTO aluguelDTO);

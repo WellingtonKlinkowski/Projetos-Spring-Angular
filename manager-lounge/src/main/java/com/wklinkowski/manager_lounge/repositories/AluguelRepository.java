@@ -11,6 +11,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repositório para manipulação de alugueis
+ * e agrupar métodos de consulta.
+ *
+ * @author WellingtonKlinkowski
+ */
 @Repository
 public interface AluguelRepository extends JpaRepository<AluguelEntity, Long> {
 

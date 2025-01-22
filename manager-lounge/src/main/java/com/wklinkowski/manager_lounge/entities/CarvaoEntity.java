@@ -8,6 +8,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Entidade criada para representar de forma
+ * básica o carvão usado no aluguel.
+ *
+ * @author WellingtonKlinkowski
+ */
 @Entity
 @Table(name = "CARVOES")
 @AllArgsConstructor
@@ -32,12 +38,25 @@ public class CarvaoEntity {
     @Column(nullable = false)
     private Integer quantidadeEstoqueCaixaCarvao = 1;
 
+    /**
+     * Atríbuto que será usado pra saber a quantidade
+     * total atualizada de carvão no estoque.
+     *
+     * @author WellingtonKlinkowski
+     */
     @Column(nullable = false)
     private Integer quantidadeTotalCarvao;
 
     @OneToMany(mappedBy = "id")
     private List<AluguelEntity> aluguelCarvao;
 
+    /**
+     * Método usado para calcular a quantidade real
+     * de carvão no estoque, ajudando posteriormente
+     * no controle de entrada e saída.
+     *
+     * @author WellingtonKlinkowski
+     */
     public void calculaQuantidadeTotalDeCarvao() {
         this.quantidadeTotalCarvao = quantidadeEstoqueCaixaCarvao * quantidadeCarvao;
     }

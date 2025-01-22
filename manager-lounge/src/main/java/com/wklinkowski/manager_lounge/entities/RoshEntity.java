@@ -9,6 +9,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Entidade criada para representar de forma
+ * básica o rosh usado no aluguel.
+ *
+ * @author WellingtonKlinkowski
+ */
 @Entity
 @Table(name = "ROSHS")
 @AllArgsConstructor

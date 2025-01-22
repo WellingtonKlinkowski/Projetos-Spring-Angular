@@ -8,6 +8,12 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * Repositório para manipulação de fumos
+ * e agrupar métodos de consulta.
+ *
+ * @author WellingtonKlinkowski
+ */
 @Repository
 public interface FumoRepository extends JpaRepository<FumoEntity, Long> {
 

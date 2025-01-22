@@ -6,6 +6,14 @@ import com.wklinkowski.manager_lounge.enums.MaterialRosh;
 
 import java.util.List;
 
+/**
+ * Interface para agrupar métodos usados no
+ * gerenciamento dos roshs.
+ *
+ * Uso: RoshServiceImpl
+ *
+ * @author WellingtonKlinkowski
+ */
 public interface RoshService {
 
     RoshDTO criarRosh(RoshDTO roshDTO);

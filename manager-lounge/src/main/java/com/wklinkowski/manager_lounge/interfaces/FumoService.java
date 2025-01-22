@@ -6,6 +6,14 @@ import com.wklinkowski.manager_lounge.enums.MarcasFumo;
 
 import java.util.List;
 
+/**
+ * Interface para agrupar métodos usados no
+ * gerenciamento dos fumos.
+ *
+ * Uso: FumoServiceImpl
+ *
+ * @author WellingtonKlinkowski
+ */
 public interface FumoService {
 
     FumoDTO criarFumo(FumoDTO fumoDTO);

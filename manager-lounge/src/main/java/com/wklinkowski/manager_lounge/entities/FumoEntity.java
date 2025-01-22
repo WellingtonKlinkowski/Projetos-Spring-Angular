@@ -8,6 +8,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * Entidade criada para representar de forma
+ * básica o fumo usado no aluguel.
+ *
+ * @author WellingtonKlinkowski
+ */
 @Entity
 @Table(name = "FUMOS")
 @AllArgsConstructor
@@ -32,12 +38,25 @@ public class FumoEntity {
     @Column(nullable = false)
     private Integer quantidadeEstoqueFumo = 1;
 
+    /**
+     * Atríbuto que será usado pra saber a quantidade
+     * total atualizada de fumo no estoque.
+     *
+     * @author WellingtonKlinkowski
+     */
     @Column(nullable = false)
     private Integer quantidadeTotalFumo;
 
     @OneToMany(mappedBy = "id")
     private List<AluguelEntity> aluguelFumo;
 
+    /**
+     * Método usado para calcular a quantidade real
+     * de fumo no estoque, ajudando posteriormente
+     * no controle de entrada e saída.
+     *
+     * @author WellingtonKlinkowski
+     */
     public void calculaQuantidadeTotalDeFumo() {
         this.quantidadeTotalFumo = quantidadeEstoqueFumo * pesoFumo;
     }

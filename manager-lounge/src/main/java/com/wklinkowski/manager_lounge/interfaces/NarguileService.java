@@ -6,6 +6,14 @@ import com.wklinkowski.manager_lounge.enums.MaterialNarguile;
 
 import java.util.List;
 
+/**
+ * Interface para agrupar métodos usados no
+ * gerenciamento das narguiles.
+ *
+ * Uso: NarguileServiceImpl
+ *
+ * @author WellingtonKlinkowski
+ */
 public interface NarguileService {
 
     NarguileDTO criarNarguile(NarguileDTO narguileDTO);

@@ -13,6 +13,14 @@ import lombok.NoArgsConstructor;
 
 import java.time.Duration;
 
+/**
+ * Classe usada para ajudar na transferência
+ * e entrada de dados dos endpoints do aluguel,
+ * controlando os dados que podem entrar e sair
+ * para o client.
+ *
+ * @author WellingtonKlinkowski
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
