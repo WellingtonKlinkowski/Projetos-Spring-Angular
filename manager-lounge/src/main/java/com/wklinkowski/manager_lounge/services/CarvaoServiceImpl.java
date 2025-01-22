@@ -105,7 +105,7 @@ public class CarvaoServiceImpl implements CarvaoService {
     @Transactional(readOnly = true)
     public List<CarvaoDTO> procuraCarvaoPorQuantidadeEmEstoque(Integer quantidadeEstoqueCarvao) {
         List<CarvaoEntity> listaCarvaoPorQuantidadeEstoque =
-                carvaoRepository.findByQuantidadeEstoqueCarvaoOrderByQuantidadeEstoqueCarvaoDesc(quantidadeEstoqueCarvao);
+                carvaoRepository.findByQuantidadeEstoqueCaixaCarvaoOrderByQuantidadeEstoqueCaixaCarvaoDesc(quantidadeEstoqueCarvao);
 
         return listaCarvaoPorQuantidadeEstoque.stream().map(carvaoMapper::toDto).collect(Collectors.toList());
     }
