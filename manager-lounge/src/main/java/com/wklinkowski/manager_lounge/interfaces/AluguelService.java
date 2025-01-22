@@ -34,9 +34,9 @@ public interface AluguelService {
 
     AluguelDTO atualizaAluguelPorId(Long idAluguel, AluguelDTO aluguelDTO);
 
-    void consumirMateriaisUsadosNoAluguelAtualizado(AluguelEntity aluguelEntity);
+    void retornaAoEstoqueSuprimentosNaoConsumiveisAposEncerrarAluguel();
 
-    void devolverMateriaisUsadosNoAluguelParaEstoque(AluguelEntity aluguelEntity);
+    boolean isAluguelExpirado(AluguelEntity aluguelEntity);
 
     void desativarAluguel(Long idAluguel);
 

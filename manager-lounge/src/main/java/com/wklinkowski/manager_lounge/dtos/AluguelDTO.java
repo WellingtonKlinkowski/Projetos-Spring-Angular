@@ -6,6 +6,7 @@ import com.wklinkowski.manager_lounge.entities.NarguileEntity;
 import com.wklinkowski.manager_lounge.entities.RoshEntity;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,6 +45,7 @@ public class AluguelDTO {
     @NotNull(message = "A quantidade de narguile usado não pode estar vazio.")
     private Integer quantidadeNarguileUsado;
 
+    @PastOrPresent
     @NotNull(message = "A duração do aluguel não pode estar vazio.")
     private Duration duracaoAluguel;
 

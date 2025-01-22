@@ -142,14 +142,12 @@ public class AluguelServiceImpl implements AluguelService {
         return aluguelMapper.toDto(aluguelRepository.save(aluguelResultado));
     }
 
-    @Transactional
     private void processarAtualizacaoAluguel(AluguelEntity aluguelEntity, AluguelDTO aluguelDTO) {
         devolverMateriaisUsadosNoAluguelParaEstoque(aluguelEntity);
         atualizarDadosDoAluguel(aluguelEntity, aluguelDTO);
         consumirMateriaisUsadosNoAluguelAtualizado(aluguelEntity);
     }
 
-    @Transactional
     private void atualizarDadosDoAluguel(AluguelEntity aluguelEntity, AluguelDTO aluguelDTO) {
         aluguelEntity.setNumeroMesaAluguel(aluguelDTO.getNumeroMesaAluguel());
         aluguelEntity.setFumoAluguel(aluguelDTO.getFumoAluguel());
@@ -166,19 +164,14 @@ public class AluguelServiceImpl implements AluguelService {
         aluguelEntity.setAtivoAluguel(aluguelDTO.isAtivoAluguel());
     }
 
-    @Override
-    @Transactional
-    public void consumirMateriaisUsadosNoAluguelAtualizado(AluguelEntity aluguelEntity) {
+    private void consumirMateriaisUsadosNoAluguelAtualizado(AluguelEntity aluguelEntity) {
         processarMateriaisNoEstoque(aluguelEntity, true);
     }
 
-    @Override
-    @Transactional
-    public void devolverMateriaisUsadosNoAluguelParaEstoque(AluguelEntity aluguelEntity) {
+    private void devolverMateriaisUsadosNoAluguelParaEstoque(AluguelEntity aluguelEntity) {
         processarMateriaisNoEstoque(aluguelEntity, false);
     }
 
-    @Transactional
     private void processarMateriaisNoEstoque(AluguelEntity aluguelEntity, boolean consumir) {
         if (consumir) {
             carvaoServiceImpl.consomeCarvaoDoEstoqueQuandoAlugado(
@@ -201,8 +194,35 @@ public class AluguelServiceImpl implements AluguelService {
         }
     }
 
-    //atualizar banco e verificar duration com data aluguel
-    //para desativar aluguel e devolver narguile e rosh.
+    @Override
+    @Transactional
+    public void retornaAoEstoqueSuprimentosNaoConsumiveisAposEncerrarAluguel() {
+        List<AluguelEntity> alugueisResultado = aluguelRepository.findAluguelIsAtivo();
+
+        alugueisResultado.forEach(aluguelEntity -> {
+            if(isAluguelExpirado(aluguelEntity)) {
+                devolveRoshENarguileAoEstoque(aluguelEntity);
+            }
+        });
+    }
+
+    @Override
+    public boolean isAluguelExpirado(AluguelEntity aluguelEntity) {
+        LocalDateTime dataHoraCriacaoAluguel = aluguelEntity.getHoraAluguel();
+
+        return dataHoraCriacaoAluguel.plus(aluguelEntity.getDuracaoAluguel()).isBefore(LocalDateTime.now());
+    }
+
+    private void devolveRoshENarguileAoEstoque(AluguelEntity aluguelEntity) {
+        roshServiceImpl.retornaConsumoAluguelParaEstoque(
+                aluguelEntity.getRoshAluguel().getId(), aluguelEntity.getQuantidadeRoshUsado());
+        narguileServiceImpl.retornaConsumoAluguelParaEstoque(
+                aluguelEntity.getNarguileAluguel().getId(), aluguelEntity.getQuantidadeNarguileUsado());
+
+        aluguelEntity.setAtivoAluguel(false);
+
+        aluguelRepository.save(aluguelEntity);
+    }
 
     @Override
     @Transactional
@@ -210,9 +230,7 @@ public class AluguelServiceImpl implements AluguelService {
         AluguelEntity aluguelResultado = aluguelRepository.findById(idAluguel)
                 .orElseThrow(EntidadeNaoEncontrada::new);
 
-        aluguelResultado.setAtivoAluguel(false);
-
-        aluguelRepository.save(aluguelResultado);
+        devolveRoshENarguileAoEstoque(aluguelResultado);
     }
 
     @Override
