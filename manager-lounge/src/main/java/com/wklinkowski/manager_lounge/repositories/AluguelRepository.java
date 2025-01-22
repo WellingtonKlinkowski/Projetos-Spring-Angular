@@ -14,6 +14,7 @@ import java.util.Optional;
 @Repository
 public interface AluguelRepository extends JpaRepository<AluguelEntity, Long> {
 
+    @Query(value = "SELECT * FROM alugueis a WHERE a.numero_mesa_aluguel = ?1 AND a.ativo_aluguel = TRUE", nativeQuery = true)
     Optional<AluguelEntity> findByNumeroMesaAluguel(Integer numeroMesaAluguel);
 
     @Query(value = "SELECT * FROM alugueis a WHERE a.fumo_aluguel_id = ?1", nativeQuery = true)
