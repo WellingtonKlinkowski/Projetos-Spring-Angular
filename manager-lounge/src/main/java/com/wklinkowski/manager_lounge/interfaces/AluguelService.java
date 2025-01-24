@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.interfaces;
 
-import com.wklinkowski.manager_lounge.dtos.AluguelDTO;
+import com.wklinkowski.manager_lounge.dtos.request.AluguelRequest;
+import com.wklinkowski.manager_lounge.dtos.response.AluguelResponse;
 import com.wklinkowski.manager_lounge.entities.AluguelEntity;
 
 import java.time.Duration;
@@ -18,29 +19,29 @@ import java.util.List;
  */
 public interface AluguelService {
 
-    AluguelDTO criarAluguel(AluguelDTO aluguelDTO);
+    AluguelResponse criarAluguel(AluguelRequest aluguelRequest);
 
-    AluguelDTO procuraAluguelPorId(Long idAluguel);
+    AluguelResponse procuraAluguelPorId(Long idAluguel);
 
-    List<AluguelDTO> listarAlugueis();
+    List<AluguelResponse> listarAlugueis();
 
-    AluguelDTO procuraAluguelPorNumeroDaMesa(Integer numeroMesaAluguel);
+    AluguelResponse procuraAluguelPorNumeroDaMesa(Integer numeroMesaAluguel);
 
-    List<AluguelDTO> procuraAluguelPorFumo(Long idFumo);
+    List<AluguelResponse> procuraAluguelPorFumo(Long idFumo);
 
-    List<AluguelDTO> procuraAluguelPorCarvao(Long idCarvao);
+    List<AluguelResponse> procuraAluguelPorCarvao(Long idCarvao);
 
-    List<AluguelDTO> procuraAluguelPorRosh(Long idRosh);
+    List<AluguelResponse> procuraAluguelPorRosh(Long idRosh);
 
-    List<AluguelDTO> procuraAluguelPorNarguile(Long idNarguile);
+    List<AluguelResponse> procuraAluguelPorNarguile(Long idNarguile);
 
-    List<AluguelDTO> procuraAluguelPorData(LocalDate dataAluguel);
+    List<AluguelResponse> procuraAluguelPorData(LocalDate dataAluguel);
 
-    List<AluguelDTO> procuraAluguelPorDataHora(LocalDateTime dataHoraAluguel);
+    List<AluguelResponse> procuraAluguelPorDataHora(LocalDateTime dataHoraAluguel);
 
-    List<AluguelDTO> procuraAluguelPorDuracao(Duration minimoDuracaoAluguel, Duration maximoDuracaoAluguel);
+    List<AluguelResponse> procuraAluguelPorDuracao(Duration minimoDuracaoAluguel, Duration maximoDuracaoAluguel);
 
-    AluguelDTO atualizaAluguelPorId(Long idAluguel, AluguelDTO aluguelDTO);
+    AluguelResponse atualizaAluguelPorId(Long idAluguel, AluguelRequest aluguelRequest);
 
     void retornaAoEstoqueSuprimentosNaoConsumiveisAposEncerrarAluguel();
 

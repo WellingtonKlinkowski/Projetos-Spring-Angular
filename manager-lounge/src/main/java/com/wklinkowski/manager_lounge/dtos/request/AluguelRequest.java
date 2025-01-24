@@ -1,4 +1,4 @@
-package com.wklinkowski.manager_lounge.dtos;
+package com.wklinkowski.manager_lounge.dtos.request;
 
 import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
 import com.wklinkowski.manager_lounge.entities.FumoEntity;
@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 import java.time.Duration;
 
 /**
- * Classe usada para ajudar na transferência
- * e entrada de dados dos endpoints do aluguel,
- * controlando os dados que podem entrar e sair
+ * Classe usada para ajudar na entrada
+ * de dados dos endpoints do aluguel,
+ * controlando os dados que podem entrar
  * para o client.
  *
  * @author WellingtonKlinkowski
@@ -24,7 +24,7 @@ import java.time.Duration;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AluguelDTO {
+public class AluguelRequest {
 
     @Min(value = 1, message = "O número da mesa mínimo para o aluguel é 1.")
     private Integer numeroMesaAluguel;

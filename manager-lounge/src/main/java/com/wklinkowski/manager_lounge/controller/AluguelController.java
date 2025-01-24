@@ -1,7 +1,8 @@
 package com.wklinkowski.manager_lounge.controller;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.wklinkowski.manager_lounge.dtos.AluguelDTO;
+import com.wklinkowski.manager_lounge.dtos.request.AluguelRequest;
+import com.wklinkowski.manager_lounge.dtos.response.AluguelResponse;
 import com.wklinkowski.manager_lounge.services.AluguelServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -25,15 +26,15 @@ public class AluguelController {
     }
 
     @PostMapping("/criar")
-    public ResponseEntity<AluguelDTO> criarAluguel(@Valid @RequestBody AluguelDTO aluguelDTO) {
-        AluguelDTO aluguelResultado = aluguelServiceImpl.criarAluguel(aluguelDTO);
+    public ResponseEntity<AluguelResponse> criarAluguel(@Valid @RequestBody AluguelRequest aluguelRequest) {
+        AluguelResponse aluguelResultado = aluguelServiceImpl.criarAluguel(aluguelRequest);
 
         return new ResponseEntity<>(aluguelResultado, HttpStatus.CREATED);
     }
 
     @GetMapping("/{idAluguel}")
-    public ResponseEntity<AluguelDTO> procuraAluguelPorId(@PathVariable Long idAluguel) {
-        AluguelDTO aluguelResultado = aluguelServiceImpl.procuraAluguelPorId(idAluguel);
+    public ResponseEntity<AluguelResponse> procuraAluguelPorId(@PathVariable Long idAluguel) {
+        AluguelResponse aluguelResultado = aluguelServiceImpl.procuraAluguelPorId(idAluguel);
 
         if(Objects.isNull(aluguelResultado)) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -41,8 +42,8 @@ public class AluguelController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<AluguelDTO>> procuraTodosAlugueis() {
-        List<AluguelDTO> listaAluguelResultado = aluguelServiceImpl.listarAlugueis();
+    public ResponseEntity<List<AluguelResponse>> procuraTodosAlugueis() {
+        List<AluguelResponse> listaAluguelResultado = aluguelServiceImpl.listarAlugueis();
 
         if(listaAluguelResultado.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -50,8 +51,8 @@ public class AluguelController {
     }
 
     @GetMapping("/mesa-aluguel")
-    public ResponseEntity<AluguelDTO> procuraAluguelPorNumeroDaMesa(@RequestParam Integer numeroMesaAluguel) {
-        AluguelDTO aluguelResultado = aluguelServiceImpl.procuraAluguelPorNumeroDaMesa(numeroMesaAluguel);
+    public ResponseEntity<AluguelResponse> procuraAluguelPorNumeroDaMesa(@RequestParam Integer numeroMesaAluguel) {
+        AluguelResponse aluguelResultado = aluguelServiceImpl.procuraAluguelPorNumeroDaMesa(numeroMesaAluguel);
 
         if(Objects.isNull(aluguelResultado)) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -59,8 +60,8 @@ public class AluguelController {
     }
 
     @GetMapping("/fumo-aluguel")
-    public ResponseEntity<List<AluguelDTO>> procuraAluguelPorFumo(@RequestParam Long idFumoAluguel) {
-        List<AluguelDTO> listaAluguelResultado = aluguelServiceImpl.procuraAluguelPorFumo(idFumoAluguel);
+    public ResponseEntity<List<AluguelResponse>> procuraAluguelPorFumo(@RequestParam Long idFumoAluguel) {
+        List<AluguelResponse> listaAluguelResultado = aluguelServiceImpl.procuraAluguelPorFumo(idFumoAluguel);
 
         if(listaAluguelResultado.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -68,8 +69,8 @@ public class AluguelController {
     }
 
     @GetMapping("/carvao-aluguel")
-    public ResponseEntity<List<AluguelDTO>> procuraAluguelPorCarvao(@RequestParam Long idCarvaoAluguel) {
-        List<AluguelDTO> listaAluguelResultado = aluguelServiceImpl.procuraAluguelPorCarvao(idCarvaoAluguel);
+    public ResponseEntity<List<AluguelResponse>> procuraAluguelPorCarvao(@RequestParam Long idCarvaoAluguel) {
+        List<AluguelResponse> listaAluguelResultado = aluguelServiceImpl.procuraAluguelPorCarvao(idCarvaoAluguel);
 
         if(listaAluguelResultado.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -77,8 +78,8 @@ public class AluguelController {
     }
 
     @GetMapping("/rosh-aluguel")
-    public ResponseEntity<List<AluguelDTO>> procuraAluguelPorRosh(@RequestParam Long idRoshAluguel) {
-        List<AluguelDTO> listaAluguelResultado = aluguelServiceImpl.procuraAluguelPorRosh(idRoshAluguel);
+    public ResponseEntity<List<AluguelResponse>> procuraAluguelPorRosh(@RequestParam Long idRoshAluguel) {
+        List<AluguelResponse> listaAluguelResultado = aluguelServiceImpl.procuraAluguelPorRosh(idRoshAluguel);
 
         if(listaAluguelResultado.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -86,8 +87,8 @@ public class AluguelController {
     }
 
     @GetMapping("/narguile-aluguel")
-    public ResponseEntity<List<AluguelDTO>> procuraAluguelPorNarguile(@RequestParam Long idNarguileAluguel) {
-        List<AluguelDTO> listaAluguelResultado = aluguelServiceImpl.procuraAluguelPorNarguile(idNarguileAluguel);
+    public ResponseEntity<List<AluguelResponse>> procuraAluguelPorNarguile(@RequestParam Long idNarguileAluguel) {
+        List<AluguelResponse> listaAluguelResultado = aluguelServiceImpl.procuraAluguelPorNarguile(idNarguileAluguel);
 
         if(listaAluguelResultado.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -95,8 +96,8 @@ public class AluguelController {
     }
 
     @GetMapping("/data-aluguel")
-    public ResponseEntity<List<AluguelDTO>> procuraAluguelPorData(@RequestParam @JsonFormat(pattern = "dd/MM/yyyy") LocalDate dataAluguel) {
-        List<AluguelDTO> listaAluguelResultado = aluguelServiceImpl.procuraAluguelPorData(dataAluguel);
+    public ResponseEntity<List<AluguelResponse>> procuraAluguelPorData(@RequestParam @JsonFormat(pattern = "dd/MM/yyyy") LocalDate dataAluguel) {
+        List<AluguelResponse> listaAluguelResultado = aluguelServiceImpl.procuraAluguelPorData(dataAluguel);
 
         if(listaAluguelResultado.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -104,8 +105,8 @@ public class AluguelController {
     }
 
     @GetMapping("/hora-aluguel")
-    public ResponseEntity<List<AluguelDTO>> procuraAluguelPorDataEHora(@RequestParam @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss") LocalDateTime dataHoraAluguel) {
-        List<AluguelDTO> listaAluguelResultado = aluguelServiceImpl.procuraAluguelPorDataHora(dataHoraAluguel);
+    public ResponseEntity<List<AluguelResponse>> procuraAluguelPorDataEHora(@RequestParam @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss") LocalDateTime dataHoraAluguel) {
+        List<AluguelResponse> listaAluguelResultado = aluguelServiceImpl.procuraAluguelPorDataHora(dataHoraAluguel);
 
         if(listaAluguelResultado.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -113,8 +114,8 @@ public class AluguelController {
     }
 
     @GetMapping("/duracao-aluguel")
-    public ResponseEntity<List<AluguelDTO>> procuraAluguelPorDucacao(@RequestParam Duration duracaoMinimaAluguel, @RequestParam Duration duracaoMaximaAluguel) {
-        List<AluguelDTO> listaAluguelResultado = aluguelServiceImpl.procuraAluguelPorDuracao(duracaoMinimaAluguel, duracaoMaximaAluguel);
+    public ResponseEntity<List<AluguelResponse>> procuraAluguelPorDucacao(@RequestParam Duration duracaoMinimaAluguel, @RequestParam Duration duracaoMaximaAluguel) {
+        List<AluguelResponse> listaAluguelResultado = aluguelServiceImpl.procuraAluguelPorDuracao(duracaoMinimaAluguel, duracaoMaximaAluguel);
 
         if(listaAluguelResultado.isEmpty()) return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
@@ -122,8 +123,8 @@ public class AluguelController {
     }
 
     @PutMapping("/{idAluguel}")
-    public ResponseEntity<AluguelDTO> atualizaAluguelPorId(@PathVariable Long idAluguel, @RequestBody AluguelDTO aluguelDTO) {
-        AluguelDTO aluguelResultado = aluguelServiceImpl.atualizaAluguelPorId(idAluguel, aluguelDTO);
+    public ResponseEntity<AluguelResponse> atualizaAluguelPorId(@PathVariable Long idAluguel, @RequestBody AluguelRequest aluguelRequest) {
+        AluguelResponse aluguelResultado = aluguelServiceImpl.atualizaAluguelPorId(idAluguel, aluguelRequest);
 
         return new ResponseEntity<>(aluguelResultado, HttpStatus.OK);
     }

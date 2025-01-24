@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.services;
 
-import com.wklinkowski.manager_lounge.dtos.AluguelDTO;
+import com.wklinkowski.manager_lounge.dtos.request.AluguelRequest;
+import com.wklinkowski.manager_lounge.dtos.response.AluguelResponse;
 import com.wklinkowski.manager_lounge.entities.AluguelEntity;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
 import com.wklinkowski.manager_lounge.interfaces.AluguelService;
@@ -49,19 +50,19 @@ public class AluguelServiceImpl implements AluguelService {
      * salvando no banco, consumindo os materiais
      * usados no aluguel e retornando os dados salvos.
      *
-     * @param aluguelDTO os dados para criar o aluguel.
+     * @param aluguelRequest os dados para criar o aluguel.
      * @return dados salvos do aluguel.
      *
      * @author WellingtonKlinkowski
      */
     @Override
     @Transactional
-    public AluguelDTO criarAluguel(AluguelDTO aluguelDTO) {
-        AluguelEntity aluguelSalvo = aluguelRepository.save(aluguelMapper.toEntity(aluguelDTO));
+    public AluguelResponse criarAluguel(AluguelRequest aluguelRequest) {
+        AluguelEntity aluguelSalvo = aluguelRepository.save(aluguelMapper.fromRequestToEntity(aluguelRequest));
 
         consumirMateriaisUsadosNoAluguelAtualizado(aluguelSalvo);
 
-        return aluguelMapper.toDto(aluguelSalvo);
+        return aluguelMapper.fromEntityToResponse(aluguelSalvo);
     }
 
     /**
@@ -77,11 +78,11 @@ public class AluguelServiceImpl implements AluguelService {
      */
     @Override
     @Transactional(readOnly = true)
-    public AluguelDTO procuraAluguelPorId(Long idAluguel) {
+    public AluguelResponse procuraAluguelPorId(Long idAluguel) {
         AluguelEntity aluguelResultado = aluguelRepository.findById(idAluguel)
                 .orElseThrow(EntidadeNaoEncontrada::new);
 
-        return aluguelMapper.toDto(aluguelResultado);
+        return aluguelMapper.fromEntityToResponse(aluguelResultado);
     }
 
     /**
@@ -94,10 +95,10 @@ public class AluguelServiceImpl implements AluguelService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<AluguelDTO> listarAlugueis() {
+    public List<AluguelResponse> listarAlugueis() {
         List<AluguelEntity> listaAluguel = aluguelRepository.findAll();
 
-        return listaAluguel.stream().map(aluguelMapper::toDto).collect(Collectors.toList());
+        return listaAluguel.stream().map(aluguelMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     /**
@@ -112,11 +113,11 @@ public class AluguelServiceImpl implements AluguelService {
      */
     @Override
     @Transactional(readOnly = true)
-    public AluguelDTO procuraAluguelPorNumeroDaMesa(Integer numeroMesaAluguel) {
+    public AluguelResponse procuraAluguelPorNumeroDaMesa(Integer numeroMesaAluguel) {
         AluguelEntity aluguelResultado = aluguelRepository.findByNumeroMesaAluguel(numeroMesaAluguel)
                 .orElseThrow(EntidadeNaoEncontrada::new);
 
-        return aluguelMapper.toDto(aluguelResultado);
+        return aluguelMapper.fromEntityToResponse(aluguelResultado);
     }
 
     /**
@@ -131,10 +132,10 @@ public class AluguelServiceImpl implements AluguelService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<AluguelDTO> procuraAluguelPorFumo(Long idFumo) {
+    public List<AluguelResponse> procuraAluguelPorFumo(Long idFumo) {
         List<AluguelEntity> listaAluguelResultado = aluguelRepository.findByFumoAluguel(idFumo);
 
-        return listaAluguelResultado.stream().map(aluguelMapper::toDto).collect(Collectors.toList());
+        return listaAluguelResultado.stream().map(aluguelMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     /**
@@ -149,10 +150,10 @@ public class AluguelServiceImpl implements AluguelService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<AluguelDTO> procuraAluguelPorCarvao(Long idCarvao) {
+    public List<AluguelResponse> procuraAluguelPorCarvao(Long idCarvao) {
         List<AluguelEntity> listaAluguelResultado = aluguelRepository.findByCarvaoAluguel(idCarvao);
 
-        return listaAluguelResultado.stream().map(aluguelMapper::toDto).collect(Collectors.toList());
+        return listaAluguelResultado.stream().map(aluguelMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     /**
@@ -167,10 +168,10 @@ public class AluguelServiceImpl implements AluguelService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<AluguelDTO> procuraAluguelPorRosh(Long idRosh) {
+    public List<AluguelResponse> procuraAluguelPorRosh(Long idRosh) {
         List<AluguelEntity> listaAluguelResultado = aluguelRepository.findByRoshAluguel(idRosh);
 
-        return listaAluguelResultado.stream().map(aluguelMapper::toDto).collect(Collectors.toList());
+        return listaAluguelResultado.stream().map(aluguelMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     /**
@@ -185,10 +186,10 @@ public class AluguelServiceImpl implements AluguelService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<AluguelDTO> procuraAluguelPorNarguile(Long idNarguile) {
+    public List<AluguelResponse> procuraAluguelPorNarguile(Long idNarguile) {
         List<AluguelEntity> listaAluguelResultado = aluguelRepository.findByNarguileAluguel(idNarguile);
 
-        return listaAluguelResultado.stream().map(aluguelMapper::toDto).collect(Collectors.toList());
+        return listaAluguelResultado.stream().map(aluguelMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     /**
@@ -203,62 +204,62 @@ public class AluguelServiceImpl implements AluguelService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<AluguelDTO> procuraAluguelPorData(LocalDate dataAluguel) {
+    public List<AluguelResponse> procuraAluguelPorData(LocalDate dataAluguel) {
         List<AluguelEntity> listaAluguelResultado = aluguelRepository.findByDataAluguel(dataAluguel);
 
-        return listaAluguelResultado.stream().map(aluguelMapper::toDto).collect(Collectors.toList());
+        return listaAluguelResultado.stream().map(aluguelMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<AluguelDTO> procuraAluguelPorDataHora(LocalDateTime dataHoraAluguel) {
+    public List<AluguelResponse> procuraAluguelPorDataHora(LocalDateTime dataHoraAluguel) {
         List<AluguelEntity> listaAluguelResultado = aluguelRepository.findByHoraAluguel(dataHoraAluguel);
 
-        return listaAluguelResultado.stream().map(aluguelMapper::toDto).collect(Collectors.toList());
+        return listaAluguelResultado.stream().map(aluguelMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<AluguelDTO> procuraAluguelPorDuracao(Duration minimoDuracaoAluguel, Duration maximoDuracaoAluguel) {
+    public List<AluguelResponse> procuraAluguelPorDuracao(Duration minimoDuracaoAluguel, Duration maximoDuracaoAluguel) {
         List<AluguelEntity> listaAluguelResultado =
                 aluguelRepository.findByDuracaoAluguelBetween(minimoDuracaoAluguel, maximoDuracaoAluguel);
 
-        return listaAluguelResultado.stream().map(aluguelMapper::toDto).collect(Collectors.toList());
+        return listaAluguelResultado.stream().map(aluguelMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional
-    public AluguelDTO atualizaAluguelPorId(Long idAluguel, AluguelDTO aluguelDTO) {
+    public AluguelResponse atualizaAluguelPorId(Long idAluguel, AluguelRequest aluguelRequest) {
         AluguelEntity aluguelResultado = aluguelRepository.findById(idAluguel)
                 .orElseThrow(EntidadeNaoEncontrada::new);
 
-        if (aluguelDTO.isAtivoAluguel()) {
-            processarAtualizacaoAluguel(aluguelResultado, aluguelDTO);
+        if (aluguelRequest.isAtivoAluguel()) {
+            processarAtualizacaoAluguel(aluguelResultado, aluguelRequest);
         }
 
-        return aluguelMapper.toDto(aluguelRepository.save(aluguelResultado));
+        return aluguelMapper.fromEntityToResponse(aluguelRepository.save(aluguelResultado));
     }
 
-    private void processarAtualizacaoAluguel(AluguelEntity aluguelEntity, AluguelDTO aluguelDTO) {
+    private void processarAtualizacaoAluguel(AluguelEntity aluguelEntity, AluguelRequest aluguelRequest) {
         devolverMateriaisUsadosNoAluguelParaEstoque(aluguelEntity);
-        atualizarDadosDoAluguel(aluguelEntity, aluguelDTO);
+        atualizarDadosDoAluguel(aluguelEntity, aluguelRequest);
         consumirMateriaisUsadosNoAluguelAtualizado(aluguelEntity);
     }
 
-    private void atualizarDadosDoAluguel(AluguelEntity aluguelEntity, AluguelDTO aluguelDTO) {
-        aluguelEntity.setNumeroMesaAluguel(aluguelDTO.getNumeroMesaAluguel());
-        aluguelEntity.setFumoAluguel(aluguelDTO.getFumoAluguel());
-        aluguelEntity.setQuantidadeFumoUsado(aluguelDTO.getQuantidadeFumoUsado());
-        aluguelEntity.setCarvaoAluguel(aluguelDTO.getCarvaoAluguel());
-        aluguelEntity.setQuantidadeCarvaoUsado(aluguelDTO.getQuantidadeCarvaoUsado());
-        aluguelEntity.setRoshAluguel(aluguelDTO.getRoshAluguel());
-        aluguelEntity.setQuantidadeRoshUsado(aluguelDTO.getQuantidadeRoshUsado());
-        aluguelEntity.setNarguileAluguel(aluguelDTO.getNarguileAluguel());
-        aluguelEntity.setQuantidadeNarguileUsado(aluguelDTO.getQuantidadeNarguileUsado());
+    private void atualizarDadosDoAluguel(AluguelEntity aluguelEntity, AluguelRequest aluguelRequest) {
+        aluguelEntity.setNumeroMesaAluguel(aluguelRequest.getNumeroMesaAluguel());
+        aluguelEntity.setFumoAluguel(aluguelRequest.getFumoAluguel());
+        aluguelEntity.setQuantidadeFumoUsado(aluguelRequest.getQuantidadeFumoUsado());
+        aluguelEntity.setCarvaoAluguel(aluguelRequest.getCarvaoAluguel());
+        aluguelEntity.setQuantidadeCarvaoUsado(aluguelRequest.getQuantidadeCarvaoUsado());
+        aluguelEntity.setRoshAluguel(aluguelRequest.getRoshAluguel());
+        aluguelEntity.setQuantidadeRoshUsado(aluguelRequest.getQuantidadeRoshUsado());
+        aluguelEntity.setNarguileAluguel(aluguelRequest.getNarguileAluguel());
+        aluguelEntity.setQuantidadeNarguileUsado(aluguelRequest.getQuantidadeNarguileUsado());
         aluguelEntity.setDataAluguel(LocalDate.now());
         aluguelEntity.setHoraAluguel(LocalDateTime.now());
-        aluguelEntity.setDuracaoAluguel(aluguelDTO.getDuracaoAluguel());
-        aluguelEntity.setAtivoAluguel(aluguelDTO.isAtivoAluguel());
+        aluguelEntity.setDuracaoAluguel(aluguelRequest.getDuracaoAluguel());
+        aluguelEntity.setAtivoAluguel(aluguelRequest.isAtivoAluguel());
     }
 
     private void consumirMateriaisUsadosNoAluguelAtualizado(AluguelEntity aluguelEntity) {
