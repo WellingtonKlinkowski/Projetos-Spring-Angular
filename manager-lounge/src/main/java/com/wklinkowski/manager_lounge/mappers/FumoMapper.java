@@ -13,7 +13,25 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface FumoMapper {
 
+    /**
+     * Recebe os dados da requisição e transforma
+     * na entidade fumo.
+     *
+     * @param fumoRequest recebe os dados para criar a entidade.
+     * @return entidade de fumo criada com os dados recebidos.
+     *
+     * @author WellingtonKlinkowski
+     */
     FumoEntity fromRequestToEntity(FumoRequest fumoRequest);
 
+    /**
+     * Recebe os dados do banco e transforma
+     * no response de fumo.
+     *
+     * @param fumoEntity recebe os dados do banco e converte em um response.
+     * @return response de fumo com os dados recebidos do banco.
+     *
+     * @author WellingtonKlinkowski
+     */
     FumoResponse fromEntityToResponse(FumoEntity fumoEntity);
 }
