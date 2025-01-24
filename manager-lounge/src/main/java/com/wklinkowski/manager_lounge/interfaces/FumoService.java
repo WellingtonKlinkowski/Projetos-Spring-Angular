@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.interfaces;
 
-import com.wklinkowski.manager_lounge.dtos.FumoDTO;
+import com.wklinkowski.manager_lounge.dtos.request.FumoRequest;
+import com.wklinkowski.manager_lounge.dtos.response.FumoResponse;
 import com.wklinkowski.manager_lounge.entities.FumoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasFumo;
 
@@ -16,27 +17,27 @@ import java.util.List;
  */
 public interface FumoService {
 
-    FumoDTO criarFumo(FumoDTO fumoDTO);
+    FumoResponse criarFumo(FumoRequest fumoRequest);
 
-    FumoDTO procurarFumoPorId(Long idFumo);
+    FumoResponse procurarFumoPorId(Long idFumo);
 
-    List<FumoDTO> listarFumos();
+    List<FumoResponse> listarFumos();
 
-    List<FumoDTO> procuraFumoPorMarcasFumo(MarcasFumo marcasFumo);
+    List<FumoResponse> procuraFumoPorMarcasFumo(MarcasFumo marcasFumo);
 
-    List<FumoDTO> procuraFumoPorSaborFumo(String saborFumo);
+    List<FumoResponse> procuraFumoPorSaborFumo(String saborFumo);
 
-    List<FumoDTO> procuraFumoPorPesoFumo(Integer pesoFumo);
+    List<FumoResponse> procuraFumoPorPesoFumo(Integer pesoFumo);
 
-    List<FumoDTO> procuraFumoPorMarcasFumoUsandoLike(String marcasFumo);
+    List<FumoResponse> procuraFumoPorMarcasFumoUsandoLike(String marcasFumo);
 
-    List<FumoDTO> procuraFumoPorSaborFumoUsandoLike(String saborFumo);
+    List<FumoResponse> procuraFumoPorSaborFumoUsandoLike(String saborFumo);
 
-    List<FumoDTO> procuraFumoEntrePesos(Integer pesoMinimoFumo, Integer pesoMaximoFumo);
+    List<FumoResponse> procuraFumoEntrePesos(Integer pesoMinimoFumo, Integer pesoMaximoFumo);
 
-    List<FumoDTO> procuraFumoPorQuantidadeEmEstoque(Integer quantidadeEstoqueFumo);
+    List<FumoResponse> procuraFumoPorQuantidadeEmEstoque(Integer quantidadeEstoqueFumo);
 
-    FumoDTO atualizaFumoPorId(Long idFumo, FumoDTO fumoDTO);
+    FumoResponse atualizaFumoPorId(Long idFumo, FumoRequest fumoRequest);
 
     void retornaConsumoAluguelParaEstoque(Long idFumo, Integer quantidadeFumoUsadoAluguel);
 

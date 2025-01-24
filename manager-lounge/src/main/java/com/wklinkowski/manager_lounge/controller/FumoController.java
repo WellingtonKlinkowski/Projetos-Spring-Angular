@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.controller;
 
-import com.wklinkowski.manager_lounge.dtos.FumoDTO;
+import com.wklinkowski.manager_lounge.dtos.request.FumoRequest;
+import com.wklinkowski.manager_lounge.dtos.response.FumoResponse;
 import com.wklinkowski.manager_lounge.enums.MarcasFumo;
 import com.wklinkowski.manager_lounge.services.FumoServiceImpl;
 import jakarta.validation.Valid;
@@ -21,15 +22,15 @@ public class FumoController {
     }
 
     @PostMapping("/criar")
-    public ResponseEntity<FumoDTO> criarFumo(@Valid @RequestBody FumoDTO fumoDTO) {
-        FumoDTO fumoResultado = fumoServiceImpl.criarFumo(fumoDTO);
+    public ResponseEntity<FumoResponse> criarFumo(@Valid @RequestBody FumoRequest fumoRequest) {
+        FumoResponse fumoResultado = fumoServiceImpl.criarFumo(fumoRequest);
 
         return new ResponseEntity<>(fumoResultado, HttpStatus.CREATED);
     }
 
     @GetMapping("/{idFumo}")
-    public ResponseEntity<FumoDTO> procuraFumoPorId(@PathVariable Long idFumo) {
-        FumoDTO fumoResultado = fumoServiceImpl.procurarFumoPorId(idFumo);
+    public ResponseEntity<FumoResponse> procuraFumoPorId(@PathVariable Long idFumo) {
+        FumoResponse fumoResultado = fumoServiceImpl.procurarFumoPorId(idFumo);
 
         if(fumoResultado == null) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -39,8 +40,8 @@ public class FumoController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<FumoDTO>> listarFumos() {
-        List<FumoDTO> listaFumoResultado = fumoServiceImpl.listarFumos();
+    public ResponseEntity<List<FumoResponse>> listarFumos() {
+        List<FumoResponse> listaFumoResultado = fumoServiceImpl.listarFumos();
 
         if(listaFumoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -50,8 +51,8 @@ public class FumoController {
     }
 
     @GetMapping("marcas-fumo")
-    public ResponseEntity<List<FumoDTO>> procuraFumoPorMarcasFumo(@RequestParam MarcasFumo marcasFumo) {
-        List<FumoDTO> listaFumoResultado = fumoServiceImpl.procuraFumoPorMarcasFumo(marcasFumo);
+    public ResponseEntity<List<FumoResponse>> procuraFumoPorMarcasFumo(@RequestParam MarcasFumo marcasFumo) {
+        List<FumoResponse> listaFumoResultado = fumoServiceImpl.procuraFumoPorMarcasFumo(marcasFumo);
 
         if(listaFumoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -61,8 +62,8 @@ public class FumoController {
     }
 
     @GetMapping("sabor-fumo")
-    public ResponseEntity<List<FumoDTO>> procuraFumoPorSaborFumo(@RequestParam String saborFumo) {
-        List<FumoDTO> listaFumoResultado = fumoServiceImpl.procuraFumoPorSaborFumo(saborFumo);
+    public ResponseEntity<List<FumoResponse>> procuraFumoPorSaborFumo(@RequestParam String saborFumo) {
+        List<FumoResponse> listaFumoResultado = fumoServiceImpl.procuraFumoPorSaborFumo(saborFumo);
 
         if(listaFumoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -72,8 +73,8 @@ public class FumoController {
     }
 
     @GetMapping("peso-fumo")
-    public ResponseEntity<List<FumoDTO>> procuraFumoPorPesoFumo(@RequestParam Integer pesoFumo) {
-        List<FumoDTO> listaFumoResultado = fumoServiceImpl.procuraFumoPorPesoFumo(pesoFumo);
+    public ResponseEntity<List<FumoResponse>> procuraFumoPorPesoFumo(@RequestParam Integer pesoFumo) {
+        List<FumoResponse> listaFumoResultado = fumoServiceImpl.procuraFumoPorPesoFumo(pesoFumo);
 
         if(listaFumoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -83,8 +84,8 @@ public class FumoController {
     }
 
     @GetMapping("sugestao-marca-fumo")
-    public ResponseEntity<List<FumoDTO>> procuraFumoPorMarcaFumoUsandoLike(@RequestParam String marcaFumo) {
-        List<FumoDTO> listaFumoResultado = fumoServiceImpl.procuraFumoPorMarcasFumoUsandoLike(marcaFumo);
+    public ResponseEntity<List<FumoResponse>> procuraFumoPorMarcaFumoUsandoLike(@RequestParam String marcaFumo) {
+        List<FumoResponse> listaFumoResultado = fumoServiceImpl.procuraFumoPorMarcasFumoUsandoLike(marcaFumo);
 
         if(listaFumoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -94,8 +95,8 @@ public class FumoController {
     }
 
     @GetMapping("sugestao-sabor-fumo")
-    public ResponseEntity<List<FumoDTO>> procuraFumoPorSaborFumoUsandoLike(@RequestParam String saborFumo) {
-        List<FumoDTO> listaFumoResultado = fumoServiceImpl.procuraFumoPorSaborFumoUsandoLike(saborFumo);
+    public ResponseEntity<List<FumoResponse>> procuraFumoPorSaborFumoUsandoLike(@RequestParam String saborFumo) {
+        List<FumoResponse> listaFumoResultado = fumoServiceImpl.procuraFumoPorSaborFumoUsandoLike(saborFumo);
 
         if(listaFumoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -105,8 +106,8 @@ public class FumoController {
     }
 
     @GetMapping("entre-peso-fumo")
-    public ResponseEntity<List<FumoDTO>> procuraFumoEntrePesos(@RequestParam Integer pesoMinimoFumo, @RequestParam Integer pesoMaximoFumo) {
-        List<FumoDTO> listaFumoResultado = fumoServiceImpl.procuraFumoEntrePesos(pesoMinimoFumo, pesoMaximoFumo);
+    public ResponseEntity<List<FumoResponse>> procuraFumoEntrePesos(@RequestParam Integer pesoMinimoFumo, @RequestParam Integer pesoMaximoFumo) {
+        List<FumoResponse> listaFumoResultado = fumoServiceImpl.procuraFumoEntrePesos(pesoMinimoFumo, pesoMaximoFumo);
 
         if(listaFumoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -116,8 +117,8 @@ public class FumoController {
     }
 
     @GetMapping("/quantidade-estoque")
-    public ResponseEntity<List<FumoDTO>> procuraFumoPorQuantidadeEstoque(@RequestParam Integer quantidadeFumoEstoque) {
-        List<FumoDTO> listaFumoResultado = fumoServiceImpl.procuraFumoPorQuantidadeEmEstoque(quantidadeFumoEstoque);
+    public ResponseEntity<List<FumoResponse>> procuraFumoPorQuantidadeEstoque(@RequestParam Integer quantidadeFumoEstoque) {
+        List<FumoResponse> listaFumoResultado = fumoServiceImpl.procuraFumoPorQuantidadeEmEstoque(quantidadeFumoEstoque);
 
         if(listaFumoResultado.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -127,8 +128,8 @@ public class FumoController {
     }
 
     @PutMapping("/{idFumo}")
-    public ResponseEntity<FumoDTO> atualizaFumoPorId(@PathVariable Long idFumo, @Valid @RequestBody FumoDTO fumoDTO) {
-        FumoDTO fumoResultado = fumoServiceImpl.atualizaFumoPorId(idFumo, fumoDTO);
+    public ResponseEntity<FumoResponse> atualizaFumoPorId(@PathVariable Long idFumo, @Valid @RequestBody FumoRequest fumoRequest) {
+        FumoResponse fumoResultado = fumoServiceImpl.atualizaFumoPorId(idFumo, fumoRequest);
 
         return new ResponseEntity<>(fumoResultado, HttpStatus.OK);
     }

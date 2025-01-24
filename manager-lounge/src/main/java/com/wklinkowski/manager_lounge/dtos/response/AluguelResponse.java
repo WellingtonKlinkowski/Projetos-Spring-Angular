@@ -13,7 +13,7 @@ import java.time.Duration;
 /**
  * Classe usada para ajudar na resposta
  * de dados dos endpoints do aluguel,
- * controlando os dados que podem entrar
+ * controlando os dados que podem sair
  * para o client.
  *
  * @author WellingtonKlinkowski

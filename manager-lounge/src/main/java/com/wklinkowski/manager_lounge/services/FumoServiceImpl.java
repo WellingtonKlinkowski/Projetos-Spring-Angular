@@ -1,7 +1,7 @@
 package com.wklinkowski.manager_lounge.services;
 
-import com.wklinkowski.manager_lounge.dtos.FumoDTO;
-import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
+import com.wklinkowski.manager_lounge.dtos.request.FumoRequest;
+import com.wklinkowski.manager_lounge.dtos.response.FumoResponse;
 import com.wklinkowski.manager_lounge.entities.FumoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasFumo;
 import com.wklinkowski.manager_lounge.exceptions.EntidadeNaoEncontrada;
@@ -28,105 +28,105 @@ public class FumoServiceImpl implements FumoService {
 
     @Override
     @Transactional
-    public FumoDTO criarFumo(FumoDTO fumoDTO) {
-        FumoEntity fumoEntity = fumoRepository.save(fumoMapper.toEntity(fumoDTO));
+    public FumoResponse criarFumo(FumoRequest fumoRequest) {
+        FumoEntity fumoEntity = fumoRepository.save(fumoMapper.fromRequestToEntity(fumoRequest));
 
-        return fumoMapper.toDto(fumoEntity);
+        return fumoMapper.fromEntityToResponse(fumoEntity);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public FumoDTO procurarFumoPorId(Long idFumo) {
+    public FumoResponse procurarFumoPorId(Long idFumo) {
         FumoEntity fumoResultado = fumoRepository.findById(idFumo)
                 .orElseThrow(EntidadeNaoEncontrada::new);
 
-        return fumoMapper.toDto(fumoResultado);
+        return fumoMapper.fromEntityToResponse(fumoResultado);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<FumoDTO> listarFumos() {
+    public List<FumoResponse> listarFumos() {
         List<FumoEntity> listaFumoEntity = fumoRepository.findAll();
 
-        return listaFumoEntity.stream().map(fumoMapper::toDto).collect(Collectors.toList());
+        return listaFumoEntity.stream().map(fumoMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<FumoDTO> procuraFumoPorMarcasFumo(MarcasFumo marcasFumo) {
+    public List<FumoResponse> procuraFumoPorMarcasFumo(MarcasFumo marcasFumo) {
         List<FumoEntity> listaFumoPorMarcasFumo =
                 fumoRepository.findByMarcasFumoOrderByMarcasFumoDesc(marcasFumo);
 
-        return listaFumoPorMarcasFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
+        return listaFumoPorMarcasFumo.stream().map(fumoMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<FumoDTO> procuraFumoPorSaborFumo(String saborFumo) {
+    public List<FumoResponse> procuraFumoPorSaborFumo(String saborFumo) {
         List<FumoEntity> listaFumoPorSaborFumo =
                 fumoRepository.findBySaborFumoOrderBySaborFumoDesc(saborFumo);
 
-        return listaFumoPorSaborFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
+        return listaFumoPorSaborFumo.stream().map(fumoMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<FumoDTO> procuraFumoPorPesoFumo(Integer pesoFumo) {
+    public List<FumoResponse> procuraFumoPorPesoFumo(Integer pesoFumo) {
         List<FumoEntity> listaFumoPorPesoFumo =
                 fumoRepository.findByPesoFumoOrderByPesoFumoDesc(pesoFumo);
 
-        return listaFumoPorPesoFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
+        return listaFumoPorPesoFumo.stream().map(fumoMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<FumoDTO> procuraFumoPorMarcasFumoUsandoLike(String marcasFumo) {
+    public List<FumoResponse> procuraFumoPorMarcasFumoUsandoLike(String marcasFumo) {
         List<FumoEntity> listaFumoPorMarcasFumo =
                 fumoRepository.procuraMarcasFumoComMetodoLike(marcasFumo);
 
-        return listaFumoPorMarcasFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
+        return listaFumoPorMarcasFumo.stream().map(fumoMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<FumoDTO> procuraFumoPorSaborFumoUsandoLike(String saborFumo) {
+    public List<FumoResponse> procuraFumoPorSaborFumoUsandoLike(String saborFumo) {
         List<FumoEntity> listaFumoPorSaborFumo =
                 fumoRepository.procuraSaborFumoComMetodoLike(saborFumo);
 
-        return listaFumoPorSaborFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
+        return listaFumoPorSaborFumo.stream().map(fumoMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<FumoDTO> procuraFumoEntrePesos(Integer pesoMinimoFumo, Integer pesoMaximoFumo) {
+    public List<FumoResponse> procuraFumoEntrePesos(Integer pesoMinimoFumo, Integer pesoMaximoFumo) {
         List<FumoEntity> listaFumoPorPesoFumo =
                 fumoRepository.findByPesoFumoBetween(pesoMinimoFumo, pesoMaximoFumo);
 
-        return listaFumoPorPesoFumo.stream().map(fumoMapper::toDto).collect(Collectors.toList());
+        return listaFumoPorPesoFumo.stream().map(fumoMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<FumoDTO> procuraFumoPorQuantidadeEmEstoque(Integer quantidadeEstoqueFumo) {
+    public List<FumoResponse> procuraFumoPorQuantidadeEmEstoque(Integer quantidadeEstoqueFumo) {
         List<FumoEntity> listaFumoPorQuantidadeEstoque =
                 fumoRepository.findByQuantidadeEstoqueFumoOrderByQuantidadeEstoqueFumoDesc(quantidadeEstoqueFumo);
 
-        return listaFumoPorQuantidadeEstoque.stream().map(fumoMapper::toDto).collect(Collectors.toList());
+        return listaFumoPorQuantidadeEstoque.stream().map(fumoMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional
-    public FumoDTO atualizaFumoPorId(Long idFumo, FumoDTO fumoDTO) {
+    public FumoResponse atualizaFumoPorId(Long idFumo, FumoRequest fumoRequest) {
         FumoEntity fumoEntity = fumoRepository.findById(idFumo).orElseThrow(() ->
                 new EntidadeNaoEncontrada());
 
-        fumoEntity.setMarcasFumo(fumoDTO.getMarcasFumo());
-        fumoEntity.setPesoFumo(fumoDTO.getPesoFumo());
-        fumoEntity.setSaborFumo(fumoDTO.getSaborFumo());
-        fumoEntity.setQuantidadeEstoqueFumo(fumoDTO.getQuantidadeEstoqueFumo());
+        fumoEntity.setMarcasFumo(fumoRequest.getMarcasFumo());
+        fumoEntity.setPesoFumo(fumoRequest.getPesoFumo());
+        fumoEntity.setSaborFumo(fumoRequest.getSaborFumo());
+        fumoEntity.setQuantidadeEstoqueFumo(fumoRequest.getQuantidadeEstoqueFumo());
         fumoEntity.calculaQuantidadeTotalDeFumo();
 
-        return fumoMapper.toDto(fumoRepository.save(fumoEntity));
+        return fumoMapper.fromEntityToResponse(fumoRepository.save(fumoEntity));
     }
 
     @Override

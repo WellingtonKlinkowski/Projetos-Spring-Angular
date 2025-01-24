@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.mappers;
 
-import com.wklinkowski.manager_lounge.dtos.FumoDTO;
+import com.wklinkowski.manager_lounge.dtos.request.FumoRequest;
+import com.wklinkowski.manager_lounge.dtos.response.FumoResponse;
 import com.wklinkowski.manager_lounge.entities.FumoEntity;
 import org.mapstruct.Mapper;
 
@@ -12,7 +13,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface FumoMapper {
 
-    FumoDTO toDto(FumoEntity fumoEntity);
+    FumoEntity fromRequestToEntity(FumoRequest fumoRequest);
 
-    FumoEntity toEntity(FumoDTO fumoDTO);
+    FumoResponse fromEntityToResponse(FumoEntity fumoEntity);
 }
