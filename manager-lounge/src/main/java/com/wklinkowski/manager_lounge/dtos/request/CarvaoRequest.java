@@ -10,8 +10,8 @@ import lombok.*;
 /**
  * Classe usada para ajudar na entrada
  * de dados dos endpoints do carvão,
- * controlando os dados que podem entrar
- *  para o client.
+ * controlando os dados que entrarem
+ * do client.
  *
  * @author WellingtonKlinkowski
  */

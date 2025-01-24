@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.mappers;
 
-import com.wklinkowski.manager_lounge.dtos.NarguileDTO;
+import com.wklinkowski.manager_lounge.dtos.request.NarguileRequest;
+import com.wklinkowski.manager_lounge.dtos.response.NarguileResponse;
 import com.wklinkowski.manager_lounge.entities.NarguileEntity;
 import org.mapstruct.Mapper;
 
@@ -12,7 +13,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface NarguileMapper {
 
-    NarguileDTO toDto(NarguileEntity narguileEntity);
+    NarguileEntity fromRequestToEntity(NarguileRequest narguileRequest);
 
-    NarguileEntity toEntity(NarguileDTO narguileDTO);
+    NarguileResponse fromEntityToResponse(NarguileEntity narguileEntity);
 }

@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.interfaces;
 
-import com.wklinkowski.manager_lounge.dtos.NarguileDTO;
+import com.wklinkowski.manager_lounge.dtos.request.NarguileRequest;
+import com.wklinkowski.manager_lounge.dtos.response.NarguileResponse;
 import com.wklinkowski.manager_lounge.enums.MarcasNarguile;
 import com.wklinkowski.manager_lounge.enums.MaterialNarguile;
 
@@ -16,31 +17,31 @@ import java.util.List;
  */
 public interface NarguileService {
 
-    NarguileDTO criarNarguile(NarguileDTO narguileDTO);
+    NarguileResponse criarNarguile(NarguileRequest narguileRequest);
 
-    NarguileDTO procuraNarguilePorId(Long idNarguile);
+    NarguileResponse procuraNarguilePorId(Long idNarguile);
 
-    List<NarguileDTO> listarNarguiles();
+    List<NarguileResponse> listarNarguiles();
 
-    List<NarguileDTO> procuraNarguilePorNomeNarguile(String nomeNarguile);
+    List<NarguileResponse> procuraNarguilePorNomeNarguile(String nomeNarguile);
 
-    List<NarguileDTO> procuraNarguilePorMarcaNarguile(MarcasNarguile marcaNarguile);
+    List<NarguileResponse> procuraNarguilePorMarcaNarguile(MarcasNarguile marcaNarguile);
 
-    List<NarguileDTO> procuraNarguilePorQuantidadeMangueirasNarguile(Integer quantidadeMangueirasNarguile);
+    List<NarguileResponse> procuraNarguilePorQuantidadeMangueirasNarguile(Integer quantidadeMangueirasNarguile);
 
-    List<NarguileDTO> procuraNarguilePorMaterialNarguile(MaterialNarguile materialNarguile);
+    List<NarguileResponse> procuraNarguilePorMaterialNarguile(MaterialNarguile materialNarguile);
 
-    List<NarguileDTO> procuraNarguilePorNomeNarguileComMetodoLike(String nomeNarguile);
+    List<NarguileResponse> procuraNarguilePorNomeNarguileComMetodoLike(String nomeNarguile);
 
-    List<NarguileDTO> procuraNarguilePorMarcasNarguileComMetodoLike(String marcaNarguile);
+    List<NarguileResponse> procuraNarguilePorMarcasNarguileComMetodoLike(String marcaNarguile);
 
-    List<NarguileDTO> procuraNarguilePorMaterialNarguileComMetodoLike(String materialNarguile);
+    List<NarguileResponse> procuraNarguilePorMaterialNarguileComMetodoLike(String materialNarguile);
 
-    List<NarguileDTO> procuraNarguileEntreQuantidadeMangueirasNarguile(Integer quantidadeMangueirasMinimo, Integer quantidadeMangueirasMaximo);
+    List<NarguileResponse> procuraNarguileEntreQuantidadeMangueirasNarguile(Integer quantidadeMangueirasMinimo, Integer quantidadeMangueirasMaximo);
 
-    List<NarguileDTO> procuraNarguilePorQuantidadeEstoqueNarguile(Integer quantidadeEstoqueNarguile);
+    List<NarguileResponse> procuraNarguilePorQuantidadeEstoqueNarguile(Integer quantidadeEstoqueNarguile);
 
-    NarguileDTO atualizaNarguilePorId(Long idNarguile, NarguileDTO narguileDTO);
+    NarguileResponse atualizaNarguilePorId(Long idNarguile, NarguileRequest narguileRequest);
 
     void retornaConsumoAluguelParaEstoque(Long idNarguile, Integer quantidadeNarguileUsadoAluguel);
 

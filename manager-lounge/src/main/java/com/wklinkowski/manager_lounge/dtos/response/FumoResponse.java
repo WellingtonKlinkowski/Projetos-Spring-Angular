@@ -8,9 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Classe usada para ajudar na transferência
- * e entrada de dados dos endpoints do fumo,
- * controlando os dados que podem entrar e sair
+ * Classe usada para ajudar na resposta
+ * de dados dos endpoints do fumo,
+ * controlando os dados que podem sair
  * para o client.
  *
  * @author WellingtonKlinkowski

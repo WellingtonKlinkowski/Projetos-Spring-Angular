@@ -8,10 +8,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Classe usada para ajudar na saída
+ * Classe usada para ajudar na resposta
  * de dados dos endpoints do carvão,
  * controlando os dados que podem sair
- * e sair para o client.
+ * para o client.
  *
  * @author WellingtonKlinkowski
  */

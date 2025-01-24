@@ -10,10 +10,10 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 /**
- * Classe usada para ajudar na
- * entrada de dados dos endpoints do fumo,
- * controlando os dados que podem entrar
- * pelo client.
+ * Classe usada para ajudar na entrada
+ * de dados dos endpoints do fumo,
+ * controlando os dados que entrarem
+ * do client.
  *
  * @author WellingtonKlinkowski
  */
