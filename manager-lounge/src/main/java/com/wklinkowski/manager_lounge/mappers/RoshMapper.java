@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.mappers;
 
-import com.wklinkowski.manager_lounge.dtos.RoshDTO;
+import com.wklinkowski.manager_lounge.dtos.request.RoshRequest;
+import com.wklinkowski.manager_lounge.dtos.response.RoshResponse;
 import com.wklinkowski.manager_lounge.entities.RoshEntity;
 import org.mapstruct.Mapper;
 
@@ -12,7 +13,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface RoshMapper {
 
-    RoshDTO toDto(RoshEntity roshEntity);
+    RoshEntity fromRequestToEntity(RoshRequest roshRequest);
 
-    RoshEntity toEntity(RoshDTO roshDTO);
+    RoshResponse fromEntityToResponse(RoshEntity roshEntity);
 }

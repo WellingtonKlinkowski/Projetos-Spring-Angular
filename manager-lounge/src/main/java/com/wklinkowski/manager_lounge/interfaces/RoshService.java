@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.interfaces;
 
-import com.wklinkowski.manager_lounge.dtos.RoshDTO;
+import com.wklinkowski.manager_lounge.dtos.request.RoshRequest;
+import com.wklinkowski.manager_lounge.dtos.response.RoshResponse;
 import com.wklinkowski.manager_lounge.enums.MarcasRosh;
 import com.wklinkowski.manager_lounge.enums.MaterialRosh;
 
@@ -16,23 +17,23 @@ import java.util.List;
  */
 public interface RoshService {
 
-    RoshDTO criarRosh(RoshDTO roshDTO);
+    RoshResponse criarRosh(RoshRequest roshRequest);
 
-    RoshDTO procuraRoshPorId(Long idRosh);
+    RoshResponse procuraRoshPorId(Long idRosh);
 
-    List<RoshDTO> listarRosh();
+    List<RoshResponse> listarRosh();
 
-    List<RoshDTO> procuraRoshPorMarcasRosh(MarcasRosh marcasRosh);
+    List<RoshResponse> procuraRoshPorMarcasRosh(MarcasRosh marcasRosh);
 
-    List<RoshDTO> procuraRoshPorMaterialRosh(MaterialRosh materialRosh);
+    List<RoshResponse> procuraRoshPorMaterialRosh(MaterialRosh materialRosh);
 
-    List<RoshDTO> procuraMarcasRoshComMetodoLike(String marcaRosh);
+    List<RoshResponse> procuraMarcasRoshComMetodoLike(String marcaRosh);
 
-    List<RoshDTO> procuraMaterialRoshComMetodoLike(String materialRosh);
+    List<RoshResponse> procuraMaterialRoshComMetodoLike(String materialRosh);
 
-    List<RoshDTO> procuraRoshPorQuantidadeEstoqueRosh(int quantidadeEstoqueRosh);
+    List<RoshResponse> procuraRoshPorQuantidadeEstoqueRosh(int quantidadeEstoqueRosh);
 
-    RoshDTO atualizaRoshPorId(Long idRosh, RoshDTO roshDTO);
+    RoshResponse atualizaRoshPorId(Long idRosh, RoshRequest roshRequest);
 
     void retornaConsumoAluguelParaEstoque(Long idRosh, Integer quantidadeRoshUsadoAluguel);
 

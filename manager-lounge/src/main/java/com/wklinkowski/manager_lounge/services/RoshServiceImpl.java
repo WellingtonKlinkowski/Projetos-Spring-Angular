@@ -1,7 +1,7 @@
 package com.wklinkowski.manager_lounge.services;
 
-import com.wklinkowski.manager_lounge.dtos.RoshDTO;
-import com.wklinkowski.manager_lounge.entities.NarguileEntity;
+import com.wklinkowski.manager_lounge.dtos.request.RoshRequest;
+import com.wklinkowski.manager_lounge.dtos.response.RoshResponse;
 import com.wklinkowski.manager_lounge.entities.RoshEntity;
 import com.wklinkowski.manager_lounge.enums.MarcasRosh;
 import com.wklinkowski.manager_lounge.enums.MaterialRosh;
@@ -29,80 +29,81 @@ public class RoshServiceImpl implements RoshService {
 
     @Override
     @Transactional
-    public RoshDTO criarRosh(RoshDTO roshDTO) {
-        RoshEntity roshEntity = roshRepository.save(roshMapper.toEntity(roshDTO));
+    public RoshResponse criarRosh(RoshRequest roshRequest) {
+        RoshEntity roshEntity = roshRepository.save(roshMapper.fromRequestToEntity(roshRequest));
 
-        return roshMapper.toDto(roshEntity);
+        return roshMapper.fromEntityToResponse(roshEntity);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public RoshDTO procuraRoshPorId(Long idRosh) {
+    public RoshResponse procuraRoshPorId(Long idRosh) {
         RoshEntity roshResultado = roshRepository.findById(idRosh)
                 .orElseThrow(EntidadeNaoEncontrada::new);
 
-        return roshMapper.toDto(roshResultado);
+        return roshMapper.fromEntityToResponse(roshResultado);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<RoshDTO> listarRosh() {
+    public List<RoshResponse> listarRosh() {
         List<RoshEntity> listaRoshEntity = roshRepository.findAll();
 
-        return listaRoshEntity.stream().map(roshMapper::toDto).collect(Collectors.toList());
+        return listaRoshEntity.stream().map(roshMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<RoshDTO> procuraRoshPorMarcasRosh(MarcasRosh marcasRosh) {
+    public List<RoshResponse> procuraRoshPorMarcasRosh(MarcasRosh marcasRosh) {
         List<RoshEntity> listaRoshPorMarca = roshRepository.findByMarcasRoshOrderByMarcasRoshDesc(marcasRosh);
 
-        return listaRoshPorMarca.stream().map(roshMapper::toDto).collect(Collectors.toList());
+        return listaRoshPorMarca.stream().map(roshMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<RoshDTO> procuraRoshPorMaterialRosh(MaterialRosh materialRosh) {
+    public List<RoshResponse> procuraRoshPorMaterialRosh(MaterialRosh materialRosh) {
         List<RoshEntity> listaRoshPorMaterial = roshRepository.findByMaterialRoshOrderByMaterialRoshDesc(materialRosh);
 
-        return listaRoshPorMaterial.stream().map(roshMapper::toDto).collect(Collectors.toList());
+        return listaRoshPorMaterial.stream().map(roshMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<RoshDTO> procuraMarcasRoshComMetodoLike(String marcaRosh) {
+    public List<RoshResponse> procuraMarcasRoshComMetodoLike(String marcaRosh) {
         List<RoshEntity> listaRoshPorMarca = roshRepository.procuraMarcasRoshComMetodoLike(marcaRosh);
 
-        return listaRoshPorMarca.stream().map(roshMapper::toDto).collect(Collectors.toList());
+        return listaRoshPorMarca.stream().map(roshMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<RoshDTO> procuraMaterialRoshComMetodoLike(String materialRosh) {
+    public List<RoshResponse> procuraMaterialRoshComMetodoLike(String materialRosh) {
         List<RoshEntity> listaRoshPorMaterial = roshRepository.procuraMaterialRoshComMetodoLike(materialRosh);
 
-        return listaRoshPorMaterial.stream().map(roshMapper::toDto).collect(Collectors.toList());
+        return listaRoshPorMaterial.stream().map(roshMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<RoshDTO> procuraRoshPorQuantidadeEstoqueRosh(int quantidadeEstoqueRosh) {
-        List<RoshEntity> listaRoshPorQuantidadeEstoque = roshRepository.findByQuantidadeEstoqueRoshOrderByQuantidadeEstoqueRoshDesc(quantidadeEstoqueRosh);
+    public List<RoshResponse> procuraRoshPorQuantidadeEstoqueRosh(int quantidadeEstoqueRosh) {
+        List<RoshEntity> listaRoshPorQuantidadeEstoque =
+                roshRepository.findByQuantidadeEstoqueRoshOrderByQuantidadeEstoqueRoshDesc(quantidadeEstoqueRosh);
 
-        return listaRoshPorQuantidadeEstoque.stream().map(roshMapper::toDto).collect(Collectors.toList());
+        return listaRoshPorQuantidadeEstoque.stream().map(roshMapper::fromEntityToResponse).collect(Collectors.toList());
     }
 
     @Override
     @Transactional
-    public RoshDTO atualizaRoshPorId(Long idRosh, RoshDTO roshDTO) {
+    public RoshResponse atualizaRoshPorId(Long idRosh, RoshRequest roshRequest) {
         RoshEntity roshEntity = roshRepository.findById(idRosh).orElseThrow(() ->
                 new EntidadeNaoEncontrada());
 
-        roshEntity.setMaterialRosh(roshDTO.getMaterialRosh());
-        roshEntity.setMarcasRosh(roshDTO.getMarcasRosh());
-        roshEntity.setQuantidadeEstoqueRosh(roshDTO.getQuantidadeEstoqueRosh());
+        roshEntity.setMaterialRosh(roshRequest.getMaterialRosh());
+        roshEntity.setMarcasRosh(roshRequest.getMarcasRosh());
+        roshEntity.setQuantidadeEstoqueRosh(roshRequest.getQuantidadeEstoqueRosh());
 
-        return roshMapper.toDto(roshRepository.save(roshEntity));
+        return roshMapper.fromEntityToResponse(roshRepository.save(roshEntity));
     }
 
     @Override

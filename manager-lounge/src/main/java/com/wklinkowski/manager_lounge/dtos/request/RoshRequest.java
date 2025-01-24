@@ -1,4 +1,4 @@
-package com.wklinkowski.manager_lounge.dtos;
+package com.wklinkowski.manager_lounge.dtos.request;
 
 import com.wklinkowski.manager_lounge.enums.MarcasRosh;
 import com.wklinkowski.manager_lounge.enums.MaterialRosh;
@@ -11,17 +11,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Classe usada para ajudar na transferência
- * e entrada de dados dos endpoints do rosh,
- * controlando os dados que podem entrar e sair
- * para o client.
+ * Classe usada para ajudar na entrada
+ * de dados dos endpoints do rosh,
+ * controlando os dados que entrarem
+ * do client.
  *
  * @author WellingtonKlinkowski
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class RoshDTO {
+public class RoshRequest {
 
     @NotNull(message = "A marca do rosh não pode estar vazia.")
     @Enumerated(EnumType.STRING)
