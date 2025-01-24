@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.interfaces;
 
-import com.wklinkowski.manager_lounge.dtos.CarvaoDTO;
+import com.wklinkowski.manager_lounge.dtos.request.CarvaoRequest;
+import com.wklinkowski.manager_lounge.dtos.response.CarvaoResponse;
 import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
 import com.wklinkowski.manager_lounge.enums.MarcaCarvao;
 import com.wklinkowski.manager_lounge.exceptions.InsumoInsuficienteException;
@@ -17,27 +18,27 @@ import java.util.List;
  */
 public interface CarvaoService {
 
-    CarvaoDTO criarCarvao(CarvaoDTO carvaoDTO);
+    CarvaoResponse criarCarvao(CarvaoRequest carvaoRequest);
 
-    CarvaoDTO procurarCarvaoPorId(Long id);
+    CarvaoResponse procurarCarvaoPorId(Long id);
 
-    List<CarvaoDTO> listarCarvoes();
+    List<CarvaoResponse> listarCarvoes();
 
-    List<CarvaoDTO> procuraCarvaoPorMarcaCarvao(MarcaCarvao marcaCarvao);
+    List<CarvaoResponse> procuraCarvaoPorMarcaCarvao(MarcaCarvao marcaCarvao);
 
-    List<CarvaoDTO> procuraCarvaoPorPesoCarvao(Integer pesoCarvao);
+    List<CarvaoResponse> procuraCarvaoPorPesoCarvao(Integer pesoCarvao);
 
-    List<CarvaoDTO> procuraCarvaoPorQuantidadeCarvao(Integer quantidadeCarvao);
+    List<CarvaoResponse> procuraCarvaoPorQuantidadeCarvao(Integer quantidadeCarvao);
 
-    List<CarvaoDTO> procuraCarvaoPorMarcaEPeso(MarcaCarvao marcaCarvao, Integer pesoCarvao);
+    List<CarvaoResponse> procuraCarvaoPorMarcaEPeso(MarcaCarvao marcaCarvao, Integer pesoCarvao);
 
-    List<CarvaoDTO> procuraMarcaCarvaoUsandoLike(String marcaCarvao);
+    List<CarvaoResponse> procuraMarcaCarvaoUsandoLike(String marcaCarvao);
 
-    List<CarvaoDTO> procuraCarvaoComPesoEntreDoisValores(Integer pesoMinimo, Integer pesoMaximo);
+    List<CarvaoResponse> procuraCarvaoComPesoEntreDoisValores(Integer pesoMinimo, Integer pesoMaximo);
 
-    List<CarvaoDTO> procuraCarvaoPorQuantidadeEmEstoque(Integer quantidadeEstoqueCarvao);
+    List<CarvaoResponse> procuraCarvaoPorQuantidadeEmEstoque(Integer quantidadeEstoqueCarvao);
 
-    CarvaoDTO atualizarCarvaoPorId(Long idCarvao, CarvaoDTO carvao);
+    CarvaoResponse atualizarCarvaoPorId(Long idCarvao, CarvaoRequest carvaoRequest);
 
     void retornaConsumoAluguelParaEstoque(Long idCarvao, Integer quantidadeCarvaoUsadoAluguel);
 

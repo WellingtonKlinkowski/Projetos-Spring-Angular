@@ -1,6 +1,7 @@
 package com.wklinkowski.manager_lounge.mappers;
 
-import com.wklinkowski.manager_lounge.dtos.CarvaoDTO;
+import com.wklinkowski.manager_lounge.dtos.request.CarvaoRequest;
+import com.wklinkowski.manager_lounge.dtos.response.CarvaoResponse;
 import com.wklinkowski.manager_lounge.entities.CarvaoEntity;
 import org.mapstruct.Mapper;
 
@@ -12,7 +13,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface CarvaoMapper {
 
-    CarvaoDTO toDto(CarvaoEntity carvaoEntity);
+    CarvaoEntity fromRequestToEntity(CarvaoRequest carvaoRequest);
 
-    CarvaoEntity toEntity(CarvaoDTO carvaoDTO);
+    CarvaoResponse fromEntityToResponse(CarvaoEntity carvaoEntity);
 }
