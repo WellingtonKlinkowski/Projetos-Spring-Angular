@@ -11,7 +11,7 @@ import lombok.*;
  * Classe usada para ajudar na entrada
  * de dados dos endpoints do carvão,
  * controlando os dados que podem entrar
- * e sair para o client.
+ *  para o client.
  *
  * @author WellingtonKlinkowski
  */
@@ -33,13 +33,4 @@ public class CarvaoRequest {
     @Min(value = 1, message = "A quantidade mínima de caixa de carvão permitida é 1.")
     private Integer quantidadeEstoqueCaixaCarvao = 1;
 
-    /**
-     * Atríbuto para controle total de carvão sem
-     * setter pois é feito por um método dentro da
-     * entidade carvão.
-     *
-     * @author WellingtonKlinkowski
-     */
-    @Setter(AccessLevel.NONE)
-    private Integer quantidadeTotalCarvao;
 }

@@ -1,6 +1,8 @@
 package com.wklinkowski.manager_lounge.dtos.response;
 
 import com.wklinkowski.manager_lounge.enums.MarcaCarvao;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +10,7 @@ import lombok.NoArgsConstructor;
 /**
  * Classe usada para ajudar na saída
  * de dados dos endpoints do carvão,
- * controlando os dados que podem entrar
+ * controlando os dados que podem sair
  * e sair para o client.
  *
  * @author WellingtonKlinkowski
@@ -18,6 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class CarvaoResponse {
 
+    @Enumerated(EnumType.STRING)
     private MarcaCarvao marcaCarvao;
 
     private Integer pesoCarvao;
